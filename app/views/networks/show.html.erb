@@ -1,0 +1,28 @@
+<p>
+  <b>Name:</b>
+  <%=h @network.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @network.description %>
+</p>
+
+<p>
+  <b>Edgefile:</b>
+  <%=h @network.edgefile %>
+</p>
+
+<p>
+  <b>Annotationfile:</b>
+  <%=h @network.annotationfile %>
+</p>
+
+<p>
+  <b>Config:</b>
+  <%=h @network.config %>
+</p>
+
+
+<%= link_to 'Edit', edit_network_path(@network) %> |
+<%= link_to 'Back', networks_path %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  name: Disney
+  description: Disney
+  edgefile: disney.txt
+  annotationfile:
+  config: mrblue.xml
+
+two:
+  name: Web
+  description: WWW
+  edgefile: web.txt
+  annotationfile: webnotes.txt
+  config: web.xml
+
+three:
+  name: Barabasi
+  description: A barabasi network
+  edgefile: barabasi.txt
+  annotationfile:
+  config: classic.xml

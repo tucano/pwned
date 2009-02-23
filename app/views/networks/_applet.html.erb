@@ -17,11 +17,11 @@
     <param name="boxmessage" value="Loading Processing software..." />
     <param name="boxbgcolor" value="#FFFFFF" />
   
-    <param name="edges" value="<%= @edgepath %>" />
-    <% if @annotationpath %>
-    <param name="nodes" value="<%= @annotationpath %>" />
+    <param name="edges" value="<%= @edgeapplet %>" />
+    <% if @nodeapplet %>
+    <param name="nodes" value="<%= @nodeapplet %>" />
     <% end %>
-    <param name="config" value="<%= @configpath %>" />
+    <param name="config" value="<%= @configapplet %>" />
     <param name="test_string" value="outer" />
 <!--<![endif]-->
   
@@ -41,13 +41,12 @@
     <param name="boxmessage" value="Loading Processing software..." />
     <param name="boxbgcolor" value="#FFFFFF" />
     
-    <param name="edges" value="<%= @edgepath %>" />
-    <% if @annotationpath %>
-    <param name="nodes" value="<%= @annotationpath %>" />
+    <param name="edges" value="<%= @edgeapplet %>" />
+    <% if @nodeapplet %>
+    <param name="nodes" value="<%= @nodeapplet %>" />
     <% end %>
-    <param name="config" value="<%= @configpath %>" />
+    <param name="config" value="<%= @configapplet %>" />
     <param name="test_string" value="inner" />
-    
     <p>
       <strong>
         This browser does not have a Java Plug-in.

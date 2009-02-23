@@ -14,12 +14,17 @@ class NetworksController < ApplicationController
   # GET /networks/1
   # GET /networks/1.xml
   def show
+
     @network = Network.find(params[:id])
     @edgepath =  get_path(@network.name) + @network.edgefile
     @configpath = get_path(@network.name) + @network.config
     if (@network.annotationfile) then
       @annotationpath = get_path(@network.name) + @network.annotationfile
+      @nodeapplet =  get_applet_path(@network.name) + @network.annotationfile
     end
+
+    @edgeapplet =  get_applet_path(@network.name) + @network.edgefile
+    @configapplet =  get_applet_path(@network.name) + @network.config
 
     respond_to do |format|
       format.html # show.html.erb
@@ -98,6 +103,11 @@ class NetworksController < ApplicationController
   # in model Network?
   def get_path(net)
     '/storage/' + net + '/'
+  end
+
+  # the applets want a path relative to /applet/data (otherwise ActionController::RoutingError)
+  def get_applet_path(net)
+    '../../storage/' + net + '/'
   end
 
 end

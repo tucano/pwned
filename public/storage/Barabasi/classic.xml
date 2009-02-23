@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+	
+	<params>
+		<node>
+			<size>10</size>
+		</node>
+		<spacer>
+			<strength>1000</strength>
+			<max>20.0</max>
+		</spacer>
+		<edge>
+			<length>20</length>
+			<strength>0.2</strength>
+			<damping>0.2</damping>
+		</edge>
+		<stroke>
+			<weight>2</weight>
+		</stroke>
+		<font>
+			<size>5</size>
+		</font>
+	</params>
+	
+	<colors>
+		<background>
+			<r>233</r>
+			<g>233</g>
+			<b>233</b>
+		</background>
+		<edge>
+			<r>100</r>
+			<g>100</g>
+			<b>100</b>
+		</edge>
+		<node1>
+			<r>150</r>
+			<g>150</g>
+			<b>150</b>
+			<rh>205</rh>
+			<gh>205</gh>
+			<bh>205</bh>
+		</node1>
+		<node2>
+			<r>150</r>
+			<g>0</g>
+			<b>0</b>
+			<rh>205</rh>
+			<gh>0</gh>
+			<bh>0</bh>
+		</node2>
+		<label>
+			<r>0</r>
+			<g>0</g>
+			<b>0</b>		
+		</label>
+	</colors>
+	
+	<flags>
+		<drawedges>1</drawedges>
+		<drawnodes>1</drawnodes>
+		<drawlabels>1</drawlabels>
+		<withlinks>0</withlinks>
+		<directed>false</directed>
+	</flags>
+	
+</config>

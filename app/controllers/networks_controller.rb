@@ -1,4 +1,5 @@
 class NetworksController < ApplicationController
+  
   # GET /networks
   # GET /networks.xml
   def index
@@ -14,10 +15,10 @@ class NetworksController < ApplicationController
   # GET /networks/1.xml
   def show
     @network = Network.find(params[:id])
-    @edgepath = '/storage/' + @network.name + '/' + @network.edgefile
-    @configpath = '/storage/' + @network.name + '/' + @network.config
+    @edgepath =  get_path(@network.name) + @network.edgefile
+    @configpath = get_path(@network.name) + @network.config
     if (@network.annotationfile) then
-      @annotationpath = '/storage/' + @network.name + '/' + @network.annotationfile
+      @annotationpath = get_path(@network.name) + @network.annotationfile
     end
 
     respond_to do |format|
@@ -40,6 +41,11 @@ class NetworksController < ApplicationController
   # GET /networks/1/edit
   def edit
     @network = Network.find(params[:id])
+    @edgepath =  get_path(@network.name) + @network.edgefile
+    @configpath = get_path(@network.name) + @network.config
+    if (@network.annotationfile) then
+      @annotationpath = get_path(@network.name) + @network.annotationfile
+    end
   end
 
   # POST /networks
@@ -87,4 +93,11 @@ class NetworksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  # in model Network?
+  def get_path(net)
+    '/storage/' + net + '/'
+  end
+
 end

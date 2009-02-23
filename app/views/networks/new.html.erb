@@ -1,6 +1,6 @@
 <h1>New network</h1>
 
-<% form_for(@network) do |f| %>
+<% form_for(@network, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -13,15 +13,15 @@
   </p>
   <p>
     <%= f.label :edgefile %><br />
-    <%= f.text_field :edgefile %>
+    <%= f.file_field :edgeupload %>
   </p>
   <p>
     <%= f.label :annotationfile %><br />
-    <%= f.text_field :annotationfile %>
+    <%= f.file_field :annotationupload %>
   </p>
   <p>
     <%= f.label :config %><br />
-    <%= f.text_field :config %>
+    <%= f.file_field :configupload %>
   </p>
   <p>
     <%= f.submit "Create" %>

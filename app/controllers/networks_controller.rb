@@ -14,6 +14,11 @@ class NetworksController < ApplicationController
   # GET /networks/1.xml
   def show
     @network = Network.find(params[:id])
+    @edgepath = '/storage/' + @network.name + '/' + @network.edgefile
+    @configpath = '/storage/' + @network.name + '/' + @network.config
+    if (@network.annotationfile) then
+      @annotationpath = '/storage/' + @network.name + '/' + @network.annotationfile
+    end
 
     respond_to do |format|
       format.html # show.html.erb

@@ -11,21 +11,21 @@
 <p>
   <b>Edgefile:</b>
   <%=h @network.edgefile %>
-  <%= link_to 'Show File', '/storage/networks/'+@network.edgefile %>
+  <%= link_to 'Show File', @edgepath %>
 </p>
 
-<% if @network.annotationfile %>
+<% if @annotationpath %>
 <p>
   <b>Annotationfile:</b>
   <%=h @network.annotationfile %>
-  <%= link_to 'Show File', '/storage/annotations/'+@network.annotationfile %>
+  <%= link_to 'Show File', @annotationpath %>
 </p>
 <% end %>
 
 <p>
   <b>Config:</b>
   <%=h @network.config %>
-  <%= link_to 'Show File', '/storage/configs/'+@network.config %>
+  <%= link_to 'Show File', @configpath %>
 </p>
 
 <%= render(:partial => 'applet') %>

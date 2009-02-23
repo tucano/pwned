@@ -12,7 +12,7 @@ class NetworkTest < ActiveSupport::TestCase
     assert network.errors.invalid?(:config)
   end
 
-  def test_edgefile
+  def test_edgefile_format
     ok = %w{ fred.txt pippo.txt pluto.txt }
     bad = %w{ pluto.doc pippo.xml }
     

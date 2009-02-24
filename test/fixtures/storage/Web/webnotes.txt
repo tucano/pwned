@@ -1,0 +1,17 @@
+index http://tucano.recipient.cc/index.html
+home http://tucano.recipient.cc/home.html
+contacts http://tucano.recipient.cc/contacts.html
+links http://tucano.recipient.cc/links.html
+projects http://tucano.recipient.cc/projects.html
+art http://tucano.recipient.cc/art.html
+science http://tucano.recipient.cc/science.html
+other http://tucano.recipient.cc/other.html
+asciiart
+flashart
+robotics
+playgene
+bioinformatics
+university
+master
+PhD
+unix

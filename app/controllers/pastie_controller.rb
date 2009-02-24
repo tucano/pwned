@@ -2,6 +2,7 @@ class PastieController < ApplicationController
   layout 'networks'
 
   def new
+    # TODO config file and templates
     @network = Network.new
   end
 

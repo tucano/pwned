@@ -22,3 +22,7 @@ ZioPaperone Archimede
 Paperino Paperina
 Paperino Gastone
 Gastone Paperina
+BandaBassotti ZioPaperone
+BandaBassotti Topolino
+Minnie Topolino
+BandaBassotti Bassettoni

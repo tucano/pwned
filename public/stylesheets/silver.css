@@ -427,3 +427,8 @@ input.submit
 
 .floatright { float: right; }
 .floatleft { float: left; }
+
+/* my tags */
+div#applet {
+	margin-bottom: 100px;
+}

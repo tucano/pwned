@@ -1,30 +1,78 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   name: Disney
-  description: Disney
+  description:
+     Walter Elias Disney (December 5, 1901 – December 15, 1966) was a multiple Academy 
+     Award-winning American film producer, director, screenwriter, voice actor, animator, 
+     entrepreneur and philanthropist. Disney is famous for his influence in the field of 
+     entertainment during the twentieth century. As the co-founder 
+     (with his brother Roy O. Disney) of Walt Disney Productions, 
+     Disney became one of the best-known motion picture producers in the world. 
+     The corporation he co-founded, now known as The Walt Disney Company, 
+     today has annual revenues of approximately U.S. $35 billion.
   edgefile: disney.txt
   annotationfile:
   config: mrblue.xml
 
 two:
-  name: Web
-  description: WWW
-  edgefile: web.txt
-  annotationfile: webnotes.txt
-  config: web.xml
+  name: Tucano
+  description:
+    A conceptual map of my website tucano.recipient.cc.
+    Red nodes are link to web pages. Grey nodes are topics.
+  edgefile: siteedges.txt
+  annotationfile: sitenodes.txt
+  config: tucano.xml
 
 three:
   name: Barabasi
   description: 
-  Albert-László Barabási (born March 30, 1967) is a Romanian-born 
-  Hungarian scientist. He is the former Emil T. Hofmann professor at the 
-  University of Notre Dame and current Distinguished Professor and Director of 
-  Northeastern University's Center for Network Science and an associate member 
-  of the Center of Cancer Systems Biology (CCSB) at the Dana Farber Cancer 
-  Institute, Harvard University. He introduced in 1999 the concept of 
-  scale-free networks and proposed the Barabasi-Albert model to explain 
-  their widespread emergence in natural, technological and 
-  social systems, from the cellular telephone to the WWW or online communities.
+      Albert-László Barabási (born March 30, 1967) is a Romanian-born 
+      Hungarian scientist. He is the former Emil T. Hofmann professor at the 
+      University of Notre Dame and current Distinguished Professor and Director of 
+      Northeastern University's Center for Network Science and an associate member 
+      of the Center of Cancer Systems Biology (CCSB) at the Dana Farber Cancer 
+      Institute, Harvard University. He introduced in 1999 the concept of 
+      scale-free networks and proposed the Barabasi-Albert model to explain 
+      their widespread emergence in natural, technological and 
+      social systems, from the cellular telephone to the WWW or online communities.
   edgefile: barabasi.txt
   annotationfile:
   config: classic.xml
+
+four:
+  name: Google
+  description:
+   In this paper, we present Google, a prototype of a large-scale search 
+   engine which makes heavy use of the structure present in hypertext. 
+   We assume page A has pages T1...Tn which point to it (i.e., are citations). 
+   The parameter d is a damping factor which can be set between 0 and 1. 
+   We usually set d to 0.85. There are more details about d in the next section. 
+   Also C(A) is defined as the number of links going out of page A. The PageRank of a page A is given as follows
+   PR(A) = (1-d) + d (PR(T1)/C(T1) + ... + PR(Tn)/C(Tn))
+   Note that the PageRanks form a probability distribution over web pages, so the sum of all web pages' PageRanks will be one.
+  edgefile: google.txt
+  annotationfile: rank.txt
+  config: google.xml
+
+five:
+  name: HumanNetwork
+  description:
+    www.HPRD.org offers a centralized platform to visualize domain architecture, 
+    post-translational modifications, interaction networks and disease association 
+    for each protein in the human proteome. Includes map of pathways and 
+    FAQ maintained by Johns Hopkins University and the Institute of Bioinformatics.
+  edgefile: hprd.txt
+  annotationfile: hprdmap.txt
+  config: classic.xml 
+  
+six:
+  name: TP53
+  description:
+    This gene encodes tumor protein p53, which responds to diverse cellular stresses to regulate 
+    target genes that induce cell cycle arrest, apoptosis, senescence, DNA repair, or changes 
+    in metabolism. p53 protein is expressed at low level in normal cells and at a high level 
+    in a variety of transformed cell lines, where it's believed to contribute to transformation and malignancy.
+    238 Nodes, 797 edges max degree 237 and clustering coeff. 0.07601903
+  edgefile: tp53.txt
+  annotationfile:
+  config: classic.xml 

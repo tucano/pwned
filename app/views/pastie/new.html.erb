@@ -1,2 +1,29 @@
-<h1>Pastie#index</h1>
-<p>Find me in app/views/pastie/index.html.erb</p>
+<h1>New network</h1>
+<% form_for(@network, :html => { :multipart => true }, :url => {:action => "create"}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :config %>
+    <%= f.select :autoconfig, %w[classic mrblue web] %>
+  </p>
+  <p>
+    <%= f.label :edges %><br />
+    <%= f.text_area :edges %>
+  </p>
+  <p>
+    <%= f.label :nodes %><br />
+    <%= f.text_area :nodes %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', networks_path %>

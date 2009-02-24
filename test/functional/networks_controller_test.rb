@@ -12,6 +12,7 @@ class NetworksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  # this create files in storage (FIXME)
   test "should create network" do
     assert_difference('Network.count') do
       post :create, :network => { 
@@ -47,6 +48,7 @@ class NetworksControllerTest < ActionController::TestCase
     assert_redirected_to network_path(assigns(:network))
   end
 
+  # this destroy files in storage (FIXME)
   test "should destroy network" do
     assert_difference('Network.count', -1) do
       delete :destroy, :id => networks(:one).id

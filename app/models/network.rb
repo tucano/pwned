@@ -15,9 +15,32 @@ class Network < ActiveRecord::Base
     :message => "Must be a .txt file",
     :if => :annotationfile
 
-  # very basic AND DANGEROUS upload
+  # very basic AND DANGEROUS upload/pastie
   after_save :write_files
   after_destroy :remove_files
+
+  # why I need this and I not need it for annotationupload?
+  attr_reader :edges, :nodes, :autoconfig
+  def edges=(data)
+    if (data != "") then
+      self.edgefile = 'edges.txt'
+      @edata = data
+    end
+  end
+
+  def nodes=(data)
+    if (data != "") then
+      self.annotationfile = 'annotation.txt'
+      @ndata = data
+    end
+  end
+
+  def autoconfig=(type)
+    templatepath = RAILS_ROOT + '/public/templates/' + type + '.xml'
+    template = File.open(templatepath)
+    self.config = type + '.xml'
+    @cdata = template.read
+  end
 
   def edgeupload=(file)
     self.edgefile = file.original_filename

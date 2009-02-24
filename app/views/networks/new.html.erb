@@ -1,15 +1,16 @@
-<h1>New network</h1>
+<div id="content">
+  <h1>New network</h1>
 
 <% form_for(@network, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
   <p>
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "input" %>
   </p>
   <p>
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+      <%= f.text_area :description, :class => "input" %>
   </p>
   <p>
     <%= f.label :edgefile %>
@@ -24,8 +25,14 @@
     <%= f.file_field :annotationupload %>
   </p>
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Create", :class => "submit" %>
   </p>
 <% end %>
+</div>
 
-<%= link_to 'Back', networks_path %>
+<div id="right">
+  <dl id="subnav">
+    <dt>ToolBox</dt>
+    <dd><%= link_to 'Back', networks_path %></dd>
+  </dl>
+</div>

@@ -15,11 +15,11 @@ class Network < ActiveRecord::Base
     :message => "Must be a .txt file",
     :if => :annotationfile
 
-  # very basic AND DANGEROUS upload/pastie
+  # FIXME very basic AND DANGEROUS upload/pastie system
   after_save :write_files
   after_destroy :remove_files
 
-  # why I need this and I not need it for annotationupload?
+  # FIXME why I need this and I not need it for annotationupload?
   attr_reader :edges, :nodes, :autoconfig
   def edges=(data)
     if (data != "") then
@@ -44,7 +44,7 @@ class Network < ActiveRecord::Base
 
   def edgeupload=(file)
     self.edgefile = file.original_filename
-    # check content/type
+    # TODO check content/type
     logger.info file.content_type.chomp
     @edata = file.read
   end
@@ -52,7 +52,7 @@ class Network < ActiveRecord::Base
   def annotationupload=(file)
     if file != "" then
       self.annotationfile = file.original_filename
-      # check content/type
+      # TODO check content/type
       logger.info file.content_type.chomp
       @ndata = file.read
     end
@@ -60,22 +60,27 @@ class Network < ActiveRecord::Base
 
   def configupload=(file)
     self.config = file.original_filename
-    # check content/type (XML)
+    # TODO check content/type (XML)
     logger.info file.content_type.chomp
     @cdata = file.read
   end
 
   def write_files
+    # FIXME horrible hack to avoid files overwrite in edit (save again)
     basepath = RAILS_ROOT + '/public/storage/' + name
-    FileUtils.makedirs(basepath)
-    efile = basepath + '/' + edgefile
-    File.open(efile,"w") do |file| file.write(@edata) end
-    cfile = basepath + '/' + config
-    File.open(cfile,"w") do |file| file.write(@cdata) end
+    if File.exists?(basepath) then
+      return
+    else
+      FileUtils.makedirs(basepath)
+      efile = basepath + '/' + edgefile
+      File.open(efile,"w") do |file| file.write(@edata) end
+      cfile = basepath + '/' + config
+      File.open(cfile,"w") do |file| file.write(@cdata) end
 
-    if annotationfile then 
-      nfile = basepath + '/' + annotationfile
-      File.open(nfile,"w") do |file| file.write(@ndata) end
+      if annotationfile then 
+        nfile = basepath + '/' + annotationfile
+        File.open(nfile,"w") do |file| file.write(@ndata) end
+      end
     end
   end
 

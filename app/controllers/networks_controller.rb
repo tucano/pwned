@@ -16,15 +16,6 @@ class NetworksController < ApplicationController
   def show
 
     @network = Network.find(params[:id])
-    @edgepath =  get_path(@network.name) + @network.edgefile
-    @configpath = get_path(@network.name) + @network.config
-    if (@network.annotationfile) then
-      @annotationpath = get_path(@network.name) + @network.annotationfile
-      @nodeapplet =  get_applet_path(@network.name) + @network.annotationfile
-    end
-
-    @edgeapplet =  get_applet_path(@network.name) + @network.edgefile
-    @configapplet =  get_applet_path(@network.name) + @network.config
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,12 +36,9 @@ class NetworksController < ApplicationController
 
   # GET /networks/1/edit
   def edit
+    # TODO remove old files on network edit/upload new files (also: edit with pastie?)
+    # For now edit only description (cause also name is involved in filepaths...)
     @network = Network.find(params[:id])
-    @edgepath =  get_path(@network.name) + @network.edgefile
-    @configpath = get_path(@network.name) + @network.config
-    if (@network.annotationfile) then
-      @annotationpath = get_path(@network.name) + @network.annotationfile
-    end
   end
 
   # POST /networks
@@ -89,6 +77,7 @@ class NetworksController < ApplicationController
 
   # DELETE /networks/1
   # DELETE /networks/1.xml
+  # TODO what we do with this Destroy method? AdminAccess
   def destroy
     @network = Network.find(params[:id])
     @network.destroy
@@ -97,17 +86,6 @@ class NetworksController < ApplicationController
       format.html { redirect_to(networks_url) }
       format.xml  { head :ok }
     end
-  end
-
-  private
-  # in model Network?
-  def get_path(net)
-    '/storage/' + net + '/'
-  end
-
-  # the applets want a path relative to /applet/data (otherwise ActionController::RoutingError)
-  def get_applet_path(net)
-    '../../storage/' + net + '/'
   end
 
 end

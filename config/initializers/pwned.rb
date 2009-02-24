@@ -1,0 +1,2 @@
+# PWNED constants
+STORAGE = '/storage/'

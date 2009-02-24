@@ -1,29 +1,35 @@
-<h1>Listing networks</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Edgefile</th>
-    <th>Annotationfile</th>
-    <th>Config</th>
-  </tr>
-
+<div id="content">
 <% for network in @networks %>
-  <tr>
-    <td><%=h network.name %></td>
-    <td><%=h network.description %></td>
-    <td><%=h network.edgefile %></td>
-    <td><%=h network.annotationfile %></td>
-    <td><%=h network.config %></td>
-    <td><%= link_to 'Show', network %></td>
-    <td><%= link_to 'Edit', edit_network_path(network) %></td>
-    <td><%= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  
+  <h1><%= link_to network.name, network %></h1>
+  
+  <blockquote>
+    <h3>Files</h3>
+    <p>
+    Edges: <%= link_to network.edgefile, get_storage_path(network.name,network.edgefile) %>
+    <br/>
+    <% if network.annotationfile %>
+    Nodes: <%= link_to network.annotationfile, get_storage_path(network.name,network.annotationfile) %>
+    <br/>
+    <% end %>
+    Config: <%= link_to network.config, get_storage_path(network.name,network.config) %>
+    </p>
+  </blockquote>
+  <p><%=h network.description %></p>
+
+  <span class="postinfo"> 
+    Created by DummyUser <%= network.created_at.to_date -%> 
+    <br/>
+  </span>
+  <div class="hr"><hr/></div>
 <% end %>
-</table>
+</div>
 
-<br />
+<div id="right">
+  <dl id="subnav">
+    <dt>ToolBox</dt>
+    <dd><%= link_to 'Upload network', new_network_path %></dd>
+    <dd><%= link_to 'New network', :controller => 'pastie' , :action => 'new' %></dd>
+  </dl>
+</div>
 
-<%= link_to 'Upload network', new_network_path %>
-<%= link_to 'New network', :controller => 'pastie' , :action => 'new' %>

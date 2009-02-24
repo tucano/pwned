@@ -1,32 +1,32 @@
-<h1>Editing network</h1>
+<div id="content">
+  <h1>Editing network <%= @network.name%></h1>
 
-<% form_for(@network) do |f| %>
-  <%= f.error_messages %>
+   <% form_for(@network) do |f| %>
+    <%= f.error_messages %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.label :edgefile %><br />
-    <%= f.text_field :edgefile %>
-  </p>
-  <p>
-    <%= f.label :annotationfile %><br />
-    <%= f.text_field :annotationfile %>
-  </p>
-  <p>
-    <%= f.label :config %><br />
-    <%= f.text_field :config %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+    <p>
+      <%= f.hidden_field :name %>
+      
+      <%= f.label :description %><br />
+      <%= f.text_area :description, :class => "input" %>
 
-<%= link_to 'Show', @network %> |
-<%= link_to 'Back', networks_path %>
+      <%= f.hidden_field :edgefile %>
+      <% if @network.annotationfile %>
+        <%= f.hidden_field :annotationfile %>
+      <% end %>
+      <%= f.hidden_field :config %>
+    </p>
+    <p>
+    <%= f.submit "Update", :class => "submit" %>
+    </p>
+  <% end %>
+</div>
+
+
+<div id="right">
+  <dl id="subnav">
+    <dt>ToolBox</dt>
+    <dd><%= link_to 'Show', @network %></dd>
+    <dd><%= link_to 'Back', networks_path %></dd>
+  </dl>
+</div>

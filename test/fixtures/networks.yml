@@ -15,7 +15,16 @@ two:
 
 three:
   name: Barabasi
-  description: A barabasi network
+  description: 
+  Albert-László Barabási (born March 30, 1967) is a Romanian-born 
+  Hungarian scientist. He is the former Emil T. Hofmann professor at the 
+  University of Notre Dame and current Distinguished Professor and Director of 
+  Northeastern University's Center for Network Science and an associate member 
+  of the Center of Cancer Systems Biology (CCSB) at the Dana Farber Cancer 
+  Institute, Harvard University. He introduced in 1999 the concept of 
+  scale-free networks and proposed the Barabasi-Albert model to explain 
+  their widespread emergence in natural, technological and 
+  social systems, from the cellular telephone to the WWW or online communities.
   edgefile: barabasi.txt
   annotationfile:
   config: classic.xml

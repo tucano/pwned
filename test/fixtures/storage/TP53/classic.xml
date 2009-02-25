@@ -6,13 +6,13 @@
 			<size>10</size>
 		</node>
 		<spacer>
-			<strength>1000</strength>
-			<max>20.0</max>
+			<strength>50</strength>
+			<max>10.0</max>
 		</spacer>
 		<edge>
-			<length>20</length>
-			<strength>0.2</strength>
-			<damping>0.2</damping>
+			<length>50</length>
+			<strength>0.02</strength>
+			<damping>0.02</damping>
 		</edge>
 		<stroke>
 			<weight>2</weight>
@@ -61,7 +61,7 @@
 		<drawnodes>1</drawnodes>
 		<drawlabels>1</drawlabels>
 		<withlinks>0</withlinks>
-		<directed>false</directed>
+		<directed>0</directed>
 	</flags>
 	
 </config>

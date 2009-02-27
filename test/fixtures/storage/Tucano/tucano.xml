@@ -61,7 +61,7 @@
 		<drawnodes>1</drawnodes>
 		<drawlabels>1</drawlabels>
 		<withlinks>1</withlinks>
-		<directed>false</directed>
+		<directed>0</directed>
 	</flags>
 	
 </config>

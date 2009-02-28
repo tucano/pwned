@@ -1,16 +1,3 @@
-# Applet
-
-1. Fix mouse dx button (CTRL not ALT)
-2. standalone version (add XML config)
-3. define a final interface
-4. optimizations ?
-5. various methods to draw edges (sampling, random, etc..)
-6. more options, image background, alpha, etc...
-7. 3D interface? see plasmodioum traer.cc
-
-
-# Rails
-
 1. Redesign upload/storage system
 2. test, test, test and more test
 3. Config and edges/nodes editor

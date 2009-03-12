@@ -1,28 +1,33 @@
 <div id="content">
   <h1>New network</h1>
 
+<%= error_messages_for :network, :edgefile, :annotationfile, :configfile %>
 <% form_for(@network, :html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
-
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name, 'Network Name' %><br />
     <%= f.text_field :name, :class => "input" %>
   </p>
   <p>
-    <%= f.label :description %><br />
+    <%= f.label :description, 'Description' %><br />
       <%= f.text_area :description, :class => "input" %>
   </p>
   <p>
-    <%= f.label :edgefile %>
-    <%= f.file_field :edgeupload %>
+    <% fields_for :edgefile do |edgefile| %>
+      <%= edgefile.label :uploaded_data , 'Edgefile'%>
+      <%= edgefile.file_field :uploaded_data %>
+    <% end %>
   </p>
   <p>
-    <%= f.label :config %>
-    <%= f.file_field :configupload %>
+    <% fields_for :configfile do |configfile| %>
+      <%= configfile.label :uploaded_data , 'Configfile'%>
+      <%= configfile.file_field :uploaded_data %>
+    <% end %>
   </p>
   <p>
-    <%= f.label :annotationfile %>
-    <%= f.file_field :annotationupload %>
+    <% fields_for :annotationfile do |annotationfile| %>
+      <%= annotationfile.label :uploaded_data , 'Annotationfile'%>
+      <%= annotationfile.file_field :uploaded_data %>
+    <% end %>
   </p>
   <p>
     <%= f.submit "Create", :class => "submit" %>

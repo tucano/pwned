@@ -45,6 +45,12 @@ class NetworksController < ApplicationController
   # POST /networks.xml
   def create
     @network = Network.new(params[:network])
+    @network.edgefile = Edgefile.new(params[:edgefile])
+    @network.configfile = Configfile.new(params[:configfile])
+    # TODO AnnotationService Adv rails recipes
+    if params[:annotationfile][:uploaded_data] != "" then
+      @network.annotationfile = Annotationfile.new(params[:annotationfile])
+    end
 
     respond_to do |format|
       if @network.save

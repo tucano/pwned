@@ -12,46 +12,45 @@ class NetworksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # this create files in storage (FIXME)
   test "should create network" do
+    network_hash = { 
+      :name => 'pippo',
+      :description => 'blablabla'
+    }
     assert_difference('Network.count') do
-      post :create, :network => { 
-        :name => 'pippo',
-        :description => 'blablabla',
-        :edgefile => 'pippo.txt',
-        :annotationfile => 'notes.txt',
-        :config => 'config.xml'
-      }
+      post :create, :network => network_hash,
+        :edgefile => { :uploaded_data => fixture_file_upload("../storage/edgefiles/barabasi.txt", "text/plain") },
+        :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") },
+    # FIXME this is an hack
+        :annotationfile =>{ :uploaded_data => ""}
     end
 
     assert_redirected_to network_path(assigns(:network))
   end
 
   test "should show network" do
-    get :show, :id => networks(:one).id
+    get :show, :id => networks(:disney).id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => networks(:one).id
+    get :edit, :id => networks(:disney).id
     assert_response :success
   end
 
   test "should update network" do
-    put :update, :id => networks(:one).id, :network => { 
-        :name => 'pippo',
-        :description => 'blablabla',
-        :edgefile => 'pippo.txt',
-        :annotationfile => 'notes.txt',
-        :config => 'config.xml'
+    network_hash = { 
+      :name => 'pippo',
+      :description => 'blablabla'
     }
+    # FIXME this is an hack
+    put :update, :id => networks(:disney).id, :network => network_hash, :annotationfile =>{ :uploaded_data => ""}, :edgefile =>{ :uploaded_data => ""}, :configfile =>{ :uploaded_data => ""}
     assert_redirected_to network_path(assigns(:network))
   end
 
-  # this destroy files in storage (FIXME)
   test "should destroy network" do
     assert_difference('Network.count', -1) do
-      delete :destroy, :id => networks(:one).id
+      delete :destroy, :id => networks(:disney).id
     end
 
     assert_redirected_to networks_path

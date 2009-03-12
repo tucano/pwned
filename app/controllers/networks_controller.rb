@@ -46,6 +46,7 @@ class NetworksController < ApplicationController
     @network.edgefile = Edgefile.new(params[:edgefile])
     @network.configfile = Configfile.new(params[:configfile])
     # TODO AnnotationService Adv rails recipes
+    # FIXME this is an hack
     if params[:annotationfile][:uploaded_data] != "" then
       @network.annotationfile = Annotationfile.new(params[:annotationfile])
     end
@@ -67,12 +68,15 @@ class NetworksController < ApplicationController
   def update
     @network = Network.find(params[:id])
 
+    # FIXME this is an hack
     if params[:edgefile][:uploaded_data] != "" then
       @network.edgefile = Edgefile.new(params[:edgefile])
     end
+    # FIXME this is an hack
     if params[:configfile][:uploaded_data] != "" then
       @network.configfile = Configfile.new(params[:configfile])
     end
+    # FIXME this is an hack
     if params[:annotationfile][:uploaded_data] != "" then
       @network.annotationfile = Annotationfile.new(params[:annotationfile])
     end

@@ -9,13 +9,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090312110657) do
+ActiveRecord::Schema.define(:version => 20090312125113) do
+
+  create_table "annotationfiles", :force => true do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "configfiles", :force => true do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "edgefiles", :force => true do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "networks", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "edgefile_id"
+    t.integer  "annotationfile_id"
+    t.integer  "configfile_id"
   end
 
   create_table "sessions", :force => true do |t|

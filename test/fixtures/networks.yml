@@ -10,18 +10,18 @@ one:
      Disney became one of the best-known motion picture producers in the world. 
      The corporation he co-founded, now known as The Walt Disney Company, 
      today has annual revenues of approximately U.S. $35 billion.
-  edgefile: disney.txt
-  annotationfile:
-  config: mrblue.xml
+  edgefile_id: disney
+  annotationfile_id:
+  configfile_id: mrblue
 
 two:
   name: Tucano
   description:
     A conceptual map of my website tucano.recipient.cc.
     Red nodes are link to web pages. Grey nodes are topics.
-  edgefile: siteedges.txt
-  annotationfile: sitenodes.txt
-  config: tucano.xml
+  edgefile_id: tucano
+  annotationfile_id: tucano
+  configfile_id: tucano
 
 three:
   name: Barabasi
@@ -35,9 +35,9 @@ three:
       scale-free networks and proposed the Barabasi-Albert model to explain 
       their widespread emergence in natural, technological and 
       social systems, from the cellular telephone to the WWW or online communities.
-  edgefile: barabasi.txt
-  annotationfile:
-  config: classic.xml
+  edgefile_id: barabasi
+  annotationfile_id:
+  configfile_id: classic
 
 four:
   name: Google
@@ -50,9 +50,9 @@ four:
    Also C(A) is defined as the number of links going out of page A. The PageRank of a page A is given as follows
    PR(A) = (1-d) + d (PR(T1)/C(T1) + ... + PR(Tn)/C(Tn))
    Note that the PageRanks form a probability distribution over web pages, so the sum of all web pages' PageRanks will be one.
-  edgefile: google.txt
-  annotationfile: rank.txt
-  config: google.xml
+  edgefile_id: google
+  annotationfile_id: google
+  configfile_id: google
 
 five:
   name: HumanNetwork
@@ -61,9 +61,9 @@ five:
     post-translational modifications, interaction networks and disease association 
     for each protein in the human proteome. Includes map of pathways and 
     FAQ maintained by Johns Hopkins University and the Institute of Bioinformatics.
-  edgefile: hprd.txt
-  annotationfile: hprdmap.txt
-  config: classic.xml 
+  edgefile_id: hprd
+  annotationfile_id: hprd
+  configfile_id: hprd
   
 six:
   name: TP53
@@ -73,9 +73,9 @@ six:
     in metabolism. p53 protein is expressed at low level in normal cells and at a high level 
     in a variety of transformed cell lines, where it's believed to contribute to transformation and malignancy.
     238 Nodes, 797 edges max degree 237 and clustering coeff. 0.07601903
-  edgefile: tp53.txt
+  edgefile_id: tp53
   annotationfile:
-  config: classic.xml
+  config: tp53
   
 seven:
   name: Facebook
@@ -83,6 +83,6 @@ seven:
     Millions of people use Facebook everyday to keep up with people they don't care, 
     upload and public private information and photos, share personal and sensitive data, 
     and learn more about why you should take care of your friend list.
-  edgefile: facebook.txt
+  edgefile: facebook
   annotationfile:
-  config: mrblue.xml 
+  config: facebook 

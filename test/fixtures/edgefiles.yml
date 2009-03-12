@@ -1,0 +1,22 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+barabasi:
+  attachment_file: test/storage/edgefiles/barabasi.txt
+
+disney:
+  attachment_file: test/storage/edgefiles/barabasi.txt
+
+facebook:
+  attachment_file: test/storage/edgefiles/facebook.txt
+  
+google:
+  attachment_file: test/storage/edgefiles/google.txt
+  
+hprd:
+  attachment_file: test/storage/edgefiles/hprd.txt
+
+tp53:  
+  attachment_file: test/storage/edgefiles/tp53.txt
+  
+tucano:
+  attachment_file: test/storage/edgefiles/tucano.txt

@@ -1,5 +1,9 @@
 class Network < ActiveRecord::Base
+  
+  has_one :edgefile, :dependent => :destroy
 
+  # all version here
+=begin
   validates_presence_of :name, :description, :edgefile, :config
   
   validates_uniqueness_of :name
@@ -88,4 +92,6 @@ class Network < ActiveRecord::Base
     basepath = RAILS_ROOT + '/public/storage/' + name
     FileUtils.rm_rf(basepath)
   end
+=end
+
 end

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+mrblue:
+  attachment_file: test/storage/configfiles/mrblue.xml
+  
+tucano:
+  attachment_file: test/storage/configfiles/tucano.xml  
+
+classic:
+  attachment_file: test/storage/configfiles/classic.xml
+
+google:
+  attachment_file: test/storage/configfiles/google.xml
+  
+tp53:
+  attachment_file: test/storage/configfiles/tp53.xml
+
+hprd:
+  attachment_file: test/storage/configfiles/hprd.xml

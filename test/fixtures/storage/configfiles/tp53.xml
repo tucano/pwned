@@ -11,8 +11,8 @@
 		</spacer>
 		<edge>
 			<length>50</length>
-			<strength>0.01</strength>
-			<damping>0.01</damping>
+			<strength>0.02</strength>
+			<damping>0.02</damping>
 		</edge>
 		<stroke>
 			<weight>2</weight>
@@ -24,30 +24,30 @@
 	
 	<colors>
 		<background>
-			<r>190</r>
-			<g>225</g>
-			<b>252</b>
+			<r>233</r>
+			<g>233</g>
+			<b>233</b>
 		</background>
 		<edge>
-			<r>232</r>
-			<g>232</g>
-			<b>101</b>
+			<r>100</r>
+			<g>100</g>
+			<b>100</b>
 		</edge>
 		<node1>
-			<r>22</r>
-			<g>111</g>
-			<b>184</b>
+			<r>150</r>
+			<g>150</g>
+			<b>150</b>
 			<rh>205</rh>
 			<gh>205</gh>
 			<bh>205</bh>
 		</node1>
 		<node2>
-			<r>22</r>
-			<g>111</g>
-			<b>184</b>
+			<r>150</r>
+			<g>0</g>
+			<b>0</b>
 			<rh>205</rh>
-			<gh>205</gh>
-			<bh>205</bh>
+			<gh>0</gh>
+			<bh>0</bh>
 		</node2>
 		<label>
 			<r>0</r>
@@ -61,7 +61,7 @@
 		<drawnodes>1</drawnodes>
 		<drawlabels>1</drawlabels>
 		<withlinks>0</withlinks>
-		<directed>1</directed>
+		<directed>0</directed>
 	</flags>
 	
 </config>

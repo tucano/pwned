@@ -16,11 +16,11 @@
     <param name="boxmessage" value="Loading Processing software..." />
     <param name="boxbgcolor" value="#FFFFFF" />
   
-    <param name="edges" value="<%= get_storage_path_for_applet(@network.name, @network.edgefile) %>" />
+    <param name="edges" value="<%= get_file_path_for_applet(@network.edgefile.public_filename) %>" />
     <% if @network.annotationfile %>
-    <param name="nodes" value="<%= get_storage_path_for_applet(@network.name, @network.annotationfile) %>" />
+    <param name="nodes" value="<%= get_file_path_for_applet(@network.annotationfile.public_filename) %>" />
     <% end %>
-    <param name="config" value="<%= get_storage_path_for_applet(@network.name, @network.config) %>" />
+    <param name="config" value="<%= get_file_path_for_applet(@network.configfile.public_filename) %>" />
     <param name="test_string" value="outer" />
 <!--<![endif]-->
   
@@ -40,11 +40,11 @@
     <param name="boxmessage" value="Loading Processing software..." />
     <param name="boxbgcolor" value="#FFFFFF" />
     
-    <param name="edges" value="<%= get_storage_path_for_applet(@network.name, @network.edgefile) %>" />
+    <param name="edges" value="<%= get_file_path_for_applet(@network.edgefile.public_filename) %>" />
     <% if @network.annotationfile %>
-    <param name="nodes" value="<%= get_storage_path_for_applet(@network.name, @network.annotationfile) %>" />
+    <param name="nodes" value="<%= get_file_path_for_applet(@network.annotationfile.public_filename) %>" />
     <% end %>
-    <param name="config" value="<%= get_storage_path_for_applet(@network.name, @network.config) %>" />
+    <param name="config" value="<%= get_file_path_for_applet(@network.configfile.public_filename) %>" />
     <param name="test_string" value="inner" />
     <p>
       <strong>

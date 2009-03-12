@@ -3,13 +3,13 @@
   <blockquote>
     <h3>Files</h3>
   <p>
-    Edges: <%= link_to @network.edgefile, get_storage_path(@network.name,@network.edgefile) %>
+    Edges: <%= link_to @network.edgefile.filename, @network.edgefile.public_filename %>
     <br/>
     <% if @network.annotationfile %>
-      Nodes: <%= link_to @network.annotationfile, get_storage_path(@network.name,@network.annotationfile) %>
+      Nodes: <%= link_to @network.annotationfile.filename, @network.annotationfile.public_filename %>
       <br/>
     <% end %>
-    Config: <%= link_to @network.config, get_storage_path(@network.name,@network.config) %>
+    Config: <%= link_to @network.configfile.filename, @network.configfile.public_filename %>
     <br/>
     </p>
   </blockquote>

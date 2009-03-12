@@ -9,14 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090223155940) do
+ActiveRecord::Schema.define(:version => 20090312110657) do
 
   create_table "networks", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "edgefile"
-    t.string   "annotationfile"
-    t.string   "config"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

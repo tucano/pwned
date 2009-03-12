@@ -2,8 +2,9 @@ class PastieController < ApplicationController
   layout 'networks'
 
   def new
+    render :text => 'Disabled, need upgrade.'
     # TODO config file and templates
-    @network = Network.new
+    # @network = Network.new
   end
 
   # POST /pastie

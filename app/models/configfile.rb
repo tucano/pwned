@@ -1,5 +1,5 @@
 class Configfile < ActiveRecord::Base
-  has_one :network
+  belongs_to :network
 
   has_attachment :content_type => 'text/xml',
                  :max_size => 1.megabyte,

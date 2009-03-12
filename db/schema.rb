@@ -12,6 +12,7 @@
 ActiveRecord::Schema.define(:version => 20090312125113) do
 
   create_table "annotationfiles", :force => true do |t|
+    t.integer  "network_id"
     t.string   "filename"
     t.string   "content_type"
     t.integer  "size"
@@ -20,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20090312125113) do
   end
 
   create_table "configfiles", :force => true do |t|
+    t.integer  "network_id"
     t.string   "filename"
     t.string   "content_type"
     t.integer  "size"
@@ -28,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20090312125113) do
   end
 
   create_table "edgefiles", :force => true do |t|
+    t.integer  "network_id"
     t.string   "filename"
     t.string   "content_type"
     t.integer  "size"
@@ -40,9 +43,6 @@ ActiveRecord::Schema.define(:version => 20090312125113) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "edgefile_id"
-    t.integer  "annotationfile_id"
-    t.integer  "configfile_id"
   end
 
   create_table "sessions", :force => true do |t|

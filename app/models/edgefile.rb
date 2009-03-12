@@ -1,5 +1,5 @@
 class Edgefile < ActiveRecord::Base
-  has_one :network
+  belongs_to :network
 
   has_attachment :content_type => 'text/plain',
                  :max_size => 1.megabyte,

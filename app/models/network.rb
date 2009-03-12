@@ -1,10 +1,10 @@
 class Network < ActiveRecord::Base
   
-  belongs_to :edgefile, :dependent => :destroy
-  belongs_to :annotationfile, :dependent => :destroy
-  belongs_to :configfile, :dependent => :destroy
+  has_one :edgefile, :dependent => :destroy
+  has_one :annotationfile, :dependent => :destroy
+  has_one :configfile, :dependent => :destroy
 
-  validates_presence_of :name, :description, :edgefile_id, :configfile_id
+  validates_presence_of :name, :description
 
   validates_format_of :name,
                       :with => /^\w+$/

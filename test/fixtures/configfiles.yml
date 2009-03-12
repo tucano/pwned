@@ -2,21 +2,28 @@
 
 disney:
   attachment_file: test/storage/configfiles/disney.xml
+  network: disney
   
 tucano:
-  attachment_file: test/storage/configfiles/tucano.xml  
+  attachment_file: test/storage/configfiles/tucano.xml
+  network: tucano
 
 barabasi:
   attachment_file: test/storage/configfiles/barabasi.xml
+  network: barabasi
 
 google:
   attachment_file: test/storage/configfiles/google.xml
+  network: google
   
 tp53:
   attachment_file: test/storage/configfiles/tp53.xml
+  network: tp53
 
 hprd:
   attachment_file: test/storage/configfiles/hprd.xml
+  network: hprd
   
 facebook:
   attachment_file: test/storage/configfiles/facebook.xml
+  network: facebook

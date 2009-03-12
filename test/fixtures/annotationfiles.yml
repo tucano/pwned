@@ -2,9 +2,12 @@
 
 tucano:
   attachment_file: test/storage/annotationfiles/tucanonodes.txt
+  network: tucano
   
 google:
   attachment_file: test/storage/annotationfiles/googlerank.txt
+  network: google
   
 hprd:
   attachment_file: test/storage/annotationfiles/hprdmap.txt
+  network: hprd

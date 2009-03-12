@@ -1,59 +1,54 @@
 require 'test_helper'
 
 class NetworkTest < ActiveSupport::TestCase
-  test "the truth" do
-    assert true
-  end
-=begin
-  end
-  fixtures :networks
 
-  def test_invalid_with_empty_attributes
+  fixtures :networks, :edgefiles, :annotationfiles, :configfiles
+
+  test "invalid with empty attributes" do
     network = Network.new
     assert !network.valid?
     assert network.errors.invalid?(:name)
     assert network.errors.invalid?(:description)
-    assert network.errors.invalid?(:edgefile)
-    assert network.errors.invalid?(:config)
+    assert network.errors.invalid?(:configfile_id)
+    assert network.errors.invalid?(:edgefile_id)
   end
-
-  def test_edgefile_format
-    ok = %w{ fred.txt pippo.txt pluto.txt }
-    bad = %w{ pluto.doc pippo.xml }
-    
-    ok.each do |file|
-      network = Network.new(
-        :name => 'test',
-        :description => 'blablabla',
-        :edgefile => file,
-        :annotationfile => 'notes.txt',
-        :config => 'config.xml'
-      )
-      assert network.valid?, network.errors.full_messages
-    end
-
-    bad.each do |file|
-      network = Network.new(
-        :name => 'test',
-        :description => 'blablabla',
-        :edgefile => file,
-        :annotationfile => 'notes.txt',
-        :config => 'config.xml'
-      )
-      assert !network.valid?, "saving #{file}"
-    end
-  end
-
-  def test_unique_name
+  
+  test "unique name" do
     network = Network.new(
-      :name => networks(:one).name,
+      :name => networks(:barabasi).name,
       :description => 'blablabla',
-      :edgefile => 'pippo.txt',
-      :annotationfile => 'notes.txt',
-      :config => 'config.xml'
+      :edgefile_id => edgefiles(:barabasi).id,
+      :configfile_id => configfiles(:barabasi).id
     )
     assert !network.save
     assert_equal "has already been taken", network.errors.on(:name)
   end
-=end
+
+  test "name format" do
+    bad = ["jhy hynjr", "\\inkjf1?!", "?", "!?", ";", "'"]
+    good = ["test", "test4", "lupo67", "Precipitando", "Ah_beh_ci_siamo"]
+    
+    bad.each do |name|
+      network = Network.new(
+        :name => name,
+        :description => 'blablabla',
+        :edgefile_id => edgefiles(:barabasi).id,
+        :configfile_id => configfiles(:barabasi).id
+      )
+      assert !network.save
+      assert_equal "is invalid", network.errors.on(:name)
+    end
+
+    good.each do |name|
+      network = Network.new(
+        :name => name,
+        :description => 'blablabla',
+        :edgefile_id => edgefiles(:barabasi).id,
+        :configfile_id => configfiles(:barabasi).id
+      )
+      assert network.valid?, network.errors.full_messages
+    end
+
+  end
+
 end

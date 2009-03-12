@@ -1,12 +1,19 @@
 class Network < ActiveRecord::Base
   
-  has_one :edgefile, :dependent => :destroy
+  belongs_to :edgefile, :dependent => :destroy
+  belongs_to :annotationfile, :dependent => :destroy
+  belongs_to :configfile, :dependent => :destroy
 
-  # all version here
-=begin
-  validates_presence_of :name, :description, :edgefile, :config
-  
+  validates_presence_of :name, :description, :edgefile_id, :configfile_id
+
+  validates_format_of :name,
+                      :with => /^\w+$/
+
   validates_uniqueness_of :name
+
+  # old version here
+=begin
+  
 
   validates_format_of :edgefile,
     :with => %r{\.txt}i,

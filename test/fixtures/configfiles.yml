@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-mrblue:
-  attachment_file: test/storage/configfiles/mrblue.xml
+disney:
+  attachment_file: test/storage/configfiles/disney.xml
   
 tucano:
   attachment_file: test/storage/configfiles/tucano.xml  
 
-classic:
-  attachment_file: test/storage/configfiles/classic.xml
+barabasi:
+  attachment_file: test/storage/configfiles/barabasi.xml
 
 google:
   attachment_file: test/storage/configfiles/google.xml
@@ -17,3 +17,6 @@ tp53:
 
 hprd:
   attachment_file: test/storage/configfiles/hprd.xml
+  
+facebook:
+  attachment_file: test/storage/configfiles/facebook.xml

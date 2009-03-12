@@ -3,27 +3,34 @@
 barabasi:
   attachment_file: test/storage/edgefiles/barabasi.txt
   network: barabasi
+  content_type: text/plain
 
 disney:
   attachment_file: test/storage/edgefiles/barabasi.txt
   network: disney
+  content_type: text/plain
   
 facebook:
   attachment_file: test/storage/edgefiles/facebook.txt
   network: facebook  
+  content_type: text/plain
   
 google:
   attachment_file: test/storage/edgefiles/google.txt
   network: google  
+  content_type: text/plain
   
 hprd:
   attachment_file: test/storage/edgefiles/hprd.txt
   network: hprd
-
+  content_type: text/plain
+  
 tp53:  
   attachment_file: test/storage/edgefiles/tp53.txt
   network: tp53
+  content_type: text/plain
   
 tucano:
   attachment_file: test/storage/edgefiles/tucano.txt
-  network: tucano  
+  network: tucano
+  content_type: text/plain

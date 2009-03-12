@@ -3,27 +3,34 @@
 disney:
   attachment_file: test/storage/configfiles/disney.xml
   network: disney
+  content_type: text/xml
   
 tucano:
   attachment_file: test/storage/configfiles/tucano.xml
   network: tucano
+  content_type: text/xml
 
 barabasi:
   attachment_file: test/storage/configfiles/barabasi.xml
   network: barabasi
+  content_type: text/xml
 
 google:
   attachment_file: test/storage/configfiles/google.xml
   network: google
+  content_type: text/xml
   
 tp53:
   attachment_file: test/storage/configfiles/tp53.xml
   network: tp53
+  content_type: text/xml
 
 hprd:
   attachment_file: test/storage/configfiles/hprd.xml
   network: hprd
+  content_type: text/xml
   
 facebook:
   attachment_file: test/storage/configfiles/facebook.xml
   network: facebook
+  content_type: text/xml

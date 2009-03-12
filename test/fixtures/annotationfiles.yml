@@ -3,11 +3,14 @@
 tucano:
   attachment_file: test/storage/annotationfiles/tucanonodes.txt
   network: tucano
+  content_type: text/plain
   
 google:
   attachment_file: test/storage/annotationfiles/googlerank.txt
   network: google
+  content_type: text/plain
   
 hprd:
   attachment_file: test/storage/annotationfiles/hprdmap.txt
   network: hprd
+  content_type: text/plain

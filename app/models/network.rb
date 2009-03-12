@@ -11,7 +11,8 @@ class Network < ActiveRecord::Base
 
   validates_uniqueness_of :name, :on => :create
 
-  validates_associated :edgefile, :configfile
+  # FIXME only on create, update what? TODO
+  validates_associated :edgefile, :configfile, :on => :create
 
   # TODO validate annotation files (AnnotationService)
 

@@ -36,8 +36,6 @@ class NetworksController < ApplicationController
 
   # GET /networks/1/edit
   def edit
-    # TODO remove old files on network edit/upload new files (also: edit with pastie?)
-    # For now edit only description (cause also name is involved in filepaths...)
     @network = Network.find(params[:id])
   end
 
@@ -68,6 +66,16 @@ class NetworksController < ApplicationController
   # PUT /networks/1.xml
   def update
     @network = Network.find(params[:id])
+
+    if params[:edgefile][:uploaded_data] != "" then
+      @network.edgefile = Edgefile.new(params[:edgefile])
+    end
+    if params[:configfile][:uploaded_data] != "" then
+      @network.configfile = Configfile.new(params[:configfile])
+    end
+    if params[:annotationfile][:uploaded_data] != "" then
+      @network.annotationfile = Annotationfile.new(params[:annotationfile])
+    end
 
     respond_to do |format|
       if @network.update_attributes(params[:network])

@@ -2,6 +2,9 @@
 log/*.log
 tmp/**/*
 config/database.yml
+config/amazon_s3.yml
+public/storage
 db/*.sqlite3
 doc/api
 doc/app
+doc/plugins

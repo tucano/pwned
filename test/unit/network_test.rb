@@ -7,15 +7,19 @@ class NetworkTest < ActiveSupport::TestCase
     assert !network.valid?
     assert network.errors.invalid?(:name)
     assert network.errors.invalid?(:description)
+    assert network.errors.invalid?(:edgefile)
+    assert network.errors.invalid?(:configfile)
   end
   
   test "unique name" do
     network = Network.new(
       :name => networks(:barabasi).name,
-      :description => 'blablabla'
+      :description => 'blablabla',
+      :edgefile => edgefiles(:barabasi),
+      :configfile => configfiles(:barabasi)
     )
-    assert !network.save
-    assert_equal "has already been taken", network.errors.on(:name)
+    assert !network.save, "Saved without unique name"
+    assert_equal I18n.translate('activerecord.errors.messages')[:taken], network.errors.on(:name)
   end
 
   test "name format" do
@@ -25,18 +29,23 @@ class NetworkTest < ActiveSupport::TestCase
     bad.each do |name|
       network = Network.new(
         :name => name,
-        :description => 'blablabla'
+        :description => 'blablabla',
+        :edgefile => edgefiles(:barabasi),
+        :configfile => configfiles(:barabasi)
       )
       assert !network.save
-      assert_equal "is invalid", network.errors.on(:name)
+      assert_equal I18n.translate('activerecord.errors.messages')[:invalid], network.errors.on(:name)
     end
 
     good.each do |name|
       network = Network.new(
         :name => name,
-        :description => 'blablabla'
+        :description => 'blablabla',
+        :edgefile => edgefiles(:barabasi),
+        :configfile => configfiles(:barabasi)
       )
       assert network.valid?, network.errors.full_messages
+      assert network.save
     end
 
   end

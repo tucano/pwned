@@ -43,15 +43,13 @@ class NetworksController < ApplicationController
   # POST /networks.xml
   def create
     @network = Network.new(params[:network])
-    @network.edgefile = Edgefile.new(params[:edgefile])
-    @network.configfile = Configfile.new(params[:configfile])
-    # TODO AnnotationService Adv rails recipes
-    if !params[:annotationfile][:uploaded_data].blank? then
-      @network.annotationfile = Annotationfile.new(params[:annotationfile])
-    end
+    @edgefile = Edgefile.new(params[:edgefile])
+    @configfile = Configfile.new(params[:configfile])
+    @annotationfile = Annotationfile.new(params[:annotationfile])
+    @service = Fileservice.new(@network, @edgefile, @configfile,@annotationfile)
 
     respond_to do |format|
-      if @network.save
+      if @service.save
         flash[:notice] = 'Network was successfully created.'
         format.html { redirect_to(@network) }
         format.xml  { render :xml => @network, :status => :created, :location => @network }

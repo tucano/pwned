@@ -21,8 +21,7 @@ class NetworksControllerTest < ActionController::TestCase
       post :create, :network => network_hash,
         :edgefile => { :uploaded_data => fixture_file_upload("../storage/edgefiles/barabasi.txt", "text/plain") },
         :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") },
-    # FIXME this is an hack
-        :annotationfile =>{ :uploaded_data => ""}
+        :annotationfile => { :uploaded_data => fixture_file_upload("../storage/annotationfiles/hprdmap.txt", "text/plain") }
     end
 
     newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 

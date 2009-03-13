@@ -2,13 +2,16 @@ require 'test_helper'
 
 class NetworkTest < ActiveSupport::TestCase
 
+  #TODO TODO Remove edgefile, configfiles, etc... there is service now
+
   test "invalid with empty attributes" do
     network = Network.new
     assert !network.valid?
     assert network.errors.invalid?(:name)
     assert network.errors.invalid?(:description)
-    assert network.errors.invalid?(:edgefile)
-    assert network.errors.invalid?(:configfile)
+    # TODO there is fileservice now
+    #assert network.errors.invalid?(:edgefile)
+    #assert network.errors.invalid?(:configfile)
   end
   
   test "unique name" do

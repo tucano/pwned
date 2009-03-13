@@ -1,8 +1,7 @@
 require 'test_helper'
 
-class FileserviceTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+class FileserviceTest < Test::Unit::TestCase
+  def test_the_truth
+    assert_not_nil 1
   end
 end

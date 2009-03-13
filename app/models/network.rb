@@ -11,8 +11,9 @@ class Network < ActiveRecord::Base
 
   validates_uniqueness_of :name, :on => :create
 
-  validates_presence_of :edgefile, :configfile
-  validates_associated :edgefile, :configfile
+  # FIXME there is fileservice now to handle this
+#  validates_presence_of :edgefile, :configfile, :on => :save
+#  validates_associated :edgefile, :configfile
 
   # TODO validate annotation files (AnnotationService)
 

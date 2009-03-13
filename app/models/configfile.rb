@@ -1,7 +1,7 @@
 class Configfile < ActiveRecord::Base
   belongs_to :network
 
-  has_attachment :content_type => 'text/xml',
+  has_attachment :content_type => ['text/xml', 'application/xml'],
                  :max_size => 1.megabyte,
                  :storage => :file_system, 
                  :path_prefix => "#{STORAGE_PATH_PREFIX}/#{table_name}"

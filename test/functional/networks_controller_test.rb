@@ -25,6 +25,12 @@ class NetworksControllerTest < ActionController::TestCase
         :annotationfile =>{ :uploaded_data => ""}
     end
 
+    newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
+    assert_not_nil newbie.edgefile
+    assert_not_nil newbie.configfile
+    assert_equal("barabasi.txt", newbie.edgefile.filename)
+    assert_equal("barabasi.xml", newbie.configfile.filename)
+
     assert_redirected_to network_path(assigns(:network))
   end
 

@@ -13,7 +13,7 @@ class ConfigfileTest < ActiveSupport::TestCase
   test "content type" do
     
     configfile = Configfile.new()
-    configfile.filename = 'pippo.txt'
+    configfile.filename = 'pippo.xml'
     configfile.size = 500
 
     configfile.content_type = 'application/pdf'
@@ -27,7 +27,26 @@ class ConfigfileTest < ActiveSupport::TestCase
     configfile.content_type = 'text/xml'
     assert configfile.valid?, configfile.errors.full_messages
 
+    configfile.content_type = 'application/xml'
+    assert configfile.valid?, configfile.errors.full_messages
+
   end
  
+  test "size" do
+    configfile = Configfile.new()
+    configfile.filename = 'pippo.xml'
+    configfile.content_type = 'text/xml'
+
+    configfile.size = 5.megabyte
+    assert !configfile.valid?
+    assert_equal "is not included in the list", configfile.errors.on(:size)
+    
+    configfile.size = 15.megabyte
+    assert !configfile.valid?
+    assert_equal "is not included in the list", configfile.errors.on(:size)
+
+    configfile.size = 1.megabyte
+    assert configfile.valid?, configfile.errors.full_messages
+  end
 
 end

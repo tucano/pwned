@@ -6,7 +6,7 @@ barabasi:
   content_type: text/plain
 
 disney:
-  attachment_file: test/storage/edgefiles/barabasi.txt
+  attachment_file: test/storage/edgefiles/disney.txt
   network: disney
   content_type: text/plain
   

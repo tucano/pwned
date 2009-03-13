@@ -29,4 +29,20 @@ class AnnotationfileTest < ActiveSupport::TestCase
 
   end
  
+  test "size" do
+    annotationfile = Annotationfile.new()
+    annotationfile.filename = 'pippo.txt'
+    annotationfile.content_type = 'text/plain'
+
+    annotationfile.size = 5.megabyte
+    assert !annotationfile.valid?
+    assert_equal "is not included in the list", annotationfile.errors.on(:size)
+    
+    annotationfile.size = 15.megabyte
+    assert !annotationfile.valid?
+    assert_equal "is not included in the list", annotationfile.errors.on(:size)
+
+    annotationfile.size = 1.megabyte
+    assert annotationfile.valid?, annotationfile.errors.full_messages
+  end
 end

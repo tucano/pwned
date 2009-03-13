@@ -46,8 +46,7 @@ class NetworksController < ApplicationController
     @network.edgefile = Edgefile.new(params[:edgefile])
     @network.configfile = Configfile.new(params[:configfile])
     # TODO AnnotationService Adv rails recipes
-    # FIXME this is an hack
-    if params[:annotationfile][:uploaded_data] != "" then
+    if !params[:annotationfile][:uploaded_data].blank? then
       @network.annotationfile = Annotationfile.new(params[:annotationfile])
     end
 

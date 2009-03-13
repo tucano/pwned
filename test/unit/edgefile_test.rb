@@ -11,7 +11,6 @@ class EdgefileTest < ActiveSupport::TestCase
   end
 
   test "content type" do
-    
     edgefile = Edgefile.new()
     edgefile.filename = 'pippo.txt'
     edgefile.size = 500
@@ -26,7 +25,22 @@ class EdgefileTest < ActiveSupport::TestCase
     
     edgefile.content_type = 'text/plain'
     assert edgefile.valid?, edgefile.errors.full_messages
-
   end
-  
+
+  test "size" do
+    edgefile = Edgefile.new()
+    edgefile.filename = 'pippo.txt'
+    edgefile.content_type = 'text/plain'
+
+    edgefile.size = 5.megabyte
+    assert !edgefile.valid?
+    assert_equal "is not included in the list", edgefile.errors.on(:size)
+    
+    edgefile.size = 15.megabyte
+    assert !edgefile.valid?
+    assert_equal "is not included in the list", edgefile.errors.on(:size)
+
+    edgefile.size = 1.megabyte
+    assert edgefile.valid?, edgefile.errors.full_messages
+  end
 end

@@ -10,6 +10,13 @@ class NetworksControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_select("form[action=?]", networks_path) do
+      assert_select "input[name *= name]"
+      assert_select "textarea[name *= description]"
+      assert_select "input[name *= edgefile]"
+      assert_select "input[name *= configfile]"
+      assert_select "input[name *= annotationfile]"
+    end
   end
 
   test "should create network" do
@@ -25,6 +32,9 @@ class NetworksControllerTest < ActionController::TestCase
     end
 
     newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
+    expected = Network.new(network_hash);
+    assert_equal(newbie.name, expected.name)
+    assert_equal(newbie.description, expected.description)
     assert_not_nil newbie.edgefile
     assert_not_nil newbie.configfile
     assert_not_nil newbie.annotationfile
@@ -49,6 +59,9 @@ class NetworksControllerTest < ActionController::TestCase
         :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") }
     end
     newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
+    expected = Network.new(network_hash);
+    assert_equal(newbie.name, expected.name)
+    assert_equal(newbie.description, expected.description)
     assert_not_nil newbie.edgefile
     assert_not_nil newbie.configfile
     assert_equal("barabasi.txt", newbie.edgefile.filename)
@@ -60,17 +73,27 @@ class NetworksControllerTest < ActionController::TestCase
   end
 
   test "should show network" do
+    # TODO visualizer testing here
     get :show, :id => networks(:disney).id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => networks(:disney).id
+    network_id = networks(:disney).id
+    get :edit, :id => network_id
     assert_response :success
+    assert_select("form[action=?]", network_path(network_id)) do
+      assert_select "input[name *= name]"
+      assert_select "textarea[name *= description]"
+      assert_select "input[name *= edgefile]"
+      assert_select "input[name *= configfile]"
+      assert_select "input[name *= annotationfile]"
+    end
   end
 
   test "should update network attributes" do
     network_id = networks(:disney).id
+    old = Network.find(network_id) 
     network_hash = { 
       :name => 'pippo',
       :description => 'blablabla'
@@ -78,19 +101,26 @@ class NetworksControllerTest < ActionController::TestCase
     put :update, :id => network_id, :network => network_hash
     
     updated = Network.find(network_id) 
+    assert_equal 'pippo', updated.name
+    assert_equal 'blablabla', updated.description
     assert_not_nil updated.edgefile
     assert_not_nil updated.configfile
+    assert_equal old.edgefile, updated.edgefile
+    assert_equal old.configfile, updated.configfile
     assert_redirected_to network_path(assigns(:network))
   end
 
   test "should update network files" do
     network_id = networks(:disney).id
+    old = Network.find(network_id) 
     put :update, :id => network_id, 
       :edgefile => { :uploaded_data => fixture_file_upload("../storage/edgefiles/barabasi.txt", "text/plain") }, 
       :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") },
       :annotationfile => { :uploaded_data => fixture_file_upload("../storage/annotationfiles/hprdmap.txt", "text/plain") }
 
     updated = Network.find(network_id) 
+    assert_equal old.name, updated.name
+    assert_equal old.description, updated.description
     assert_not_nil updated.edgefile
     assert_not_nil updated.configfile
     assert_not_nil updated.annotationfile

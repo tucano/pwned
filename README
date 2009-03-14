@@ -9,15 +9,12 @@ This software was presented as a prototype at dorkbot Milano (26/02/2009).
 
 == Getting Started
 
-1. Create a storage in public/storage: rake utils:storage:init
-2. Load fixtures: rake db:fixtures:load
-3. Copy fixtures file from test/fixtures/storage to public/storage: rake utils:storage:load
-4. launch server (./script/server)
-5. Ready to go!
+1. Load fixtures: rake db:fixtures:load
+2. launch server (./script/server)
+3. Ready to go!
 
 
 == Rake custom Tasks
 
 rake utils:storage:drop              # Delete the storage and ALL files!
 rake utils:storage:init              # Create a storage
-rake utils:storage:load              # Copy fixture files from test/fixtures/storage dir in public/storage

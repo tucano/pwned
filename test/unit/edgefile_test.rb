@@ -17,11 +17,11 @@ class EdgefileTest < ActiveSupport::TestCase
 
     edgefile.content_type = 'application/pdf'
     assert !edgefile.valid?
-    assert_equal "is not included in the list", edgefile.errors.on(:content_type)
+    assert_equal "edgefile error on content-type: #{edgefile.content_type}", edgefile.errors.on(:content_type)
 
     edgefile.content_type = :image
     assert !edgefile.valid?
-    assert_equal "is not included in the list", edgefile.errors.on(:content_type)
+    assert_equal "edgefile error on content-type: #{edgefile.content_type}", edgefile.errors.on(:content_type)
     
     edgefile.content_type = 'text/plain'
     assert edgefile.valid?, edgefile.errors.full_messages
@@ -34,11 +34,11 @@ class EdgefileTest < ActiveSupport::TestCase
 
     edgefile.size = 5.megabyte
     assert !edgefile.valid?
-    assert_equal "is not included in the list", edgefile.errors.on(:size)
+    assert_equal "edgefile error on size #{edgefile.size}", edgefile.errors.on(:size)
     
     edgefile.size = 15.megabyte
     assert !edgefile.valid?
-    assert_equal "is not included in the list", edgefile.errors.on(:size)
+    assert_equal "edgefile error on size #{edgefile.size}", edgefile.errors.on(:size)
 
     edgefile.size = 1.megabyte
     assert edgefile.valid?, edgefile.errors.full_messages

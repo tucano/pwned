@@ -18,11 +18,11 @@ class AnnotationfileTest < ActiveSupport::TestCase
 
     annotationfile.content_type = 'application/pdf'
     assert !annotationfile.valid?
-    assert_equal "is not included in the list", annotationfile.errors.on(:content_type)
+    assert_equal "annotationfile error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
 
     annotationfile.content_type = :image
     assert !annotationfile.valid?
-    assert_equal "is not included in the list", annotationfile.errors.on(:content_type)
+    assert_equal "annotationfile error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
     
     annotationfile.content_type = 'text/plain'
     assert annotationfile.valid?, annotationfile.errors.full_messages
@@ -36,11 +36,11 @@ class AnnotationfileTest < ActiveSupport::TestCase
 
     annotationfile.size = 5.megabyte
     assert !annotationfile.valid?
-    assert_equal "is not included in the list", annotationfile.errors.on(:size)
+    assert_equal "annotationfile error on size #{annotationfile.size}", annotationfile.errors.on(:size)
     
     annotationfile.size = 15.megabyte
     assert !annotationfile.valid?
-    assert_equal "is not included in the list", annotationfile.errors.on(:size)
+    assert_equal "annotationfile error on size #{annotationfile.size}", annotationfile.errors.on(:size)
 
     annotationfile.size = 1.megabyte
     assert annotationfile.valid?, annotationfile.errors.full_messages

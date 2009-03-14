@@ -12,9 +12,6 @@ class Fileservice
 
   def save
     return false unless valid?
-    if annotation? then 
-      return false unless @annotationfile.valid? 
-    end
     begin 
       Network.transaction do
         check_edges()
@@ -28,7 +25,21 @@ class Fileservice
   end
 
   def valid?
-      @network.valid? && @edgefile.valid? && @configfile.valid?
+    
+    # I need assignments to have errors back (short-circuit operators in ruby)
+    n = @network.valid?
+    c = @configfile.valid?
+    e = @edgefile.valid?
+    a = true
+    if annotation? then 
+      a = @annotationfile.valid? 
+    end
+    
+    if (n && c && e && a) then
+      return true
+    else
+      return false
+    end
   end
 
   def update_attributes(network, edgefile, configfile, annotationfile)
@@ -72,7 +83,11 @@ class Fileservice
   end
 
   def annotation?
-    !@annotationfile.nil? && @annotationfile.attribute_present?(:filename)
+    if !@annotationfile.nil? && @annotationfile.attribute_present?(:filename) then 
+      return true 
+    else
+      return false
+    end
   end
 
 end

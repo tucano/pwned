@@ -18,11 +18,11 @@ class ConfigfileTest < ActiveSupport::TestCase
 
     configfile.content_type = 'application/pdf'
     assert !configfile.valid?
-    assert_equal "is not included in the list", configfile.errors.on(:content_type)
+    assert_equal "configfile error on content-type: #{configfile.content_type}", configfile.errors.on(:content_type)
 
     configfile.content_type = :image
     assert !configfile.valid?
-    assert_equal "is not included in the list", configfile.errors.on(:content_type)
+    assert_equal "configfile error on content-type: #{configfile.content_type}", configfile.errors.on(:content_type)
     
     configfile.content_type = 'text/xml'
     assert configfile.valid?, configfile.errors.full_messages
@@ -39,11 +39,11 @@ class ConfigfileTest < ActiveSupport::TestCase
 
     configfile.size = 5.megabyte
     assert !configfile.valid?
-    assert_equal "is not included in the list", configfile.errors.on(:size)
+    assert_equal "configfile error on size #{configfile.size}", configfile.errors.on(:size)
     
     configfile.size = 15.megabyte
     assert !configfile.valid?
-    assert_equal "is not included in the list", configfile.errors.on(:size)
+    assert_equal "configfile error on size #{configfile.size}", configfile.errors.on(:size)
 
     configfile.size = 1.megabyte
     assert configfile.valid?, configfile.errors.full_messages

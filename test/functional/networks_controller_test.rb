@@ -73,9 +73,10 @@ class NetworksControllerTest < ActionController::TestCase
   end
 
   test "should show network" do
-    # TODO visualizer testing here
-    get :show, :id => networks(:disney).id
+    network_id = networks(:disney).id
+    get :show, :id => network_id
     assert_response :success
+    assert_not_nil assigns(:network)
   end
 
   test "should get edit" do

@@ -1,0 +1,22 @@
+<h1><%= link_to network.name, network %></h1>
+
+<blockquote>
+  <h3>Files</h3>
+  <p>
+  Edges: <%= link_to network.edgefile.filename, network.edgefile.public_filename %>
+  <br/>
+  <% if network.annotationfile %>
+  Nodes: <%= link_to network.annotationfile.filename, network.annotationfile.public_filename %>
+  <br/>
+  <% end %>
+  Config: <%= link_to network.configfile.filename, network.configfile.public_filename %>
+  </p>
+</blockquote>
+<p><%=h network.description %></p>
+
+<span class="postinfo"> 
+  Created by DummyUser <%= network.created_at.to_date -%> 
+  <br/>
+</span>
+<div class="hr"><hr/></div>
+

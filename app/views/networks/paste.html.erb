@@ -1,0 +1,12 @@
+<div id="content">
+  <h1>New network</h1>
+  <%= error_messages_for :network, :edgefile, :annotationfile, :configfile %>
+  <%= render :partial => "form" %>
+</div>
+
+<div id="right">
+  <dl id="subnav">
+    <dt>ToolBox</dt>
+    <dd><%= link_to 'Back', networks_path %></dd>
+  </dl>
+</div>

@@ -1,7 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :networks
 
   # The priority is based upon order of creation: first created -> highest priority.
+  map.connect 'networks/paste', :controller => 'networks', :action => 'paste'
+  map.resources :networks
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

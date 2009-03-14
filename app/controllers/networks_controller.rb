@@ -34,6 +34,17 @@ class NetworksController < ApplicationController
     end
   end
 
+  # GET /networks/paste
+  # GET /networks/paste.xml
+  # TODO
+  def paste
+    @network = Network.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @network }
+    end
+  end
+
   # GET /networks/1/edit
   def edit
     @network = Network.find(params[:id])

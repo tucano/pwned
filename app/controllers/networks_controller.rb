@@ -64,22 +64,13 @@ class NetworksController < ApplicationController
   # PUT /networks/1.xml
   def update
     @network = Network.find(params[:id])
-
-    # FIXME this is an hack
-    if params[:edgefile][:uploaded_data] != "" then
-      @network.edgefile = Edgefile.new(params[:edgefile])
-    end
-    # FIXME this is an hack
-    if params[:configfile][:uploaded_data] != "" then
-      @network.configfile = Configfile.new(params[:configfile])
-    end
-    # FIXME this is an hack
-    if params[:annotationfile][:uploaded_data] != "" then
-      @network.annotationfile = Annotationfile.new(params[:annotationfile])
-    end
+    @edgefile = @network.edgefile
+    @configfile = @network.configfile
+    @annotationfile = @network.annotationfile
+    @service = Fileservice.new(@network, @edgefile, @configfile, @annotationfile)
 
     respond_to do |format|
-      if @network.update_attributes(params[:network])
+      if @service.update_attributes(params[:network],params[:edgefile],params[:configfile],params[:annotationfile])
         flash[:notice] = 'Network was successfully updated.'
         format.html { redirect_to(@network) }
         format.xml  { head :ok }

@@ -27,8 +27,34 @@ class NetworksControllerTest < ActionController::TestCase
     newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
     assert_not_nil newbie.edgefile
     assert_not_nil newbie.configfile
+    assert_not_nil newbie.annotationfile
     assert_equal("barabasi.txt", newbie.edgefile.filename)
+    assert_equal("text/plain", newbie.edgefile.content_type)
     assert_equal("barabasi.xml", newbie.configfile.filename)
+    assert_equal("text/xml", newbie.configfile.content_type)
+    assert_equal("hprdmap.txt", newbie.annotationfile.filename)
+    assert_equal("text/plain", newbie.annotationfile.content_type)
+
+    assert_redirected_to network_path(assigns(:network))
+  end
+
+  test "should create network without annotation file" do
+    network_hash = { 
+      :name => 'pippo',
+      :description => 'blablabla'
+    }
+    assert_difference('Network.count') do
+      post :create, :network => network_hash,
+        :edgefile => { :uploaded_data => fixture_file_upload("../storage/edgefiles/barabasi.txt", "text/plain") },
+        :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") }
+    end
+    newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
+    assert_not_nil newbie.edgefile
+    assert_not_nil newbie.configfile
+    assert_equal("barabasi.txt", newbie.edgefile.filename)
+    assert_equal("text/plain", newbie.edgefile.content_type)
+    assert_equal("barabasi.xml", newbie.configfile.filename)
+    assert_equal("text/xml", newbie.configfile.content_type)
 
     assert_redirected_to network_path(assigns(:network))
   end
@@ -43,13 +69,38 @@ class NetworksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update network" do
+  test "should update network attributes" do
+    network_id = networks(:disney).id
     network_hash = { 
       :name => 'pippo',
       :description => 'blablabla'
     }
-    # FIXME this is an hack
-    put :update, :id => networks(:disney).id, :network => network_hash, :annotationfile =>{ :uploaded_data => ""}, :edgefile =>{ :uploaded_data => ""}, :configfile =>{ :uploaded_data => ""}
+    put :update, :id => network_id, :network => network_hash
+    
+    updated = Network.find(network_id) 
+    assert_not_nil updated.edgefile
+    assert_not_nil updated.configfile
+    assert_redirected_to network_path(assigns(:network))
+  end
+
+  test "should update network files" do
+    network_id = networks(:disney).id
+    put :update, :id => network_id, 
+      :edgefile => { :uploaded_data => fixture_file_upload("../storage/edgefiles/barabasi.txt", "text/plain") }, 
+      :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") },
+      :annotationfile => { :uploaded_data => fixture_file_upload("../storage/annotationfiles/hprdmap.txt", "text/plain") }
+
+    updated = Network.find(network_id) 
+    assert_not_nil updated.edgefile
+    assert_not_nil updated.configfile
+    assert_not_nil updated.annotationfile
+    assert_equal("barabasi.txt", updated.edgefile.filename)
+    assert_equal("text/plain", updated.edgefile.content_type)
+    assert_equal("barabasi.xml", updated.configfile.filename)
+    assert_equal("text/xml", updated.configfile.content_type)
+    assert_equal("hprdmap.txt", updated.annotationfile.filename)
+    assert_equal("text/plain", updated.annotationfile.content_type)
+
     assert_redirected_to network_path(assigns(:network))
   end
 
@@ -57,7 +108,7 @@ class NetworksControllerTest < ActionController::TestCase
     assert_difference('Network.count', -1) do
       delete :destroy, :id => networks(:disney).id
     end
-
+    
     assert_redirected_to networks_path
   end
 end

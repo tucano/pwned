@@ -16,7 +16,7 @@ class Fileservice
       Network.transaction do
         check_edges()
         check_config()
-        check_annotation() if annotation?
+        check_annotation() if has_annotation?
         @network.save!
       end
     rescue
@@ -31,7 +31,7 @@ class Fileservice
     c = @configfile.valid?
     e = @edgefile.valid?
     a = true
-    if annotation? then 
+    if has_annotation? then 
       a = @annotationfile.valid? 
     end
     
@@ -40,6 +40,10 @@ class Fileservice
     else
       return false
     end
+  end
+  
+  def has_annotation?
+    !@annotationfile.nil? && @annotationfile.attribute_present?(:filename) 
   end
 
   def update_attributes(network, edgefile, configfile, annotationfile)
@@ -81,13 +85,5 @@ class Fileservice
       @annotationfile.save!
     end
   end
-
-  def annotation?
-    if !@annotationfile.nil? && @annotationfile.attribute_present?(:filename) then 
-      return true 
-    else
-      return false
-    end
-  end
-
+  
 end

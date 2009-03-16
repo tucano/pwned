@@ -1,0 +1,26 @@
+<% form_for(@network, :html => { :multipart => true }, :url => { :action =>'paste' }) do |f| %>
+  <p>
+    <%= f.label :name, 'Network Name' %><br />
+    <%= f.text_field :name, :class => "input" %>
+  </p>
+  <p>
+    <%= f.label :description, 'Description' %><br />
+    <%= f.text_area :description, :class => "input" %>
+  </p>
+  <p>
+    <%= label_tag 'edges', 'Edges' %><br />
+    <%= text_area_tag 'edges' %>
+  </p>
+  <p>
+    <%= label_tag 'configs', 'Configuration' %><br />
+    <%= text_area_tag 'configs' %>
+  </p>
+  <p>
+    <%= label_tag 'annotations', 'Annotation' %><br />
+    <%= text_area_tag 'annotations' %>
+  </p>
+  <p>
+    <%= f.submit "Create", :class => "submit" %>
+  </p>
+<% end %>
+

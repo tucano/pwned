@@ -36,13 +36,53 @@ class NetworksController < ApplicationController
 
   # GET /networks/paste
   # GET /networks/paste.xml
-  # TODO
+  # TODO handle past form here
   def paste
     @network = Network.new
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @network }
     end
+  end
+
+  # POST /networks/paste
+  # POST /networks/paste.xml
+  # TODO handle paste here
+  def paste_create
+    # Now strategy is:
+    # get data
+    # load data in empty model with set_temp_data
+    # add filename a content_type
+
+    @network = Network.new(params[:network])
+
+    @edgefile = Edgefile.new()
+    @edgefile.filename = 'pastie.txt'
+    @edgefile.content_type = 'text/plain'
+    @edgefile.set_temp_data(params[:edges])
+
+    @configfile = Configfile.new()
+    @configfile.filename = 'pastie.xml'
+    @configfile.content_type = 'text/xml'
+    @configfile.set_temp_data(params[:configs])
+
+    @annotationfile = Annotationfile.new()
+    @annotationfile.filename = 'pastie.txt'
+    @annotationfile.content_type = 'text/plain'
+    @annotationfile.set_temp_data(params[:annotations])
+
+    @service = Fileservice.new(@network, @edgefile, @configfile,@annotationfile)
+    respond_to do |format|
+      if @service.save
+        flash[:notice] = 'Network was successfully created.'
+        format.html { redirect_to(@network) }
+        format.xml  { render :xml => @network, :status => :created, :location => @network }
+      else
+        format.html { render :action => "paste" }
+        format.xml  { render :xml => @network.errors, :status => :unprocessable_entity }
+      end
+    end
+
   end
 
   # GET /networks/1/edit

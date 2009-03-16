@@ -1,7 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
 
   # The priority is based upon order of creation: first created -> highest priority.
-  map.connect 'networks/paste', :controller => 'networks', :action => 'paste'
+  map.connect 'networks/paste', :controller => 'networks', :action => 'paste', :conditions => { :method => :get }
+  map.connect 'networks/paste', :controller => 'networks', :action => 'paste_create', :conditions => { :method => :post }
   map.resources :networks
 
   # Sample of regular route:

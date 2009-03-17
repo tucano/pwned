@@ -7,20 +7,27 @@
     <%= f.label :description, 'Description' %><br />
     <%= f.text_area :description, :size => "50x10", :class => "input" %>
   </p>
-  <p>
-    <%= label_tag 'edges', 'Edges' %><br />
-    <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "input" %>
-  </p>
-  <p>
-    <%= label_tag 'configs', 'Configuration' %><br />
-    <%= text_area_tag 'configs' , nil, :size => "50x10", :class => "input"  %>
-  </p>
-  <p>
-    <%= label_tag 'annotations', 'Annotation' %><br />
-    <%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "input"  %>
-  </p>
-  <p>
-    <%= f.submit "Create", :class => "submit" %>
-  </p>
+  <%=  button_to_function "Edges", "Effect.toggle('paste-edges', 'blind',{ duration: 0.5 })", {:class => 'button'} %>
+  <%=  button_to_function "Config", "Effect.toggle('paste-config', 'blind',{ duration: 0.5 })", {:class => 'button'} %>
+  <%=  button_to_function "Annotation", "Effect.toggle('paste-annotations', 'blind',{ duration: 0.5 })", {:class => 'button'} %>
+  <%= f.submit "Create", :class => "submit" %>
+  <div id="paste-edges" style="display:none">
+    <p>
+      <%= label_tag 'edges', 'Edges' %><br />
+      <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "input" %>
+    </p>
+  </div>
+  <div id="paste-config" style="display:none">
+    <p>
+      <%= label_tag 'configs', 'Configuration' %><br />
+      <%= text_area_tag 'configs' , nil, :size => "50x10", :class => "input"  %>
+    </p>
+  </div>
+  <div id="paste-annotations" style="display:none">
+    <p>
+      <%= label_tag 'annotations', 'Annotation' %><br />
+      <%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "input"  %>
+    </p>
+  </div>
 <% end %>
 

@@ -96,6 +96,7 @@ class NetworksController < ApplicationController
       else
         if flash[:paste] then
           format.html { render :action => :paste }
+          flash[:paste] = true
         else
           format.html { render :action => :new }
         end

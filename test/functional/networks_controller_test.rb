@@ -92,7 +92,7 @@ class NetworksControllerTest < ActionController::TestCase
 
     edges = 'A\tB\nA\tC\n'
     annotations = 'uno\ndue\ntre\n'
-    configs = '<?xml version="1.0"?>'
+    configs = '<a>Test</a>'
     assert_difference('Network.count') do
       post :create, :network => network_hash,
         :edges => edges,

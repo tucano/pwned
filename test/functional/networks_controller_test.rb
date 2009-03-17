@@ -19,6 +19,18 @@ class NetworksControllerTest < ActionController::TestCase
     end
   end
 
+  test "should get paste" do
+    get :paste
+    assert_response :success
+    assert_select("form[action=?]", networks_path) do
+      assert_select "input[name *= name]"
+      assert_select "textarea[name *= description]"
+      assert_select "textarea[name *= edges]"
+      assert_select "textarea[name *= configs]"
+      assert_select "textarea[name *= annotations]"
+    end
+  end
+
   test "should create network" do
     network_hash = { 
       :name => 'pippo',
@@ -70,6 +82,36 @@ class NetworksControllerTest < ActionController::TestCase
     assert_equal("text/xml", newbie.configfile.content_type)
 
     assert_redirected_to network_path(assigns(:network))
+  end
+
+  test "should create network from paste" do
+    network_hash = { 
+      :name => 'pippo',
+      :description => 'blablabla'
+    }
+
+    edges = 'A\tB\nA\tC\n'
+    annotations = 'uno\ndue\ntre\n'
+    configs = '<?xml version="1.0"?>'
+    assert_difference('Network.count') do
+      post :create, :network => network_hash,
+        :edges => edges,
+        :configs => configs,
+        :annotations => annotations
+    end
+    newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
+    expected = Network.new(network_hash);
+    assert_equal(newbie.name, expected.name)
+    assert_equal(newbie.description, expected.description)
+    assert_not_nil newbie.edgefile
+    assert_not_nil newbie.configfile
+    assert_not_nil newbie.annotationfile
+    assert_equal("pastie.txt", newbie.edgefile.filename)
+    assert_equal("text/plain", newbie.edgefile.content_type)
+    assert_equal("pastie.xml", newbie.configfile.filename)
+    assert_equal("text/xml", newbie.configfile.content_type)
+    assert_equal("pastie.txt", newbie.annotationfile.filename)
+    assert_equal("text/plain", newbie.annotationfile.content_type)
   end
 
   test "should show network" do

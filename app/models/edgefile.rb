@@ -6,21 +6,19 @@ class Edgefile < ActiveRecord::Base
                  :storage => :file_system, 
                  :path_prefix => "#{STORAGE_PATH_PREFIX}/#{table_name}"
                  
-  validate :attachment_valid?
+  validates_presence_of :filename
+  validate :attachment_valid?, :if =>  Proc.new { |e| !e.filename.blank? }
 
   def attachment_valid?
-    unless self.filename then
-      errors.add(:filename, "no edgefile file was selected" )
-    end
 
     content_type = attachment_options[:content_type]
     unless content_type.nil? || content_type.include?(self.content_type) then
-      errors.add(:content_type, "edgefile error on content-type: #{self.content_type}" )
+      errors.add(:content_type, "error on content-type: #{self.content_type}" )
     end
 
     size = attachment_options[:size]
     unless size.nil? || size.include?(self.size) then
-      errors.add(:size, "edgefile error on size #{self.size}")
+      errors.add(:size, "error on size #{self.size}")
     end
   end
 

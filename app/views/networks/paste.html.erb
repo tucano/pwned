@@ -1,6 +1,9 @@
 <div id="content">
   <h1>New network</h1>
-  <%= error_messages_for :network, :edgefile, :annotationfile, :configfile %>
+  <%= error_messages_for :network %>
+  <%= error_messages_for :edgefile %>
+  <%= error_messages_for :configfile %>
+  <%= error_messages_for :annotationfile %>
   <%= render :partial => "pasteform" %>
 </div>
 

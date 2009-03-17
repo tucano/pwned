@@ -22,8 +22,8 @@ class FileserviceTest < Test::Unit::TestCase
     @edgefile.size = 500
     @edgefile.content_type = 'text/plain'
     @configfile.filename = 'pippo.xml'
-    @configfile.size = 500
     @configfile.content_type = 'text/xml'
+    @configfile.set_temp_data('<a>Test</a>')
     @service = Fileservice.new(@network,@edgefile,@configfile,@annotationfile) 
     assert @service.valid?
     assert @service.save
@@ -40,11 +40,11 @@ class FileserviceTest < Test::Unit::TestCase
     @edgefile.size = 500
     @edgefile.content_type = 'text/plain'
     @configfile.filename = 'pippo.xml'
-    @configfile.size = 500
     @configfile.content_type = 'text/xml'
+    @configfile.set_temp_data('<a>Test</a>')
     @annotationfile.filename = 'pippo.txt'
-    @annotationfile.size = 500
     @annotationfile.content_type = 'text/plain'
+    @annotationfile.size = 500
     @service = Fileservice.new(@network,@edgefile,@configfile,@annotationfile) 
     assert @service.valid?
     assert @service.save

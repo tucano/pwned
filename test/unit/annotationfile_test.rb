@@ -6,8 +6,6 @@ class AnnotationfileTest < ActiveSupport::TestCase
     annotationfile = Annotationfile.new
     assert !annotationfile.valid?
     assert annotationfile.errors.invalid?(:filename)
-    assert annotationfile.errors.invalid?(:size)
-    assert annotationfile.errors.invalid?(:content_type)
   end
 
   test "content type" do
@@ -24,9 +22,6 @@ class AnnotationfileTest < ActiveSupport::TestCase
     assert !annotationfile.valid?
     assert_equal "annotationfile error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
     
-    annotationfile.content_type = 'text/plain'
-    assert annotationfile.valid?, annotationfile.errors.full_messages
-
   end
  
   test "size" do
@@ -42,7 +37,5 @@ class AnnotationfileTest < ActiveSupport::TestCase
     assert !annotationfile.valid?
     assert_equal "annotationfile error on size #{annotationfile.size}", annotationfile.errors.on(:size)
 
-    annotationfile.size = 1.megabyte
-    assert annotationfile.valid?, annotationfile.errors.full_messages
   end
 end

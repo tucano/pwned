@@ -7,7 +7,8 @@ class Network < ActiveRecord::Base
   validates_presence_of :name, :description
 
   validates_format_of :name,
-                      :with => /^\w+$/
+                      :with => /^\w+$/,
+                      :if => Proc.new { |n| !n.name.blank? }
 
   validates_uniqueness_of :name, :on => :create
 

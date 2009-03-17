@@ -3,7 +3,7 @@ class NetworksController < ApplicationController
   # GET /networks
   # GET /networks.xml
   def index
-    @networks = Network.find(:all)
+    @networks = Network.find(:all, :order => "name")
 
     respond_to do |format|
       format.html # index.html.erb

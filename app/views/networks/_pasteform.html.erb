@@ -5,19 +5,19 @@
   </p>
   <p>
     <%= f.label :description, 'Description' %><br />
-    <%= f.text_area :description, :class => "input" %>
+    <%= f.text_area :description, :size => "50x10", :class => "input" %>
   </p>
   <p>
     <%= label_tag 'edges', 'Edges' %><br />
-    <%= text_area_tag 'edges' %>
+    <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "input" %>
   </p>
   <p>
     <%= label_tag 'configs', 'Configuration' %><br />
-    <%= text_area_tag 'configs' %>
+    <%= text_area_tag 'configs' , nil, :size => "50x10", :class => "input"  %>
   </p>
   <p>
     <%= label_tag 'annotations', 'Annotation' %><br />
-    <%= text_area_tag 'annotations' %>
+    <%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "input"  %>
   </p>
   <p>
     <%= f.submit "Create", :class => "submit" %>

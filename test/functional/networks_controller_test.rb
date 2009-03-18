@@ -26,7 +26,7 @@ class NetworksControllerTest < ActionController::TestCase
       assert_select "input[name *= name]"
       assert_select "textarea[name *= description]"
       assert_select "textarea[name *= edges]"
-      assert_select "textarea[name *= configs]"
+      assert_select "select[name *= config]"
       assert_select "textarea[name *= annotations]"
     end
   end
@@ -92,11 +92,11 @@ class NetworksControllerTest < ActionController::TestCase
 
     edges = 'A\tB\nA\tC\n'
     annotations = 'uno\ndue\ntre\n'
-    configs = '<a>Test</a>'
+
     assert_difference('Network.count') do
       post :create, :network => network_hash,
         :edges => edges,
-        :configs => configs,
+        :config => 'mrblue',
         :annotations => annotations
     end
     newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 

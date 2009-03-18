@@ -25,18 +25,23 @@ class Configfile < ActiveRecord::Base
   end
 
   def xml_valid?
-    # this validate tags consistency but not <UNDEFINED..>
+    
+    # this validate tags consistency
     begin 
       xml = REXML::Document.new(self.temp_data)
     rescue REXML::ParseException => ex
       errors.add(:xmldata, "is not valid xml. #{ex.continued_exception}")
     end
-
-    # check if
-    unless xml.nil? || xml.has_elements? then
-      errors.add(:xmldata, "is xml without elements.")
+    
+    # check if is a pwned config and try load it
+    configservice = Configservice.new(xml)
+    unless configservice.valid? then
+      errors.add(:xmldata, "is not a valid config file")
     end
-
+    unless configservice.load then
+      errors.add(:xmldata, "is not a valid config file")
+    end
+    
   end
 
 end

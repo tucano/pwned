@@ -38,7 +38,8 @@ class NetworksController < ApplicationController
   # GET /networks/paste.xml
   def paste
     @network = Network.new
-
+    @configs = get_config_templates
+    @templates = @configs.keys
     flash[:paste] = true
 
     respond_to do |format|
@@ -63,6 +64,7 @@ class NetworksController < ApplicationController
       @edgefile = Edgefile.new(params[:edgefile])
     elsif params[:edges] then
       @edgefile = Edgefile.new()
+      # TODO FIXME
       @edgefile.filename = 'pastie.txt'
       @edgefile.content_type = 'text/plain'
       @edgefile.set_temp_data(params[:edges])
@@ -70,17 +72,22 @@ class NetworksController < ApplicationController
 
     if params[:configfile] then
       @configfile = Configfile.new(params[:configfile])
-    elsif params[:configs] then
+    elsif params[:config] then
       @configfile = Configfile.new()
+      # TODO FIXME
+      @configs = get_config_templates
+      @templates = @configs.keys
       @configfile.filename = 'pastie.xml'
       @configfile.content_type = 'text/xml'
-      @configfile.set_temp_data(params[:configs])
+      xml = @configs[ params[:config] ].xml
+      @configfile.set_temp_data(xml)
     end
 
     if params[:annotationfile] then
       @annotationfile = Annotationfile.new(params[:annotationfile])
-    elsif params[:annotations] then
+    elsif params[:annotations] and !params[:annotations].blank? then
       @annotationfile = Annotationfile.new()
+      # TODO FIXME      
       @annotationfile.filename = 'pastie.txt'
       @annotationfile.content_type = 'text/plain'
       @annotationfile.set_temp_data(params[:annotations])
@@ -139,4 +146,17 @@ class NetworksController < ApplicationController
     end
   end
 
+  private
+  def get_config_templates
+    templates = Hash.new
+    templatesdir = Rails.root + "/" + CONFIG_TEMPLATES + "/*.xml"
+    templatesfiles = Dir.glob(templatesdir)
+    templatesfiles.each do |f|
+      name = File.basename(f,'.xml')
+      xml = REXML::Document.new(File.read f)
+      config = Configservice.new(xml)
+      templates[name] = config if config.valid?
+    end
+    return templates
+  end
 end

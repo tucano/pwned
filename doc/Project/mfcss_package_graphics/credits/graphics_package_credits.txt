@@ -1,0 +1,28 @@
+Multiflex-5 Graphics Package
+----------------------------
+
+All components of the media application are open source and freely available to the public.
+
+Credits:
+
++ Flags
+  ------------
+  Provided by FamFamFam
+  Homepage: http://famfamfam.com
+  Graphics link: http://www.famfamfam.com/lab/icons/flags/
+
++ Basic icons
+  -----------
+  Provided by GoSquared Ltd.
+  Homepage: http://www.gosquared.com
+  Graphics link:http://www.gosquared.com/liquidicity/archives/122
+
++ RSS icon
+  --------
+  Provided by FeedIcons Ltd.
+  Homepage: http://feedicons.com/
+
++ Logo
+  ----
+  Eternal Grey Icons
+  Unknown source

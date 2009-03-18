@@ -8,6 +8,7 @@ class Edgefile < ActiveRecord::Base
                  
   validates_presence_of :filename
   validate :attachment_valid?, :if =>  Proc.new { |e| !e.filename.blank? }
+  validate :edgefile_valid?, :if => Proc.new { |c| !c.temp_data.blank? }
 
   def attachment_valid?
 
@@ -22,4 +23,11 @@ class Edgefile < ActiveRecord::Base
     end
   end
 
+  def edgefile_valid?
+    edgeservice = Edgeservice.new(self.temp_data)
+    unless edgeservice.valid? then
+      errors.add(:edgedata, "is not a valid edges file")
+    end
+  end
+  
 end

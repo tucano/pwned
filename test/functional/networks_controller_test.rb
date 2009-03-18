@@ -90,8 +90,8 @@ class NetworksControllerTest < ActionController::TestCase
       :description => 'blablabla'
     }
 
-    edges = 'A\tB\nA\tC\n'
-    annotations = 'uno\ndue\ntre\n'
+    edges = "A B\nA C\n"
+    annotations = "uno\ndue\ntre\n"
 
     assert_difference('Network.count') do
       post :create, :network => network_hash,

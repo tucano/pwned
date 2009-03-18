@@ -153,7 +153,7 @@ class NetworksController < ApplicationController
     templatesfiles = Dir.glob(templatesdir)
     templatesfiles.each do |f|
       name = File.basename(f,'.xml')
-      xml = REXML::Document.new(File.read f)
+      xml = REXML::Document.new(File.read(f))
       config = Configservice.new(xml)
       templates[name] = config if config.valid?
     end

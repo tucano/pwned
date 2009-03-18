@@ -27,24 +27,11 @@ class NetworksController < ApplicationController
   # GET /networks/new.xml
   def new
     @network = Network.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @network }
-    end
-  end
-
-  # GET /networks/paste
-  # GET /networks/paste.xml
-  def paste
-    @network = Network.new
     @configs = get_config_templates
     @templates = @configs.keys
-    flash[:paste] = true
-
+    
     respond_to do |format|
-      format.html # paste.html.erb
-      # FIXME this xml
+      format.html # new.html.erb
       format.xml  { render :xml => @network }
     end
   end
@@ -52,15 +39,19 @@ class NetworksController < ApplicationController
   # GET /networks/1/edit
   def edit
     @network = Network.find(params[:id])
+    @configs = get_config_templates
+    @templates = @configs.keys
   end
 
   # POST /networks
   # POST /networks.xml
   def create
-    # check what we have: files or data?
     @network = Network.new(params[:network])
+    # TODO FIXME
+    @configs = get_config_templates
+    @templates = @configs.keys
     
-    if params[:edgefile] then
+    if params[:edgefile] && !params[:edgefile][:uploaded_data].blank? then
       @edgefile = Edgefile.new(params[:edgefile])
     elsif params[:edges] then
       @edgefile = Edgefile.new()
@@ -70,20 +61,17 @@ class NetworksController < ApplicationController
       @edgefile.set_temp_data(params[:edges])
     end
 
-    if params[:configfile] then
+    if params[:configfile] && !params[:configfile][:uploaded_data].blank? then
       @configfile = Configfile.new(params[:configfile])
     elsif params[:config] then
       @configfile = Configfile.new()
-      # TODO FIXME
-      @configs = get_config_templates
-      @templates = @configs.keys
       @configfile.filename = 'pastie.xml'
       @configfile.content_type = 'text/xml'
       xml = @configs[ params[:config] ].xml
       @configfile.set_temp_data(xml)
     end
 
-    if params[:annotationfile] then
+    if params[:annotationfile] && !params[:annotationfile][:uploaded_data].blank? then
       @annotationfile = Annotationfile.new(params[:annotationfile])
     elsif params[:annotations] and !params[:annotations].blank? then
       @annotationfile = Annotationfile.new()
@@ -100,13 +88,8 @@ class NetworksController < ApplicationController
         flash[:notice] = 'Network was successfully created.'
         format.html { redirect_to(@network) }
         format.xml  { render :xml => @network, :status => :created, :location => @network }
-      else
-        if flash[:paste] then
-          format.html { render :action => :paste }
-          flash[:paste] = true
-        else
-          format.html { render :action => :new }
-        end
+      else       
+        format.html { render :action => :new }
         format.xml  { render :xml => @network.errors, :status => :unprocessable_entity }
       end
     end

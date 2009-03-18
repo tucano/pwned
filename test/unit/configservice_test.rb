@@ -6,17 +6,17 @@ class ConfigserviceTest < Test::Unit::TestCase
     @xml = REXML::Document.new(File.read('test/storage/configfiles/barabasi.xml'))
   end
   
-  def test_valid_config
+  def test_validation
     config = Configservice.new(@xml)
     assert config.valid?
   end
   
-  def test_load_config
+  def test_load
     config = Configservice.new(@xml)
     assert config.load
   end
   
-  def test_not_valid_config
+  def test_not_valid
     bad = REXML::Document.new(File.read('test/storage/configfiles/barabasi.xml'))
     bad.root.elements[1].remove
     config = Configservice.new(bad)

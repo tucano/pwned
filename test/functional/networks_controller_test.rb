@@ -16,15 +16,6 @@ class NetworksControllerTest < ActionController::TestCase
       assert_select "input[name *= edgefile]"
       assert_select "input[name *= configfile]"
       assert_select "input[name *= annotationfile]"
-    end
-  end
-
-  test "should get paste" do
-    get :paste
-    assert_response :success
-    assert_select("form[action=?]", networks_path) do
-      assert_select "input[name *= name]"
-      assert_select "textarea[name *= description]"
       assert_select "textarea[name *= edges]"
       assert_select "select[name *= config]"
       assert_select "textarea[name *= annotations]"

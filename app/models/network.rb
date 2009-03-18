@@ -10,6 +10,6 @@ class Network < ActiveRecord::Base
                       :with => /^\w+$/,
                       :if => Proc.new { |n| !n.name.blank? }
 
-  validates_uniqueness_of :name, :on => :create
+  validates_uniqueness_of :name
 
 end

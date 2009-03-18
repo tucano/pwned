@@ -25,6 +25,22 @@
       <%= annotationfile.file_field :uploaded_data %>
     <% end %>
   </p>
+  <%=  button_to_function "Annotation", "Effect.toggle('paste-annotations', 'blind',{ duration: 0.5 })", {:class => 'button'} %>
+  <p>
+    <%= label_tag 'config', 'Configuration' -%>
+    <% options = options_for_select @templates %>
+    <%= select_tag 'config' , options  -%>
+  </p>
+  <p>
+    <%= label_tag 'edges', 'Edges' %><br />
+    <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "input" %>
+  </p>
+  <div id="paste-annotations" style="display:none">
+  <p>
+    <%= label_tag 'annotations', 'Annotation' %><br />
+    <%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "input"  %>
+  </p>
+  </div>
   <p>
     <%= f.submit "Create", :class => "submit" %>
   </p>

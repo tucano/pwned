@@ -1,8 +1,7 @@
 require 'test_helper'
 
-class AnnotationserviceTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
+class AnnotationserviceTest < Test::Unit::TestCase
+  def test_the_truth
     assert true
   end
 end

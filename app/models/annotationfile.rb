@@ -8,17 +8,25 @@ class Annotationfile < ActiveRecord::Base
 
   validates_presence_of :filename
   validate :attachment_valid?, :if =>  Proc.new { |a| !a.filename.blank? }
-
+  validate :annotationfile_valid?, :if => Proc.new { |a| !a.temp_data.blank? }
+  
   def attachment_valid?
 
     content_type = attachment_options[:content_type]
     unless content_type.nil? || content_type.include?(self.content_type) then
-      errors.add(:content_type,"annotationfile error on content-type: #{self.content_type}" )
+      errors.add(:content_type,"error on content-type: #{self.content_type}" )
     end
 
     size = attachment_options[:size]
     unless size.nil? || size.include?(self.size) then
-      errors.add(:size, "annotationfile error on size #{self.size}")
+      errors.add(:size, "error on size #{self.size}")
+    end
+  end
+  
+  def annotationfile_valid?
+    annotationservice = Annotationservice.new(self.temp_data)
+    unless annotationservice.valid? then
+      errors.add(:annotationdata, "is not a valid annotation file")
     end
   end
 

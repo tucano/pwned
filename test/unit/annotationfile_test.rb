@@ -8,7 +8,7 @@ class AnnotationfileTest < ActiveSupport::TestCase
     assert annotationfile.errors.invalid?(:filename)
   end
 
-  test "content type" do
+  test "invalid content type" do
     
     annotationfile = Annotationfile.new()
     annotationfile.filename = 'pippo.txt'
@@ -16,26 +16,26 @@ class AnnotationfileTest < ActiveSupport::TestCase
 
     annotationfile.content_type = 'application/pdf'
     assert !annotationfile.valid?
-    assert_equal "annotationfile error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
+    assert_equal "error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
 
     annotationfile.content_type = :image
     assert !annotationfile.valid?
-    assert_equal "annotationfile error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
+    assert_equal "error on content-type: #{annotationfile.content_type}", annotationfile.errors.on(:content_type)
     
   end
  
-  test "size" do
+  test "invalid size" do
     annotationfile = Annotationfile.new()
     annotationfile.filename = 'pippo.txt'
     annotationfile.content_type = 'text/plain'
 
     annotationfile.size = 5.megabyte
     assert !annotationfile.valid?
-    assert_equal "annotationfile error on size #{annotationfile.size}", annotationfile.errors.on(:size)
+    assert_equal "error on size #{annotationfile.size}", annotationfile.errors.on(:size)
     
     annotationfile.size = 15.megabyte
     assert !annotationfile.valid?
-    assert_equal "annotationfile error on size #{annotationfile.size}", annotationfile.errors.on(:size)
+    assert_equal "error on size #{annotationfile.size}", annotationfile.errors.on(:size)
 
   end
 end

@@ -1,4 +1,9 @@
+<div class="corner-content-1col-top"></div>
+<div class="content-1col-nobox">
+
 <h1><%= link_to network.name, network %></h1>
+<h5>Description</h5>
+<p><%=h network.description %></p>
 
 <blockquote>
   <h3>Files</h3>
@@ -12,11 +17,8 @@
   Config: <%= link_to network.configfile.filename, network.configfile.public_filename %>
   </p>
 </blockquote>
-<p><%=h network.description %></p>
 
-<span class="postinfo"> 
-  Created by DummyUser <%= network.created_at.to_date -%> 
-  <br/>
-</span>
-<div class="hr"><hr/></div>
+<p class="details">Created by DummyUser <%= network.created_at.to_date -%> </p>
 
+</div>
+<div class="corner-content-1col-bottom"></div>

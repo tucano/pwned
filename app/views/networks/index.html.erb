@@ -1,13 +1,32 @@
-<div id="content">
-  <% for network in @networks %>
-    <%= render(:partial => network) %>
- <% end %>
+<!-- C.1 CONTENT -->
+<div class="content">
+	
+	<div id="notice">
+		<p style="color: green"><%= flash[:notice] %></p>
+	</div>
+	
+	<!-- NETWORKS LIST CELL -->
+	<div class="corner-content-1col-top"></div>
+	<div class="content-1col-nobox">
+		<h1>Networks Index</h1>
+		<div class="content-2col-nobox-leftcolumn">
+			<ul>
+			<% for network in @networks %>
+				<li><%= network.name %></li>
+			<% end %>
+			</ul>
+		</div>
+	</div>
+	<div class="corner-content-1col-bottom"></div>
+	
+	<!-- NETWORKS CONTENT CELL -->                
+	<% for network in @networks %>
+	  <%= render(:partial => network) %>
+	<% end %>
+
 </div>
 
-<div id="right">
-  <dl id="subnav">
-    <dt>ToolBox</dt>
-    <dd><%= link_to 'New network', new_network_path %></dd>
-  </dl>
-</div>
+<%= link_to 'New network', new_network_path %>
+<%= render(:partial => 'subcontent') %>
+
 

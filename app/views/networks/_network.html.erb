@@ -2,7 +2,7 @@
 <div class="content-1col-nobox">
 
 	<h1><%= link_to network.name, network %></h1>
-	<p><%= truncate(network.description, 250) %></p>
+	<p><%= truncate(network.description, :length => 250, :omission => ' ... ') %></p>
 	
 	<div id="description">
 	<blockquote>

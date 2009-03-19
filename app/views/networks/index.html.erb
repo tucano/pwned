@@ -2,7 +2,15 @@
   <%= stylesheet_link_tag 'mf54_reset' %>
 	<%= stylesheet_link_tag 'mf54_grid' %>
   <%= stylesheet_link_tag 'mf54_content' %>
+	<%= stylesheet_link_tag 'pwned' %>
 <% end %>
+
+<!-- PAGE TITLE -->
+<h1 class="pagetitle"><%= page_entries_info @networks %></h1>
+
+<div id="notice">
+	<p style="color: green"><%= flash[:notice] %></p>
+</div>
 
 <!-- C.1 CONTENT -->
 <div class="content">
@@ -10,24 +18,25 @@
 	<!-- NETWORKS LIST CELL -->
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
-		<h1>Networks Index</h1>
-		<div class="content-2col-nobox-leftcolumn">
-		<ul>
-			<% for network in @networks %>
-			<li><%= link_to network.name, network %></li>
-			<% end %>
-		</ul>
-		<%= page_entries_info @networks %>
-		<%= will_paginate @networks %>
-		</div>
+		<% if @networks.total_pages <= 1 then %>
+			<h1>Networks</h1>
+		<% else %>
+			<h1><%= will_paginate @networks %></h1>
+		<% end %>
+		<% for network in @networks %>
+		<h2>
+			<%= link_to_remote network.name, :url => { :action => 'get_network' , :id => network.id 	}, :update => 'networkbox'	%>
+		</h2>
+		<% end %>	
 	</div>
-	
 	<div class="corner-content-1col-bottom"></div>
+	
+	<div id="networkbox"></div>
 </div>
 
 <!-- 
 <%= link_to 'New network', new_network_path %>
-
+<%=h javascript_tag(visual_effect(:toggle_blind, "name", :duration => 5.5)) %>	
 -->
 <%= render(:partial => 'subcontent') %>
 

@@ -2,8 +2,14 @@
   <%= stylesheet_link_tag 'mf54_reset' %>
 	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
   <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
+	<%= stylesheet_link_tag 'pwned_nosidebar' %>
 <% end %>
+<!-- PAGE TITLE -->
+<h1 class="pagetitle"><%= page_title %></h1>
 
+<div id="notice">
+	<p style="color: green"><%= flash[:notice] %></p>
+</div>
 <!-- C.1 CONTENT no sidebar -->
 <div class="content">
 	<div class="corner-content-1col-top"></div>

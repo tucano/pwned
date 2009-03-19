@@ -34,3 +34,18 @@ facebook:
   attachment_file: test/storage/configfiles/facebook.xml
   network: facebook
   content_type: text/xml
+  
+one:
+  attachment_file: test/storage/configfiles/tucano.xml
+  network: one
+  content_type: text/xml
+  
+two:
+  attachment_file: test/storage/configfiles/tucano.xml
+  network: two
+  content_type: text/xml
+
+three:
+  attachment_file: test/storage/configfiles/tucano.xml
+  network: three
+  content_type: text/xml  

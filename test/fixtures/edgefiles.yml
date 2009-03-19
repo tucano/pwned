@@ -34,3 +34,18 @@ tucano:
   attachment_file: test/storage/edgefiles/tucano.txt
   network: tucano
   content_type: text/plain
+  
+one:
+  attachment_file: test/storage/edgefiles/tucano.txt
+  network: one
+  content_type: text/plain
+  
+two:
+  attachment_file: test/storage/edgefiles/tucano.txt
+  network: two
+  content_type: text/plain
+
+three:
+  attachment_file: test/storage/edgefiles/tucano.txt
+  network: three
+  content_type: text/plain

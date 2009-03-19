@@ -22,6 +22,17 @@ class NetworksController < ApplicationController
     end
   end
 
+  def get_network
+    begin
+      @network = Network.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error("Attempt to access invalid network #{params[:id]}")
+      redirect_to_index("Invalid network")
+    else
+      render :partial => @network
+    end
+  end
+
   # GET /networks/new
   # GET /networks/new.xml
   def new
@@ -129,6 +140,7 @@ class NetworksController < ApplicationController
   end
 
   private
+  
   def get_config_templates
     templates = Hash.new
     templatesdir = Rails.root + "/" + CONFIG_TEMPLATES + "/*.xml"
@@ -140,5 +152,10 @@ class NetworksController < ApplicationController
       templates[name] = config if config.valid?
     end
     return templates
+  end
+
+  def redirect_to_index(msg = nil)
+    flash[:notice] = msg if msg
+    redirect_to :action => :index
   end
 end

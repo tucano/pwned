@@ -3,8 +3,7 @@ class NetworksController < ApplicationController
   # GET /networks
   # GET /networks.xml
   def index
-    @networks = Network.find(:all, :order => "name")
-
+    @networks = Network.paginate :page => params[:page], :order => 'name', :per_page => 5
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @networks }

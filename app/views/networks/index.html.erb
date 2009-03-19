@@ -12,18 +12,17 @@
 	<div class="content-1col-nobox">
 		<h1>Networks Index</h1>
 		<div class="content-2col-nobox-leftcolumn">
-			<ul>
+		<ul>
 			<% for network in @networks %>
-				<li><%= link_to network.name, network %></li>
+			<li><%= link_to network.name, network %></li>
 			<% end %>
-			</ul>
+		</ul>
+		<%= page_entries_info @networks %>
+		<%= will_paginate @networks %>
 		</div>
 	</div>
-	<div class="corner-content-1col-bottom"></div>
 	
-	<!-- NETWORK CONTENT CELL                
-	<%= render :partial => @networks %>
-	-->
+	<div class="corner-content-1col-bottom"></div>
 </div>
 
 <!-- 

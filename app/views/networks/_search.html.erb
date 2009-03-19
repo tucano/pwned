@@ -1,0 +1,13 @@
+<div class="corner-subcontent-top"></div>                        
+<div class="subcontent-box">
+  <h1 class="search">Search network</h1>
+  <div class="searchform">
+    <% form_for :network, :url => { :action => :search } do |f| %>
+			<fieldset>
+		  	<%= f.text_field :name, :class => "field" , :value => " Search..." %>
+  	  	<%= f.submit "GO!", :class => "button" %>
+			</fieldset>
+		<% end %>
+  </div>
+</div>  
+<div class="corner-subcontent-bottom"></div>

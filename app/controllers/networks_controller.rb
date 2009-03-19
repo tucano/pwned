@@ -22,6 +22,18 @@ class NetworksController < ApplicationController
     end
   end
 
+  def search
+    p params[:network][:name]
+    begin
+      @network = Network.find_by_name(params[:network][:name])
+    rescue ActiveRecord::RecordNotFound
+      logger.error("Attempt to access invalid network #{params[:network][:name]}")
+      redirect_to_index("Invalid network")
+    else
+      redirect_to @network
+    end
+  end
+  
   def get_network
     begin
       @network = Network.find(params[:id])

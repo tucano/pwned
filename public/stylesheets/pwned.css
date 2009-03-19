@@ -1,0 +1,13 @@
+/****************************************************************/
+/*   Design:   Tucano                                           */
+/*--------------------------------------------------------------*/
+/*   Aditional classes for PWNED                                */
+/****************************************************************/
+
+.content h1.network
+{
+	background: url(../images/icon_celltitle_level1.gif) no-repeat;
+	background-position: 632px 5px;
+}
+
+.content .networktitle { border: 1px #000 solid; }

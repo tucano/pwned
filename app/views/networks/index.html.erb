@@ -14,16 +14,16 @@
 		<div class="content-2col-nobox-leftcolumn">
 			<ul>
 			<% for network in @networks %>
-				<li><%= network.name %></li>
+				<li><%= link_to network.name, network %></li>
 			<% end %>
 			</ul>
 		</div>
 	</div>
 	<div class="corner-content-1col-bottom"></div>
 	
-	<!-- NETWORK CONTENT CELL -->                
+	<!-- NETWORK CONTENT CELL                
 	<%= render :partial => @networks %>
-	
+	-->
 </div>
 
 <!-- 

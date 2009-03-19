@@ -1,17 +1,20 @@
-<div id="content">
-  <%= render(:partial => @network) %>
-</div>
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
+  <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
+<% end %>
 
-<div id="right">
-  <dl id="subnav">
-    <dt>ToolBox</dt>
-    <dd><%= link_to 'Edit', edit_network_path(@network) %></dd>
-    <dd><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></dd>
-    <dd><%= link_to 'Back', networks_path %></dd>
-  </dl>
-</div>
+<% content_for(:applet) do %>
+	<%= render :partial => 'applet' %>
+<% end %>
 
-<div class="clear" id="applet">
-  <%= render(:partial => 'applet') %>
-</div>
+<!-- C.1 CONTENT no sidebar -->
+<div class="content">
 
+	<!-- NETWORK CONTENT CELL -->
+  <%= render :partial => @network %>
+	<%= link_to 'New network', new_network_path %>
+	<%= link_to 'Back', networks_path %>
+	<%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %>
+	<%= link_to 'Edit', edit_network_path(@network) %>
+</div>

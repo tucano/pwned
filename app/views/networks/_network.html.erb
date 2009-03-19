@@ -1,24 +1,47 @@
 <div class="corner-content-1col-top"></div>
 <div class="content-1col-nobox">
 
-<h1><%= link_to network.name, network %></h1>
-<h5>Description</h5>
-<p><%=h network.description %></p>
+	<h1><%= link_to network.name, network %></h1>
+	<p><%= truncate(network.description, 250) %></p>
+	
+	<div id="description">
+	<blockquote>
+		<h5>Description size: <%= network.description.size %></h5>
+  	<p><%= auto_link(network.description, :urls) %></p>
+	</blockquote>
+	</div>
+	
+	<%= yield :applet %>
+	
+	<div class="content-2col-nobox-leftcolumn">
+		<h2>Network icon</h2>
+		<table>
+			<tr><th class="top" scope="col">Heading 1</th><th class="top" scope="col">Heading 2</th></tr>
+			<tr><th scope="row">Category 1</th><td>Data</td></tr>
+			<tr><th scope="row">Category 2</th><td>Data</td></tr>
+			<tr><th scope="row">Category 3</th><td><a href="#">Link</a></td></tr>              
+    </table>
+		<p class="caption"><b>Table x.x.</b> Caption</p>
+	</div>
 
-<blockquote>
-  <h3>Files</h3>
-  <p>
-  Edges: <%= link_to network.edgefile.filename, network.edgefile.public_filename %>
-  <br/>
-  <% if network.annotationfile %>
-  Nodes: <%= link_to network.annotationfile.filename, network.annotationfile.public_filename %>
-  <br/>
-  <% end %>
-  Config: <%= link_to network.configfile.filename, network.configfile.public_filename %>
-  </p>
-</blockquote>
+	<div class="content-2col-nobox-rightcolumn"> 
+		<h2>Files icon</h2>
+		<h5>File links</h5>
+		<ol>
+			<li>Edges: <%= link_to network.edgefile.filename, network.edgefile.public_filename %></li>
+			<li>Config: <%= link_to network.configfile.filename, network.configfile.public_filename %></li>
+			<% if network.annotationfile %>
+			<li>Nodes: <%= link_to network.annotationfile.filename, network.annotationfile.public_filename %></li>
+			<% end %>
+		</ol>
+	</div>
 
-<p class="details">Created by DummyUser <%= network.created_at.to_date -%> </p>
+	<h2>Posted by</h2>
+	<h3><a href="#"><img src="/images/image.jpg" alt="Image description" title="Image title" /></a>Heading 3</h3>
+	<h6>Heading h6</h6>
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
+		 euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+	<p class="details">Posted by DummyUser <%= network.created_at.to_date -%> </p> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
 
 </div>
 <div class="corner-content-1col-bottom"></div>

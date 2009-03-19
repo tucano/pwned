@@ -1,14 +1,21 @@
-<div id="content">
-  <h1>Editing network <%= @network.name%></h1>
-  <%= error_messages_for :network, :edgefile, :annotationfile, :configfile %>
-  <%= render :partial => "form" %>
-</div>
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
+  <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
+<% end %>
 
+<!-- C.1 CONTENT no sidebar -->
+<div class="content">
+	<div class="corner-content-1col-top"></div>
+	<div class="content-1col-nobox">
+  	<h1>Editing network <%= @network.name%></h1>
+  	<%= error_messages_for :network %>
+	  <%= error_messages_for :edgefile %>
+	  <%= error_messages_for :configfile %>
+	  <%= error_messages_for :annotationfile %>
+  	<%= render :partial => "form" %>
 
-<div id="right">
-  <dl id="subnav">
-    <dt>ToolBox</dt>
-    <dd><%= link_to 'Show', @network %></dd>
-    <dd><%= link_to 'Back', networks_path %></dd>
-  </dl>
+		<%= link_to 'Show', @network %>
+		<%= link_to 'Back', networks_path %>
+	</div>
 </div>

@@ -1,9 +1,11 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid' %>
+  <%= stylesheet_link_tag 'mf54_content' %>
+<% end %>
+
 <!-- C.1 CONTENT -->
 <div class="content">
-	
-	<div id="notice">
-		<p style="color: green"><%= flash[:notice] %></p>
-	</div>
 	
 	<!-- NETWORKS LIST CELL -->
 	<div class="corner-content-1col-top"></div>
@@ -19,14 +21,15 @@
 	</div>
 	<div class="corner-content-1col-bottom"></div>
 	
-	<!-- NETWORKS CONTENT CELL -->                
-	<% for network in @networks %>
-	  <%= render(:partial => network) %>
-	<% end %>
-
+	<!-- NETWORK CONTENT CELL -->                
+	<%= render :partial => @networks %>
+	
 </div>
 
+<!-- 
 <%= link_to 'New network', new_network_path %>
+
+-->
 <%= render(:partial => 'subcontent') %>
 
 

@@ -25,7 +25,12 @@
 		<% end %>
 		<% for network in @networks %>
 		<h2>
-			<%= link_to_remote network.name, :url => { :action => 'get_network' , :id => network.id 	}, :update => 'networkbox'	%>
+			<%= link_to_remote network.name, 
+				:url => { :action => 'get_network' , :id => network.id 	}, 
+				:update => { :success => "networkbox", :failure => "error" },
+				:before => "Element.hide('networkbox')",
+				:complete => visual_effect(:appear, "networkbox", :duration => 1.5)
+				%>
 		</h2>
 		<% end %>	
 	</div>

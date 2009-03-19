@@ -1,5 +1,7 @@
+<div class="contactform"><!-- change to network form -->
 <% form_for(@network, :html => { :multipart => true }) do |f| %>
-  <p>
+  <fieldset><legend>network</legend>
+	<p>
     <%= f.label :name, 'Network Name' %><br />
     <%= f.text_field :name, :class => "input" %>
   </p>
@@ -7,42 +9,46 @@
     <%= f.label :description, 'Description' %><br />
     <%= f.text_area :description, :size => "50x10" ,:class => "input" %>
   </p>
+	</fieldset>
+	<fieldset><legend>edges</legend>
   <p>
     <% fields_for :edgefile do |edgefile| %>
       <%= edgefile.label :uploaded_data , 'Edgefile'%>
       <%= edgefile.file_field :uploaded_data %>
     <% end %>
   </p>
+	<p>
+    <%= label_tag 'edges', 'Edges' %><br />
+    <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "input" %>
+  </p>
+	</fieldset>
+	<fieldset><legend>config</legend>
   <p>
     <% fields_for :configfile do |configfile| %>
       <%= configfile.label :uploaded_data , 'Configfile'%>
       <%= configfile.file_field :uploaded_data %>
     <% end %>
   </p>
+	<p>
+    <%= label_tag 'config', 'Configuration' -%>
+    <% options = options_for_select @templates %>
+    <%= select_tag 'config' , options  -%>
+  </p>
+	</fieldset>
+	<fieldset><legend>annotation</legend>
   <p>
     <% fields_for :annotationfile do |annotationfile| %>
       <%= annotationfile.label :uploaded_data , 'Annotationfile'%>
       <%= annotationfile.file_field :uploaded_data %>
     <% end %>
   </p>
-  <%=  button_to_function "Annotation", "Effect.toggle('paste-annotations', 'blind',{ duration: 0.5 })", {:class => 'button'} %>
-  <p>
-    <%= label_tag 'config', 'Configuration' -%>
-    <% options = options_for_select @templates %>
-    <%= select_tag 'config' , options  -%>
-  </p>
-  <p>
-    <%= label_tag 'edges', 'Edges' %><br />
-    <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "input" %>
-  </p>
-  <div id="paste-annotations" style="display:none">
   <p>
     <%= label_tag 'annotations', 'Annotation' %><br />
     <%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "input"  %>
   </p>
-  </div>
+	</fieldset>
   <p>
     <%= f.submit "Create", :class => "submit" %>
   </p>
 <% end %>
-
+</div>

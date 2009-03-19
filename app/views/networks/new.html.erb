@@ -4,24 +4,37 @@
   <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
 	<%= stylesheet_link_tag 'pwned_nosidebar' %>
 <% end %>
+
 <!-- PAGE TITLE -->
 <h1 class="pagetitle"><%= page_title %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
 </div>
+
 <!-- C.1 CONTENT no sidebar -->
 <div class="content">
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
-  	<h1>New network</h1>
-	  <%= error_messages_for :network %>
-	  <%= error_messages_for :edgefile %>
-	  <%= error_messages_for :configfile %>
-	  <%= error_messages_for :annotationfile %>
+  	<h1 class="network">New network</h1>
+		<h6>Box subhead messages </h6>
+		
+		<div>
+			<h5>ERRORS</h5>
+		  <p><%= error_messages_for :network %></p>
+			<blockquote>
+				<ul>
+					<li><%= error_messages_for :edgefile %></li>
+					<li><%= error_messages_for :configfile %></li>
+					<li><%= error_messages_for :annotationfile %></li>										
+				</ul>  
+			</blockquote>
+		</div>
 
-	  <%= render :partial => "form" %>
-
+	</div>
+  <div class="content-1col-nobox">
+		<h2>Network Form icon</h2>
+		<%= render :partial => "form" %>
 		<%= link_to 'Back', networks_path %>
 	</div>
 </div>

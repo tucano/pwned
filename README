@@ -6,7 +6,6 @@ You can find a googledoc presentation about pwned here: http://tucano.recipient.
 This software was presented as a prototype at dorkbot Milano (26/02/2009).
 
 
-
 == Getting Started
 
 1. Load fixtures: rake db:fixtures:load
@@ -18,3 +17,7 @@ This software was presented as a prototype at dorkbot Milano (26/02/2009).
 
 rake utils:storage:drop              # Delete the storage and ALL files!
 rake utils:storage:init              # Create a storage
+
+== News
+
+Added new template, search box, attacments.

@@ -12,7 +12,7 @@
 <% end %>
 
 <!-- PAGE TITLE -->
-<h1 class="pagetitle"><%= page_entries_info @networks %></h1>
+<h1 class="pagetitle"><%= page_entries_info @pages %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
@@ -24,12 +24,12 @@
 	<!-- NETWORKS LIST CELL -->
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
-		<% if @networks.total_pages <= 1 then %>
+		<% if @pages.total_pages <= 1 then %>
 			<h1>Networks</h1>
 		<% else %>
-			<h1><%= will_paginate @networks %></h1>
+			<h1><%= will_paginate @pages %></h1>
 		<% end %>
-		<% for network in @networks %>
+		<% for network in @pages %>
 		<h2><%= network.name %></h2>
 		<p class="details">
 			<%= link_to_remote 'Show', 

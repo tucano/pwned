@@ -6,10 +6,13 @@ class NetworksController < ApplicationController
   # GET /networks
   # GET /networks.xml
   def index
-    objects = Network.search(params[:network])
-    @networks = objects.paginate :page => params[:page], :order => 'name', :per_page => 5
+    
+    @networks = Network.search(params[:network])
+    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
+    
     respond_to do |format|
       format.html # index.html.erb
+      format.rss { render :layout => false, :collection => @networks }
       format.xml  { render :xml => @networks }
     end
   end
@@ -20,6 +23,7 @@ class NetworksController < ApplicationController
     @network = Network.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
+      format.rss { render :layout => false }
       format.xml  { render :xml => @network }
     end
   end

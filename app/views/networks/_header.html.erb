@@ -2,24 +2,22 @@
 <div class="header">
 	<div class="header-top">
 	  <!-- A.1 SITENAME -->
-	  <a class="sitelogo" href="<%= root_url %>" title="Home"></a>
+	  <%= link_to("", root_url, {:title => 'Home', :class => 'sitelogo'}) %>
 	  <div class="sitename">
-	    <h1><a href="<%= root_url %>" title="Home">PWNED&bull;1.0</a></h1> 
+	    <h1><%= link_to("PWNED&bull;1.0", root_url, { :title => 'Home'}) %></h1> 
 			<h2>Processing.org Wise Node and Edges Drawer</h2>
    	</div>
 		<!-- A.2 BUTTON NAVIGATION -->
 		<div class="navbutton">
 			<ul>
-				<li><a href="#" title="English"><img src="/images/icon_flag_us.gif" alt="Flag" /></a></li>
-				<li><a href="#" title="Deutsch"><img src="/images/icon_flag_de.gif" alt="Flag" /></a></li>
-				<li><a href="#" title="Svenska"><img src="/images/icon_flag_se.gif" alt="Flag" /></a></li>
-				<li><a href="#" title="RSS"><img src="/images/icon_rss.gif" alt="RSS-Button" /></a></li>
+				<li><a href="#" title="English"><img src="/images/icon_flag_en.png" alt="Flag" /></a></li>
+				<li><%= rss_button %></li>
 			</ul>
 		</div>
 		<!-- A.3 GLOBAL NAVIGATION -->
 		<div class="navglobal">
 		 	<ul id="nav">
-		     <li><a href="<%= root_url %>" class="home"><strong>Home</strong></a></li>
+		     <li><%= link_to("Home", root_url, { :class => 'home'}) %></li>
 		     <li><a href="/404.html" class="news"><strong>News</strong></a></li>
 		     <li><a href="/404.html" class="services"><strong>Services</strong></a></li>
 		     <li><a href="/404.html" class="contact"><strong>Contact</strong></a></li>
@@ -38,14 +36,7 @@
 			<li><a href="#">Sub-Sub-Page</a></li>          
 		</ul>
 		<!-- Search form -->                  
-		<div class="searchform">
-			<form action="index.html" method="get">
-				<fieldset>
-					<input name="field" class="field"  value=" Enter search word ..." />
-					<input type="submit" name="button" class="button" value="Search" />
-				</fieldset>
-			</form>
-		</div>
+		<%= render :partial => 'searchform'%>
 	</div>
 </div>		
 <div class="corner-page-bottom"></div>

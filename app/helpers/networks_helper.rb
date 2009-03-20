@@ -18,13 +18,53 @@ module NetworksHelper
 
   def info
     info = [
-    (tag 'meta', :name => 'copyright', :content => "Creative Commons License"),
-    (tag 'meta', :name => 'author', :content => "Tucano"),
-    (tag 'meta', :name => 'description', :content => "Network data drawer")]
+    (tag 'meta', :name => 'copyright', :content => COPYRIGHT),
+    (tag 'meta', :name => 'author', :content => AUTHOR),
+    (tag 'meta', :name => 'description', :content => DESC)]
   end
   
   def icon
-    tag 'link', :rel => "icon", :type => "image/x-icon" ,:href => "/images/favicon.ico"
+    tag 'link', :rel => "icon", :type => "image/x-icon" ,:href => ICON
   end
+  
+  def form_title
+    @form_title ||= set_form_title
+  end
+  
+  def hidden_div_if(condition, attributes = {})
+    if condition then
+      attributes["style"] = "display: none"
+    end
+    attrs = tag_options(attributes.stringify_keys)
+    "<div #{attrs}>"
+  end
+  
+  def hidden_div_close
+    "</div>"
+  end
+  
+  def rss_button
+    @rss_button ||= set_rss_button 
+  end
+  
+  private
+  
+  def set_rss_button
+    rss = url_for(formatted_networks_url(:rss))
+    image = image_tag("icon_rss.gif")
+    "<a href=#{rss} title=#{rss}>#{image}</a>"
+  end
+  
+  def set_form_title
+    if controller.action_name == 'new'
+      "New #{controller.controller_name.singularize}"
+    elsif controller.action_name == 'edit'
+      "Editing #{@network.name}"
+    else
+      "New Form"
+    end
+  end
+
+ 
   
 end

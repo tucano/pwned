@@ -2,9 +2,11 @@
 <div class="corner-subcontent-top"></div>                        
 <div class="subcontent-box">
   <h1 class="webtemplate">News</h1>                  
-  <h2>RSS Feed</h2> 
-  <p class="demo">Here comes the content. <br />See "Content Toolbox" on how to fill up content.</p>            
-  <h2>Last added</h2> 
-  <p class="demo">Here comes the content. <br />See "Content Toolbox" on how to fill up content.</p>            
+  <h2><%= link_to "RSS last 5 feeds", formatted_networks_url(:rss) %></h2> 
+  <ul>
+  <% @networks.last(5).each do |n| %>
+    <li><%= link_to n.name, formatted_network_url(n.id, :rss) %></li>
+  <% end %>
+  </ul>
 </div>  
 <div class="corner-subcontent-bottom"></div>

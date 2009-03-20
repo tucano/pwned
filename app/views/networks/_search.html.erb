@@ -3,11 +3,12 @@
   <h1 class="search">Search network</h1>
   <div class="searchform">
     <% form_tag networks_path, :method => :get do %>
-			<fieldset>
-				<%= text_field_with_auto_complete :network, :name , {}, { :method => :get}%>
+  		<fieldset>
+  			<%= text_field_with_auto_complete :network, :name , { :autocomplete => "off"}, { :method => :get} %>
+  			<br/>
   	  	<%= submit_tag "GO!", :class => "button", :name => nil %>
-			</fieldset>	
-		<% end %>
+  		</fieldset>	
+  	<% end %>
   </div>
 </div>  
 <div class="corner-subcontent-bottom"></div>

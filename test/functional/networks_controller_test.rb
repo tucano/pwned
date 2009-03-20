@@ -10,16 +10,6 @@ class NetworksControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-    assert_select("form[action=?]", networks_path) do
-      assert_select "input[name *= name]"
-      assert_select "textarea[name *= description]"
-      assert_select "input[name *= edgefile]"
-      assert_select "input[name *= configfile]"
-      assert_select "input[name *= annotationfile]"
-      assert_select "textarea[name *= edges]"
-      assert_select "select[name *= config]"
-      assert_select "textarea[name *= annotations]"
-    end
   end
 
   test "should create network" do
@@ -116,13 +106,6 @@ class NetworksControllerTest < ActionController::TestCase
     network_id = networks(:disney).id
     get :edit, :id => network_id
     assert_response :success
-    assert_select("form[action=?]", network_path(network_id)) do
-      assert_select "input[name *= name]"
-      assert_select "textarea[name *= description]"
-      assert_select "input[name *= edgefile]"
-      assert_select "input[name *= configfile]"
-      assert_select "input[name *= annotationfile]"
-    end
   end
 
   test "should update network attributes" do

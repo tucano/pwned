@@ -29,10 +29,10 @@
 				:url => { :action => 'get_network' , :id => network.id 	}, 
 				:update => { :success => "networkbox", :failure => "error" },
 				:before => "Element.hide('networkbox')",
-				:complete => visual_effect(:appear, "networkbox", :duration => 1.5)
+				:complete => visual_effect(:appear, "networkbox", :duration => 1.0)
 				%>
 		</h2>
-		<% end %>	
+		<% end %>
 	</div>
 	<div class="corner-content-1col-bottom"></div>
 	
@@ -43,6 +43,12 @@
 <%= link_to 'New network', new_network_path %>
 <%=h javascript_tag(visual_effect(:toggle_blind, "name", :duration => 5.5)) %>	
 -->
-<%= render(:partial => 'subcontent') %>
+
+<!-- C.2 SUBCONTENT -->
+<div class="subcontent">
+	<%= render(:partial => 'login') %>
+	<%= render(:partial => 'search') %>	
+	<%= render(:partial => 'news') %>	
+</div>
 
 

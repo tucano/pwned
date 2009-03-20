@@ -1,9 +1,12 @@
 class NetworksController < ApplicationController
   
+  auto_complete_for :network, :name
+  
   # GET /networks
   # GET /networks.xml
   def index
-    @networks = Network.paginate :page => params[:page], :order => 'name', :per_page => 5
+    objects = Network.search(params[:network])
+    @networks = objects.paginate :page => params[:page], :order => 'name', :per_page => 5
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @networks }
@@ -13,24 +16,10 @@ class NetworksController < ApplicationController
   # GET /networks/1
   # GET /networks/1.xml
   def show
-
     @network = Network.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @network }
-    end
-  end
-
-  def search
-    p params[:network][:name]
-    begin
-      @network = Network.find_by_name(params[:network][:name])
-    rescue ActiveRecord::RecordNotFound
-      logger.error("Attempt to access invalid network #{params[:network][:name]}")
-      redirect_to_index("Invalid network")
-    else
-      redirect_to @network
     end
   end
   

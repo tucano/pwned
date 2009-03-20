@@ -2,11 +2,11 @@
 <div class="subcontent-box">
   <h1 class="search">Search network</h1>
   <div class="searchform">
-    <% form_for :network, :url => { :action => :search } do |f| %>
+    <% form_tag networks_path, :method => :get do %>
 			<fieldset>
-		  	<%= f.text_field :name, :class => "field" , :value => " Search..." %>
-  	  	<%= f.submit "GO!", :class => "button" %>
-			</fieldset>
+				<%= text_field_with_auto_complete :network, :name , {}, { :method => :get}%>
+  	  	<%= submit_tag "GO!", :class => "button", :name => nil %>
+			</fieldset>	
 		<% end %>
   </div>
 </div>  

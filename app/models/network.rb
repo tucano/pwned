@@ -11,5 +11,16 @@ class Network < ActiveRecord::Base
                       :if => Proc.new { |n| !n.name.blank? }
 
   validates_uniqueness_of :name
+  
+  
+  def self.search(search)
+    if search then
+      if search.has_key? 'name' then
+        find(:all, :conditions => ['name LIKE ?', "%#{search['name']}%"])
+      end
+    else
+      find(:all)
+    end
+  end
 
 end

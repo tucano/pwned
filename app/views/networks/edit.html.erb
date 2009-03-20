@@ -5,6 +5,18 @@
 	<%= stylesheet_link_tag 'pwned_nosidebar' %>
 <% end %>
 
+<% content_for(:toolbox) do %>
+  <li><%= link_to 'Show', @network %></li>
+	<li><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></li>
+<% end %>
+
+<% content_for(:navbar) do %>
+  <%= render :partial => 'menu_user' %>
+  <%= render :partial => 'menu_toolbox' %>
+  <%= render :partial => 'menu_networks' %>
+  <%= render :partial => 'menu_help' %> 
+<% end %>
+
 <!-- PAGE TITLE -->
 <h1 class="pagetitle"><%= page_title %></h1>
 
@@ -14,16 +26,5 @@
 
 <!-- C.1 CONTENT no sidebar -->
 <div class="content">
-	<div class="corner-content-1col-top"></div>
-	<div class="content-1col-nobox">
-  	<h1>Editing network <%= @network.name%></h1>
-  	<%= error_messages_for :network %>
-	  <%= error_messages_for :edgefile %>
-	  <%= error_messages_for :configfile %>
-	  <%= error_messages_for :annotationfile %>
   	<%= render :partial => "form" %>
-
-		<%= link_to 'Show', @network %>
-		<%= link_to 'Back', networks_path %>
-	</div>
 </div>

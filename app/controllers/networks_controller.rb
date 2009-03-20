@@ -1,6 +1,7 @@
 class NetworksController < ApplicationController
   
   auto_complete_for :network, :name
+  layout "networks", :except => [:get_network]
   
   # GET /networks
   # GET /networks.xml
@@ -28,7 +29,7 @@ class NetworksController < ApplicationController
       @network = Network.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       logger.error("Attempt to access invalid network #{params[:id]}")
-      redirect_to_index("Invalid network")
+      render :text => "Invalid Network"
     else
       render :partial => @network
     end

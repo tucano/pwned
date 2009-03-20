@@ -5,6 +5,18 @@
 	<%= stylesheet_link_tag 'pwned_nosidebar' %>
 <% end %>
 
+<% content_for(:toolbox) do %>
+  <li><%= link_to 'Edit', edit_network_path(@network) %></li>
+	<li><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></li>
+<% end %>
+
+<% content_for(:navbar) do %>
+  <%= render :partial => 'menu_user' %>
+  <%= render :partial => 'menu_toolbox' %>
+  <%= render :partial => 'menu_networks' %>
+  <%= render :partial => 'menu_help' %>
+<% end %>
+
 <% content_for(:applet) do %>
 	<%= render :partial => 'applet' %>
 <% end %>
@@ -21,9 +33,5 @@
 
 	<!-- NETWORK CONTENT CELL -->
   <%= render :partial => @network %>
-
-	<%= link_to 'New network', new_network_path %>
-	<%= link_to 'Back', networks_path %>
-	<%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %>
-	<%= link_to 'Edit', edit_network_path(@network) %>
+	
 </div>

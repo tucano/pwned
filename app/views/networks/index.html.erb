@@ -5,6 +5,12 @@
 	<%= stylesheet_link_tag 'pwned' %>
 <% end %>
 
+<% content_for(:navbar) do %>
+  <%= render :partial => 'menu_user' %>
+  <%= render :partial => 'menu_networks' %>
+  <%= render :partial => 'menu_help' %> 
+<% end %>
+
 <!-- PAGE TITLE -->
 <h1 class="pagetitle"><%= page_entries_info @networks %></h1>
 
@@ -24,25 +30,28 @@
 			<h1><%= will_paginate @networks %></h1>
 		<% end %>
 		<% for network in @networks %>
-		<h2>
-			<%= link_to_remote network.name, 
+		<h2><%= network.name %></h2>
+		<p class="details">
+			<%= link_to_remote 'Show', 
 				:url => { :action => 'get_network' , :id => network.id 	}, 
-				:update => { :success => "networkbox", :failure => "error" },
+				:update => { :success => "networkbox", :failure => "notice" },
 				:before => "Element.hide('networkbox')",
 				:complete => visual_effect(:appear, "networkbox", :duration => 1.0)
-				%>
-		</h2>
+			%> | 
+			<%= link_to 'Go', network %> | 
+			<%= link_to 'Edit', edit_network_path(network) %> |
+			<%= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete %>
+		</p>
 		<% end %>
 	</div>
 	<div class="corner-content-1col-bottom"></div>
 	
-	<div id="networkbox"></div>
+	<div id="networkbox">
+	 <% if @networks.size == 1 %>
+	  <%= render :partial => @networks[0] %>
+	 <% end %>
+	</div>
 </div>
-
-<!-- 
-<%= link_to 'New network', new_network_path %>
-<%=h javascript_tag(visual_effect(:toggle_blind, "name", :duration => 5.5)) %>	
--->
 
 <!-- C.2 SUBCONTENT -->
 <div class="subcontent">
@@ -50,5 +59,3 @@
 	<%= render(:partial => 'search') %>	
 	<%= render(:partial => 'news') %>	
 </div>
-
-

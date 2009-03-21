@@ -53,6 +53,29 @@
 	border: 1px #666661 solid;
 }
 
+.niceform legend.child
+{
+	background: none;
+	color: #666661;
+	font: 17px/21px Calibri, Arial, Helvetica, sans-serif;
+	margin-left: 15px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	padding: 0px 10px 0px 10px;
+	font-weight: normal;
+	border: 0px solid #666661;
+}
+
+.niceform fieldset.child
+{
+	background: #f2f2e6;
+	padding: 2px;
+	margin-bottom: 16px;
+	width: 596px;
+	border: 1px #666661 solid;
+}
+
 .niceform label
 {
 	font-size: 11px;

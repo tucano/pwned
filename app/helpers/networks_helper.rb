@@ -71,4 +71,19 @@ module NetworksHelper
     "can't be saved for #{count} errors"
   end
   
+  def config_form_builder(xml)
+    form = String.new
+    xml.root.each_element do |e|
+      form << '<fieldset class="child"><legend class="child">' << e.name << '</legend>'
+      e.each_element do |n|
+        form << '<p><b>' + n.name + '</b> '
+        n.each_element do |p|
+          form << p.name + ' '
+        end
+      end
+      form << '</fieldset>'
+    end
+    form
+  end
+  
 end

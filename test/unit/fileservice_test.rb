@@ -20,7 +20,7 @@ class FileserviceTest < Test::Unit::TestCase
     @network.name = 'pippo'
     @network.description = 'blablabla'
     @edgefile.filename = 'pippo.txt'
-    @edgefile.size = 500
+    @edgefile.set_temp_data(File.read('test/storage/edgefiles/barabasi.txt'))
     @edgefile.content_type = 'text/plain'
     @configfile.filename = 'pippo.xml'
     @configfile.content_type = 'text/xml'
@@ -38,7 +38,7 @@ class FileserviceTest < Test::Unit::TestCase
     @network.name = 'pippo'
     @network.description = 'blablabla'
     @edgefile.filename = 'pippo.txt'
-    @edgefile.size = 500
+    @edgefile.set_temp_data(File.read('test/storage/edgefiles/barabasi.txt'))
     @edgefile.content_type = 'text/plain'
     @configfile.filename = 'pippo.xml'
     @configfile.content_type = 'text/xml'

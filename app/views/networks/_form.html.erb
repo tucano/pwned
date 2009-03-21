@@ -19,7 +19,7 @@
   	  <%= error_messages_for :network %>
 	    <dl>
 	      <dt><%= f.label :name, 'Network Name' %></dt>
-	      <dd><%= f.text_field :name, :class => "field" %></dd>
+	      <dd><%= f.text_field :name %></dd>
 	    </dl>
 	    <dl>
         <dt><%= f.label :description, 'Description' %></dt>
@@ -51,9 +51,21 @@
       </dl>
       <% end %>
       <dl>
-        <dt><%= label_tag 'config', 'Configuration' -%></dt>
-        <dd><% options = options_for_select @templates %><%= select_tag 'config' , options -%></dd>
+        <dt><%= label 'config', 'template', 'Template' -%></dt>
+        <dd><%= select 'config' , 'template', @templates , {:include_blank => true} -%></dd>
       </dl>
+      <%= config_form_builder(@configs[@templates[0]].xml) %>
+      <fieldset class="child"><legend class="child">params</legend>
+        <p>Node</p>
+        <dl>
+          <dt><%= label 'config','node', 'size' -%></dt>
+          <dd><%= text_field 'config','node', :size => 2 %></dd>
+        </dl>
+        <dl>
+          <dt><%= label 'config','spacer', 'strength' -%></dt>
+          <dd><%= text_field 'config','spacer', :size => 2 %></dd>
+        </dl>
+      </fieldset>
     </fieldset>
     
     <fieldset><legend>annotation</legend>
@@ -66,7 +78,7 @@
       <% end %>
       <dl>
         <dt><%= label_tag 'annotations', 'Annotation' %></dt>
-        <dd><%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "field"  %></dd>
+        <dd><%= text_area_tag 'annotations' , nil, :size => "50x10"  %></dd>
       </dl>
     </fieldset>
     

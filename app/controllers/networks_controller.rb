@@ -62,43 +62,19 @@ class NetworksController < ApplicationController
   # POST /networks
   # POST /networks.xml
   def create
-    
     @network = Network.new(params[:network])
-    # TODO FIXME
+    
     @configs = get_config_templates
     @templates = @configs.keys
     
-    if params[:edgefile] && !params[:edgefile][:uploaded_data].blank? then
-      @edgefile = Edgefile.new(params[:edgefile])
-    elsif params[:edges] then
-      @edgefile = Edgefile.new()
-      # TODO FIXME
-      @edgefile.filename = 'pastie.txt'
-      @edgefile.content_type = 'text/plain'
-      @edgefile.set_temp_data(params[:edges])
-    end
+    @edgefile = edges_handler
+    @configfile = config_handler
+    @annotationfile = annotation_handler
 
-    if params[:configfile] && !params[:configfile][:uploaded_data].blank? then
-      @configfile = Configfile.new(params[:configfile])
-    elsif params[:config] then
-      @configfile = Configfile.new()
-      @configfile.filename = 'pastie.xml'
-      @configfile.content_type = 'text/xml'
-      xml = @configs[ params[:config] ].xml
-      @configfile.set_temp_data(xml)
-    end
-
-    if params[:annotationfile] && !params[:annotationfile][:uploaded_data].blank? then
-      @annotationfile = Annotationfile.new(params[:annotationfile])
-    elsif params[:annotations] and !params[:annotations].blank? then
-      @annotationfile = Annotationfile.new()
-      # TODO FIXME      
-      @annotationfile.filename = 'pastie.txt'
-      @annotationfile.content_type = 'text/plain'
-      @annotationfile.set_temp_data(params[:annotations])
-    end
-
-    @service = Fileservice.new(@network, @edgefile, @configfile,@annotationfile)
+    # TODO before fileservice must check is all is ok (no validation till now)
+    # except a false in fileservice for nil objects
+    
+    @service = Fileservice.new(@network, @edgefile, @configfile, @annotationfile)
 
     respond_to do |format|
       if @service.save
@@ -114,6 +90,7 @@ class NetworksController < ApplicationController
 
   # PUT /networks/1
   # PUT /networks/1.xml
+  # TODO FIXME according to changes in create
   def update
     @network = Network.find(params[:id])
     @edgefile = @network.edgefile
@@ -147,6 +124,63 @@ class NetworksController < ApplicationController
   end
 
   private
+
+  def annotation_handler
+    if params[:annotationfile] && !params[:annotationfile][:uploaded_data].blank? then
+      @annotationfile = Annotationfile.new(params[:annotationfile])
+    elsif params[:annotations] and !params[:annotations].blank? then
+      @annotationfile = make_annotation(params[:annotations])
+    else
+      # TODO
+    end    
+  end
+
+  def make_annotation(params)
+    annotationfile = Annotationfile.new()
+    annotationfile.filename = 'pastie.txt'
+    annotationfile.content_type = 'text/plain'
+    annotationfile.set_temp_data(params)
+    annotationfile
+  end
+
+  def config_handler
+    if params[:configfile] && !params[:configfile][:uploaded_data].blank? then
+      c = Configfile.new(params[:configfile])
+    elsif !params[:config][:template].blank? then
+      c = make_config(params[:config][:template])
+    else
+      # TODO error messages
+    end
+    c
+  end
+
+  def make_config(params)
+    configfile = Configfile.new()
+    configfile.filename = 'pastie.xml'
+    configfile.content_type = 'text/xml'
+    xml = @configs[ params ].xml
+    configfile.set_temp_data(xml)
+    configfile
+  end
+
+  def edges_handler
+    if params[:edgefile] && !params[:edgefile][:uploaded_data].blank? then
+      e = Edgefile.new(params[:edgefile])
+    elsif params[:edges] then
+      e = make_edgefile(params[:edges])
+    else
+      # TODO error messages
+    end
+    e
+  end
+  
+  def make_edgefile(params)
+    edgefile = Edgefile.new()
+    edgefile.filename = 'pastie.txt'
+    edgefile.content_type = 'text/plain'
+    edgefile.set_temp_data(params)
+    edgefile
+  end
   
   def get_config_templates
     templates = Hash.new
@@ -165,4 +199,5 @@ class NetworksController < ApplicationController
     flash[:notice] = msg if msg
     redirect_to :action => :index
   end
+
 end

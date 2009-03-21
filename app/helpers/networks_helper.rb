@@ -74,14 +74,27 @@ module NetworksHelper
   def config_form_builder(xml)
     form = String.new
     xml.root.each_element do |e|
-      form << '<fieldset class="child"><legend class="child">' << e.name << '</legend>'
-      e.each_element do |n|
-        form << '<p><b>' + n.name + '</b> '
-        n.each_element do |p|
-          form << p.name + ' '
+      form  << e.name
+      if e.name == "flags" then 
+        form << '<dl><dt>' << label(xml.root.name, 'flags') << '</dt><dd>'
+        e.each_element do |n|
+          form << check_box(xml.root.name, n.name) << label(xml.root.name, n.name, nil, {:class => 'opt'}) << " "
+        end
+        form << '</dd></dl>'
+      else
+        e.each_element do |n|
+          form  << "<p>" << n.name << "</p>"
+          n.each_element do |p|
+            mypar = n.name + '_' + p.name
+            label = label(xml.root.name, mypar )
+            element = text_field(xml.root.name, mypar, :size => 5)
+            form << '<dl>'
+            form << '<dt>' << label <<  '</dt>'
+            form << '<dd>' << element << '</dd>'
+            form << '</dl>'
+          end
         end
       end
-      form << '</fieldset>'
     end
     form
   end

@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for(:javascript_tags) do %>
-  <%= javascript_include_tag 'niceforms' %>
+
 <% end %>
 
 
@@ -54,18 +54,9 @@
         <dt><%= label 'config', 'template', 'Template' -%></dt>
         <dd><%= select 'config' , 'template', @templates , {:include_blank => true} -%></dd>
       </dl>
+      
       <%= config_form_builder(@configs[@templates[0]].xml) %>
-      <fieldset class="child"><legend class="child">params</legend>
-        <p>Node</p>
-        <dl>
-          <dt><%= label 'config','node', 'size' -%></dt>
-          <dd><%= text_field 'config','node', :size => 2 %></dd>
-        </dl>
-        <dl>
-          <dt><%= label 'config','spacer', 'strength' -%></dt>
-          <dd><%= text_field 'config','spacer', :size => 2 %></dd>
-        </dl>
-      </fieldset>
+      
     </fieldset>
     
     <fieldset><legend>annotation</legend>

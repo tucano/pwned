@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class FileserviceTest < Test::Unit::TestCase
+ 
   def setup
     @network = Network.new()
     @edgefile = Edgefile.new()
@@ -54,5 +55,19 @@ class FileserviceTest < Test::Unit::TestCase
     assert_equal @service.configfile.filename, 'pippo.xml'
     assert_equal @service.annotationfile.filename, 'pippo.txt'
   end
-
+  
+  def should_not_create_entry_on_invalid_obects
+    @network.name = 'pippo'
+    @network.description = 'blablabla'
+    @edgefile.filename = 'pippo.txt'
+    @edgefile.size = 500
+    @edgefile.content_type = 'text/plain'
+    @configfile.filename = 'pippo.xml'
+    @configfile.content_type = 'text/xml'
+    bad = REXML::Document.new(File.read('test/storage/configfiles/barabasi.xml'))
+    bad.root.elements[1].remove
+    @service = Fileservice.new(@network,@edgefile,@configfile,@annotationfile)
+    assert !@service.valid?
+    assert !@service.save
+  end
 end

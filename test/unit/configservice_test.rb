@@ -16,11 +16,17 @@ class ConfigserviceTest < Test::Unit::TestCase
     assert config.load
   end
   
-  def test_not_valid
+  def test_not_valid_with_missing_nodes
     bad = REXML::Document.new(File.read('test/storage/configfiles/barabasi.xml'))
     bad.root.elements[1].remove
     config = Configservice.new(bad)
     assert !config.valid?
   end
-    
+  
+  def test_not_valid_object
+    bad = 'string'
+    config = Configservice.new(bad)
+    assert !config.valid?
+  end
+  
 end

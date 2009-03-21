@@ -1,46 +1,84 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'niceforms-default' %>
+<% end %>
+
+<% content_for(:javascript_tags) do %>
+  <%= javascript_include_tag 'niceforms' %>
+<% end %>
+
 <div class="corner-content-1col-top"></div>
 <div class="content-1col-nobox">
 	<h1 class="network"><%= form_title %></h1>
 	
 	<%= hidden_div_if(@network.errors.empty?, :id => 'errors') %>
-	  <h6>Box subhead messages </h6>
-		<h5>ERRORS</h5>
-	  <%= error_messages_for :network, :header_tag => 'h3' %>
-		<%= error_messages_for :edgefile, :header_tag => 'h4' %>
-		<%= error_messages_for :configfile, :header_tag => 'h4' %>
-		<%= error_messages_for :annotationfile, :header_tag => 'h4' %>
+	  <h6><%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %></h6>
 	<%= hidden_div_close %>
 
 </div>
 <div class="content-1col-nobox">
 	<h2>Network Form icon</h2>
-  <div class="contactform"><!-- change to network form -->
-    <% form_for(@network, :html => { :multipart => true }) do |f| %>
-      <fieldset><legend>network</legend>
-  	    <p><%= f.label :name, 'Network Name' %> <%= f.text_field :name, :class => "field" %></p>
-        <p><%= f.label :description, 'Description' %> <%= f.text_area :description, :size => "100x10" ,:class => "field" %></p>
+  <div>
+    <% form_for(@network, :html => { :multipart => true , :class => 'niceform'  }) do |f| %>
+    
+      <fieldset>
+        <legend>Network</legend>
+    	  <%= error_messages_for :network %>
+  	    <dl>
+  	      <dt><%= f.label :name, 'Network Name' %></dt>
+  	      <dd><%= f.text_field :name, :class => "field" %></dd>
+  	    </dl>
+  	    <dl>
+          <dt><%= f.label :description, 'Description' %></dt>
+          <dd><%= f.text_area :description, :size => "60x10" ,:class => "field" %></dd>
+        </dl>
+
 	    </fieldset>
-	    <fieldset><legend>edges</legend>
+	    
+	    <fieldset><legend>Edges</legend>
+		    <%= error_messages_for :edgefile %>
 	      <% fields_for :edgefile do |edgefile| %>
-        <p><%= edgefile.label :uploaded_data , 'Edgefile'%> <%= edgefile.file_field :uploaded_data %></p>
+        <dl>
+          <dt><%= edgefile.label :uploaded_data , 'Edgefile'%></dt>
+          <dd><%= edgefile.file_field :uploaded_data %></dd>
+        </dl>
         <% end %>
-	      <p><%= label_tag 'edges', 'Edges' %> <%= text_area_tag 'edges' , nil, :size => "50x10", :class => "field" %></p>
+        <dl>
+          <dt><%= label_tag 'edges', 'Edges' %></dt>
+          <dd><%= text_area_tag 'edges' , nil, :size => "50x10", :class => "field" %></dd>
+        </dl>
 	    </fieldset>
-	    <fieldset><legend>config</legend>
+	    
+	    <fieldset><legend>Config</legend>
+		    <%= error_messages_for :configfile %>
 	      <% fields_for :configfile do |configfile| %>
-        <p><%= configfile.label :uploaded_data , 'Configfile'%> <%= configfile.file_field :uploaded_data %></p>
-      <% end %>
-	    <p><%= label_tag 'config', 'Configuration' -%>
-         <% options = options_for_select @templates %>
-         <%= select_tag 'config' , options -%></p>
-	    </fieldset>
-	    <fieldset><legend>annotation</legend>
-        <% fields_for :annotationfile do |annotationfile| %>
-        <p><%= annotationfile.label :uploaded_data , 'Annotationfile'%> <%= annotationfile.file_field :uploaded_data %></p>
+        <dl>
+          <dt><%= configfile.label :uploaded_data , 'Configfile'%></dt>
+          <dd><%= configfile.file_field :uploaded_data %></dd>
+        </dl>
         <% end %>
-        <p><%= label_tag 'annotations', 'Annotation' %> <%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "field"  %></p>
+	      <dl>
+	        <dt><%= label_tag 'config', 'Configuration' -%></dt>
+          <dd><% options = options_for_select @templates %><%= select_tag 'config' , options -%></dd>
+        </dl>
 	    </fieldset>
-      <p><%= f.submit "Create" %></p>
+	    
+	    <fieldset><legend>annotation</legend>
+    		<%= error_messages_for :annotationfile, :header_tag => 'h4' %>
+        <% fields_for :annotationfile do |annotationfile| %>
+        <dl>
+          <dt><%= annotationfile.label :uploaded_data , 'Annotationfile'%></dt>
+          <dd><%= annotationfile.file_field :uploaded_data %></dd>
+        </dl>
+        <% end %>
+        <dl>
+          <dt><%= label_tag 'annotations', 'Annotation' %></dt>
+          <dd><%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "field"  %></dd>
+        </dl>
+	    </fieldset>
+	    
+	    <fieldset class="action">
+        <%= f.submit "Create" %>
+      </fieldset>
     <% end %>
   </div>
 </div>

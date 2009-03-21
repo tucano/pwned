@@ -65,6 +65,10 @@ module NetworksHelper
     end
   end
 
- 
+  def general_error_msgs(*params)
+    objects = params.collect {|object_name| instance_variable_get("@#{object_name}") }.compact
+    count  = objects.inject(0) {|sum, object| sum + object.errors.count }
+    "can't be saved for #{count} errors"
+  end
   
 end

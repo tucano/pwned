@@ -39,7 +39,18 @@ class NetworkTest < ActiveSupport::TestCase
       assert network.valid?, network.errors.full_messages
       assert network.save
     end
-
+  end
+  
+  test "search basic name" do
+    network = Network.new(
+      :name => 'Findme',
+      :description => 'blablabla'
+    )
+    assert network.valid?, network.errors.full_messages
+    assert network.save
+    params = { 'name' => 'Findme' }
+    search = Network.search(params)
+    assert_equal 1, search.size
   end
 
 end

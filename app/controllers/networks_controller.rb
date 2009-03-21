@@ -62,6 +62,7 @@ class NetworksController < ApplicationController
   # POST /networks
   # POST /networks.xml
   def create
+    
     @network = Network.new(params[:network])
     # TODO FIXME
     @configs = get_config_templates

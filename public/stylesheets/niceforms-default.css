@@ -1,5 +1,18 @@
 /*Defaults Styling*/
-.niceform
+.niceform 
+{
+	display: inline;
+	/*Fix IE floating margin bug*/
+	float: left;
+	width: 958px;
+	background-color: rgb(200,200,200);
+	font-size: 1.0em;
+	/*Non-IE6*/
+	/*IE6*/
+	overflow: hidden;
+}
+
+.niceform form
 {
 	font: 12px/17px Arial, Helvetica, sans-serif;
 	color: #333;

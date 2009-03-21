@@ -6,79 +6,72 @@
   <%= javascript_include_tag 'niceforms' %>
 <% end %>
 
-<div class="corner-content-1col-top"></div>
-<div class="content-1col-nobox">
-	<h1 class="network"><%= form_title %></h1>
-	
-	<%= hidden_div_if(@network.errors.empty?, :id => 'errors') %>
-	  <h6><%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %></h6>
-	<%= hidden_div_close %>
 
-</div>
-<div class="content-1col-nobox">
-	<h2>Network Form icon</h2>
-  <div>
-    <% form_for(@network, :html => { :multipart => true , :class => 'niceform'  }) do |f| %>
+<%= hidden_div_if(@network.errors.empty?, :id => 'errors') %>
+  <h6><%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %></h6>
+<%= hidden_div_close %>
+
+<div>
+  <% form_for(@network, :html => { :multipart => true , :class => 'niceform'  }) do |f| %>
+  
+    <fieldset>
+      <legend>Network</legend>
+  	  <%= error_messages_for :network %>
+	    <dl>
+	      <dt><%= f.label :name, 'Network Name' %></dt>
+	      <dd><%= f.text_field :name, :class => "field" %></dd>
+	    </dl>
+	    <dl>
+        <dt><%= f.label :description, 'Description' %></dt>
+        <dd><%= f.text_area :description, :size => "60x10" %></dd>
+      </dl>
+
+    </fieldset>
     
-      <fieldset>
-        <legend>Network</legend>
-    	  <%= error_messages_for :network %>
-  	    <dl>
-  	      <dt><%= f.label :name, 'Network Name' %></dt>
-  	      <dd><%= f.text_field :name, :class => "field" %></dd>
-  	    </dl>
-  	    <dl>
-          <dt><%= f.label :description, 'Description' %></dt>
-          <dd><%= f.text_area :description, :size => "60x10" ,:class => "field" %></dd>
-        </dl>
-
-	    </fieldset>
-	    
-	    <fieldset><legend>Edges</legend>
-		    <%= error_messages_for :edgefile %>
-	      <% fields_for :edgefile do |edgefile| %>
-        <dl>
-          <dt><%= edgefile.label :uploaded_data , 'Edgefile'%></dt>
-          <dd><%= edgefile.file_field :uploaded_data %></dd>
-        </dl>
-        <% end %>
-        <dl>
-          <dt><%= label_tag 'edges', 'Edges' %></dt>
-          <dd><%= text_area_tag 'edges' , nil, :size => "50x10", :class => "field" %></dd>
-        </dl>
-	    </fieldset>
-	    
-	    <fieldset><legend>Config</legend>
-		    <%= error_messages_for :configfile %>
-	      <% fields_for :configfile do |configfile| %>
-        <dl>
-          <dt><%= configfile.label :uploaded_data , 'Configfile'%></dt>
-          <dd><%= configfile.file_field :uploaded_data %></dd>
-        </dl>
-        <% end %>
-	      <dl>
-	        <dt><%= label_tag 'config', 'Configuration' -%></dt>
-          <dd><% options = options_for_select @templates %><%= select_tag 'config' , options -%></dd>
-        </dl>
-	    </fieldset>
-	    
-	    <fieldset><legend>annotation</legend>
-    		<%= error_messages_for :annotationfile, :header_tag => 'h4' %>
-        <% fields_for :annotationfile do |annotationfile| %>
-        <dl>
-          <dt><%= annotationfile.label :uploaded_data , 'Annotationfile'%></dt>
-          <dd><%= annotationfile.file_field :uploaded_data %></dd>
-        </dl>
-        <% end %>
-        <dl>
-          <dt><%= label_tag 'annotations', 'Annotation' %></dt>
-          <dd><%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "field"  %></dd>
-        </dl>
-	    </fieldset>
-	    
-	    <fieldset class="action">
-        <%= f.submit "Create" %>
-      </fieldset>
-    <% end %>
+    <fieldset><legend>Edges</legend>
+	    <%= error_messages_for :edgefile %>
+      <% fields_for :edgefile do |edgefile| %>
+      <dl>
+        <dt><%= edgefile.label :uploaded_data , 'Edgefile'%></dt>
+        <dd><%= edgefile.file_field :uploaded_data %></dd>
+      </dl>
+      <% end %>
+      <dl>
+        <dt><%= label_tag 'edges', 'Edges' %></dt>
+        <dd><%= text_area_tag 'edges' , nil, :size => "50x10" %></dd>
+      </dl>
+    </fieldset>
+    
+    <fieldset><legend>Config</legend>
+	    <%= error_messages_for :configfile %>
+      <% fields_for :configfile do |configfile| %>
+      <dl>
+        <dt><%= configfile.label :uploaded_data , 'Configfile'%></dt>
+        <dd><%= configfile.file_field :uploaded_data %></dd>
+      </dl>
+      <% end %>
+      <dl>
+        <dt><%= label_tag 'config', 'Configuration' -%></dt>
+        <dd><% options = options_for_select @templates %><%= select_tag 'config' , options -%></dd>
+      </dl>
+    </fieldset>
+    
+    <fieldset><legend>annotation</legend>
+  		<%= error_messages_for :annotationfile, :header_tag => 'h4' %>
+      <% fields_for :annotationfile do |annotationfile| %>
+      <dl>
+        <dt><%= annotationfile.label :uploaded_data , 'Annotationfile'%></dt>
+        <dd><%= annotationfile.file_field :uploaded_data %></dd>
+      </dl>
+      <% end %>
+      <dl>
+        <dt><%= label_tag 'annotations', 'Annotation' %></dt>
+        <dd><%= text_area_tag 'annotations' , nil, :size => "50x10", :class => "field"  %></dd>
+      </dl>
+    </fieldset>
+    
+    <fieldset class="action">
+      <%= f.submit "Create" %>
+    </fieldset>
+  <% end %>
   </div>
-</div>

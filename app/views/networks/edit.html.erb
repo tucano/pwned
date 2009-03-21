@@ -18,13 +18,13 @@
 <% end %>
 
 <!-- PAGE TITLE -->
-<h1 class="pagetitle"><%= page_title %></h1>
+<h1 class="pagetitle"><%= form_title %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
 </div>
 
 <!-- C.1 CONTENT no sidebar -->
-<div class="content">
+<div class="niceform">
   	<%= render :partial => "form" %>
 </div>

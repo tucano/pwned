@@ -10,6 +10,12 @@
 	background-position: 914px 5px;
 }
 
+.content h1.network
+{
+	background: url(../images/icon_celltitle_level1.gif) no-repeat;
+	background-position: 914px 5px;
+}
+
 .content .networktitle { border: 0px #000 solid; }
 
 .content h1.apptitle

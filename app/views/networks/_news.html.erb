@@ -4,9 +4,15 @@
   <h1 class="webtemplate">News</h1>                  
   <h2><%= link_to "RSS last 5 feeds", formatted_networks_url(:rss) %></h2> 
   <ul>
-  <% @networks.last(5).each do |n| %>
+  <% Network.find(:all).last(5).each do |n| %>
     <li><%= link_to n.name, formatted_network_url(n.id, :rss) %></li>
   <% end %>
   </ul>
+  <h2>Tag cloud</h2>
+  <p>
+  <% tag_cloud Network.tag_counts, %w{tag1 tag2 tag3 tag4 tag5 tag6 tag7 tag8} do |tag, css_class| %> 
+	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
+	<% end %>
+	</p>
 </div>  
 <div class="corner-subcontent-bottom"></div>

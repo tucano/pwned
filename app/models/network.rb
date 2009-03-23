@@ -1,5 +1,7 @@
 class Network < ActiveRecord::Base
   
+  acts_as_taggable
+  
   has_one :edgefile, :dependent => :destroy
   has_one :annotationfile, :dependent => :destroy
   has_one :configfile, :dependent => :destroy

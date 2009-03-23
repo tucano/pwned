@@ -17,6 +17,18 @@ class NetworksController < ApplicationController
     end
   end
 
+  # GET /networks/tag/name
+  # GET /networks/tag/name.xml
+  def tag
+    @networks = Network.find_tagged_with(params[:id])
+    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
+    respond_to do |format|
+      format.html { render :action => :index , :collection => @pages }
+      format.rss { render :action => :index, :layout => false, :collection => @networks }
+      format.xml  { render :xml => @networks }
+    end
+  end
+
   # GET /networks/1
   # GET /networks/1.xml
   def show

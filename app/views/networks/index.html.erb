@@ -31,6 +31,8 @@
 		<% end %>
 		<% for network in @pages %>
 		<h2><%= network.name %></h2>
+		<h6><%= truncate(network.description, :length => 100, :omission => ' ... ') %></h6>
+		<p><b>tags:</b> <%= network.tag_list %><p/>
 		<p class="details">
 			<%= link_to_remote 'Show', 
 				:url => { :action => 'get_network' , :id => network.id 	}, 
@@ -45,6 +47,10 @@
 		<% end %>
 	</div>
 	<div class="corner-content-1col-bottom"></div>
+	
+	<div>
+	
+	</div>
 	
 	<div id="networkbox">
 	 <% if @networks.size == 1 %>

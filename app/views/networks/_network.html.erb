@@ -4,8 +4,8 @@
 	<div class="networktitle" id="name">		
 		<h1 class="network"><%= link_to network.name, network %></h1>
 	</div>
-	<p><%= truncate(network.description, :length => 250, :omission => ' ... ') %></p>
-	
+  <h5>Tags</h5>
+	<p><%= network.tag_list %></p>
 	<div id="description">
 	<blockquote>
 		<h5>Description size: <%= network.description.size %></h5>

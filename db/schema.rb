@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090323160446) do
+ActiveRecord::Schema.define(:version => 20090323174040) do
 
   create_table "annotationfiles", :force => true do |t|
     t.integer  "network_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20090323160446) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cached_tag_list"
   end
 
   create_table "sessions", :force => true do |t|

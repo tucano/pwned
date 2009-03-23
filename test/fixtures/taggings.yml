@@ -1,0 +1,24 @@
+one:
+  tag: science
+  taggable: barabasi
+  taggable_type: Network
+  
+two:
+  tag: web
+  taggable: tucano
+  taggable_type: Network
+  
+three:
+  tag: test
+  taggable: one
+  taggable_type: Network
+
+four:
+  tag: test
+  taggable: two
+  taggable_type: Network
+  
+five:
+  tag: web
+  taggable: barabasi
+  taggable_type: Network  

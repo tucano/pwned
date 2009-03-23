@@ -28,9 +28,9 @@ class Fileservice
     
     # I need assignments to have errors back:
     # errors are checked on valid? + short-circuit operators in ruby
-    n = !@network.nil? && @network.valid?
-    c = !@configfile.nil? && @configfile.valid?
-    e = !@edgefile.nil? && @edgefile.valid?
+    n = @network.valid?
+    c = @configfile.valid?
+    e = @edgefile.valid?
     a = true
     if has_annotation? then 
       a = @annotationfile.valid? 

@@ -1,5 +1,4 @@
 /*Defaults Styling*/
-
 .niceform form
 {
 	font: 12px/17px Arial, Helvetica, sans-serif;
@@ -7,6 +6,14 @@
 	background: #FFF;
 	padding: 40px 20px 20px 20px;
 }
+
+.niceform td
+{
+	border: 0px #666661 solid;
+	padding-right: 5px;
+}
+
+
 
 .niceform fieldset
 {
@@ -16,6 +23,15 @@
 	width: 600px;
 	border: 1px #666661 solid;
 }
+
+.niceform fieldset.child
+{
+	background: #f2f2e6;
+	padding: 12px 2px 2px 12px;
+	border: 1px #666661 solid;
+	margin: 5px 15px 10px 15px;
+}
+
 
 .niceform input, textarea, select
 {
@@ -40,6 +56,18 @@
 	font-weight: bold;
 	border: 1px #666661 solid;
 }
+
+.niceform legend.child
+{
+	background: none;
+	color: #666661;
+	font: 14px/16px Calibri, Arial, Helvetica, sans-serif;
+	padding: 4px;
+	margin: 0px 0px 0px 10px;
+	font-weight: bold;
+	border: 0px #666661 solid;
+}
+
 
 .niceform label
 {
@@ -75,47 +103,49 @@
 	margin: 0px;
 	clear: none;
 }
-.niceform .NFButtonRight
-{
-	float: none;
-}
+
+.niceform .NFButtonRight { float: none; }
 
 /* FORMS ERRORS */
-
-.fieldWithErrors {
-  padding: 1px;
-  background-color: red;
-  display: table;
+.fieldWithErrors
+{
+	padding: 1px;
+	background-color: red;
+	display: table;
 }
 
-#errorExplanation {
-  width: 400px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 12px;
-  margin: auto;
-  background-color: #f0f0f0;
+#errorExplanation
+{
+	width: 400px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 12px;
+	margin: auto;
+	background-color: #f0f0f0;
 }
 
-#errorExplanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00;
-  color: #fff;
+#errorExplanation h2
+{
+	text-align: left;
+	font-weight: bold;
+	padding: 5px 5px 5px 15px;
+	font-size: 12px;
+	margin: -7px;
+	background-color: #c00;
+	color: #fff;
 }
 
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
+#errorExplanation p
+{
+	color: #333;
+	margin-bottom: 0;
+	padding: 5px;
 }
 
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
+#errorExplanation ul li
+{
+	font-size: 12px;
+	list-style: square;
 }
 
 /*Safari*/

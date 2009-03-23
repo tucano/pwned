@@ -2,11 +2,6 @@
   <%= stylesheet_link_tag 'niceforms-default' %>
 <% end %>
 
-<% content_for(:javascript_tags) do %>
-
-<% end %>
-
-
 <%= hidden_div_if(@network.errors.empty?, :id => 'errors') %>
   <h6><%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %></h6>
 <%= hidden_div_close %>
@@ -50,13 +45,13 @@
         <dd><%= configfile.file_field :uploaded_data %></dd>
       </dl>
       <% end %>
+      <% fields_for :config do |config| %>
       <dl>
-        <dt><%= label 'config', 'template', 'Template' -%></dt>
-        <dd><%= select 'config' , 'template', @templates , {:include_blank => true} -%></dd>
+        <dt><%= config.label :template, 'Template' -%></dt>
+        <dd><%= config.select :template, @templates, {:include_blank => true }%></dd>
       </dl>
-      
-      <%= config_form_builder(@configs[@templates[0]].xml) %>
-      
+      <% end %>
+      <%= config_form_builder(@configs[@templates[0]].xml) %>      
     </fieldset>
     
     <fieldset><legend>annotation</legend>

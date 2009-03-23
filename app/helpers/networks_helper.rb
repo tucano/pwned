@@ -73,30 +73,61 @@ module NetworksHelper
   
   def config_form_builder(xml)
     form = String.new
-    xml.root.each_element do |e|
-      form  << e.name
-      if e.name == "flags" then 
-        form << '<dl><dt>' << label(xml.root.name, 'flags') << '</dt><dd>'
-        e.each_element do |n|
-          form << check_box(xml.root.name, n.name) << label(xml.root.name, n.name, nil, {:class => 'opt'}) << " "
+    xmlparams = xml.root.elements[1]
+    xmlcolors = xml.root.elements[2]
+    xmlflags  = xml.root.elements[3]
+    
+    form << '<fieldset class="child"><legend class="child">params</legend>'
+    fields_for(xmlparams.name) do |par|
+      xmlparams.each_element do |p|
+        form << '<dl>'      
+        form << '<dt>' << label(p.name, p.name) << '</dt>'
+        form << '<dd><table><tr>'
+        p.each_element do |n|
+          mykey = p.name + '_' + n.name
+          form << '<td>'
+          form << par.label(mykey, n.name) << '</td><td>'
+          form << par.text_field(mykey, :size => 5, :value => n.text)
+          form << '</td>'
         end
-        form << '</dd></dl>'
-      else
-        e.each_element do |n|
-          form  << "<p>" << n.name << "</p>"
-          n.each_element do |p|
-            mypar = n.name + '_' + p.name
-            label = label(xml.root.name, mypar )
-            element = text_field(xml.root.name, mypar, :size => 5)
-            form << '<dl>'
-            form << '<dt>' << label <<  '</dt>'
-            form << '<dd>' << element << '</dd>'
-            form << '</dl>'
-          end
+        form << '</tr></table></dd>'
+        form << '</dl>'
+      end
+    form << '</fieldset>'
+    end
+    
+    form << '<fieldset class="child"><legend class="child">colors</legend>'
+    fields_for(xmlcolors.name) do |par|
+      xmlcolors.each_element do |p|
+        form << '<dl>'
+        form << '<dt>' << label(p.name, p.name) << '</dt>'
+        form << '<dd><table class="niceform"><tr>'
+        p.each_element do |n|
+          form << '<td>'
+          mykey = p.name + '_' + n.name
+          form << par.label(mykey, n.name) << '</td><td>'
+          form << par.text_field(mykey, :size => 5, :value => n.text)
+          form << '</td>'
         end
+        form << '</tr></table></dd>'
+        form << '</dl>'
+        form << '</dl>'
+      end
+    form << '</fieldset>'
+    end
+    
+    form << '<fieldset class="child"><legend class="child">flags</legend>'
+    fields_for(xmlflags.name) do |par|
+      xmlflags.each_element do |p|
+        checked = false
+        checked = true if p.text.to_i > 0
+        form << '<dl>'
+        form << '<dt>' << par.label(p.name) << '</dt>'
+        form << '<dd>' << par.check_box(p.name, :checked => checked) << '</dd>' 
+        form << '</dl>'
       end
     end
-    form
-  end
-  
+    form << '</fieldset>'
+    return form
+  end  
 end

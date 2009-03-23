@@ -3,7 +3,7 @@ class Configservice
   attr_reader :xml, :params, :colors, :flags
   attr_reader :node_opts, :edge_opts, :global_opts
 
-  def initialize(xml)
+  def initialize(xml = nil)
     @xml = xml
   end
   

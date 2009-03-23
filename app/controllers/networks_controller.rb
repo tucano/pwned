@@ -147,18 +147,19 @@ class NetworksController < ApplicationController
     if params[:configfile] && !params[:configfile][:uploaded_data].blank? then
       c = Configfile.new(params[:configfile])
     elsif !params[:config][:template].blank? then
-      c = make_config(params[:config][:template])
+      c = set_template_config(params[:config][:template])
     else
-      # TODO error messages
+      # Use form fields... TODO error messages on empty, etc...
+      c = set_params_config(params[:params], params[:colors], params[:flags])
     end
     c
   end
 
-  def make_config(params)
+  def set_template_config(template)
     configfile = Configfile.new()
-    configfile.filename = 'pastie.xml'
+    configfile.filename = "#{template}.xml"
     configfile.content_type = 'text/xml'
-    xml = @configs[ params ].xml
+    xml = @configs[ template ].xml
     configfile.set_temp_data(xml)
     configfile
   end
@@ -166,10 +167,11 @@ class NetworksController < ApplicationController
   def edges_handler
     if params[:edgefile] && !params[:edgefile][:uploaded_data].blank? then
       e = Edgefile.new(params[:edgefile])
-    elsif params[:edges] then
+    elsif !params[:edges].blank? then
       e = make_edgefile(params[:edges])
     else
       # TODO error messages
+      e = Edgefile.new()
     end
     e
   end
@@ -195,6 +197,43 @@ class NetworksController < ApplicationController
     return templates
   end
 
+  def set_params_config(par, col, flags)
+    configfile = Configfile.new()
+    configfile.filename = "form.xml"
+    configfile.content_type = 'text/xml'
+    xml = REXML::Document.new('<config></config>')
+    xmlpar = xml.root.add_element "params"
+    par.each do |k,v|
+      key = k.split("_")
+      if xmlpar.elements[key[0]].nil? then
+        xmlpar.add_element key[0]
+      end
+      e = xmlpar.elements[key[0]].add_element key[1]
+      e.text = v
+    end
+    xmlcol = xml.root.add_element "colors"
+    col.each do |k,v|
+      key = k.split("_")
+      if xmlcol.elements[key[0]].nil? then
+        xmlcol.add_element key[0]
+      end
+      e = xmlcol.elements[key[0]].add_element key[1]
+      e.text = v
+    end
+    xmlflag = xml.root.add_element "flags"
+    flags.each do |k,v|
+      e =xmlflag.add_element k
+      e.text = v
+    end
+    puts xml
+    configfile.filename = "form.xml"
+    configfile.content_type = 'text/xml'
+    # puts in service
+    configservice = Configservice.new(xml)
+    configfile.set_temp_data(configservice.xml) if configservice.valid?
+    return configfile
+  end
+  
   def redirect_to_index(msg = nil)
     flash[:notice] = msg if msg
     redirect_to :action => :index

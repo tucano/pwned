@@ -48,14 +48,18 @@
       <% fields_for :config do |config| %>
       <dl>
         <dt><%= config.label :template, 'Template' -%></dt>
-        <dd><%= config.select :template, @templates, {:include_blank => true }%></dd>
+        <dd><%= config.select :template, @service.template_keys, {:include_blank => true }%></dd>
       </dl>
       <% end %>
-      <%= config_form_builder(@configs[@templates[0]].xml) %>      
+      <% if @thisconfig %>
+        <%= config_form_builder(@thisconfig) %>
+      <% else %>
+        <%= config_form_builder(@service.config_templates[@service.template_keys[0]]) %>
+      <% end %>
     </fieldset>
     
     <fieldset><legend>annotation</legend>
-  		<%= error_messages_for :annotationfile, :header_tag => 'h4' %>
+  		<%= error_messages_for :annotationfile %>
       <% fields_for :annotationfile do |annotationfile| %>
       <dl>
         <dt><%= annotationfile.label :uploaded_data , 'Annotationfile'%></dt>

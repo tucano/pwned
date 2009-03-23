@@ -77,7 +77,7 @@ class NetworksControllerTest < ActionController::TestCase
     assert_difference('Network.count') do
       post :create, :network => network_hash,
         :edges => edges,
-        :config => 'mrblue',
+        :config => { :template => 'mrblue'},
         :annotations => annotations
     end
     newbie = Network.find(:all, :order => "id DESC", :limit =>  1)[0] 
@@ -89,7 +89,7 @@ class NetworksControllerTest < ActionController::TestCase
     assert_not_nil newbie.annotationfile
     assert_equal("pastie.txt", newbie.edgefile.filename)
     assert_equal("text/plain", newbie.edgefile.content_type)
-    assert_equal("pastie.xml", newbie.configfile.filename)
+    assert_equal("mrblue.xml", newbie.configfile.filename)
     assert_equal("text/xml", newbie.configfile.content_type)
     assert_equal("pastie.txt", newbie.annotationfile.filename)
     assert_equal("text/plain", newbie.annotationfile.content_type)
@@ -103,7 +103,7 @@ class NetworksControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    network_id = networks(:disney).id
+    network_id = networks(:barabasi).id
     get :edit, :id => network_id
     assert_response :success
   end
@@ -115,7 +115,7 @@ class NetworksControllerTest < ActionController::TestCase
       :name => 'pippo',
       :description => 'blablabla'
     }
-    put :update, :id => network_id, :network => network_hash
+    put :update, :id => network_id, :network => network_hash, :config => { :template => 'classic'}
     
     updated = Network.find(network_id) 
     assert_equal 'pippo', updated.name

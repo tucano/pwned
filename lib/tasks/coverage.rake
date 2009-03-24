@@ -23,7 +23,7 @@ namespace :test do
         t.libs << "test"
         t.test_files = FileList["test/#{target}/**/*_test.rb"]
         t.verbose = true
-        t.rcov_opts << '--rails --aggregate data/coverage.data'
+        t.rcov_opts << '--rails --aggregate data/coverage.data --exclude /Library/,/System/'
         if target == tests_to_run[-1]
           t.output_dir = "data/coverage"
         else

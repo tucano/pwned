@@ -21,4 +21,20 @@ four:
 five:
   tag: web
   taggable: barabasi
-  taggable_type: Network  
+  taggable_type: Network
+  
+six:
+  tag: test
+  taggable: disney
+  taggable_type: Network
+  
+seven:
+  tag: test
+  taggable: google
+  taggable_type: Network
+
+eight:  
+  tag: web
+  taggable: facebook
+  taggable_type: Network
+  

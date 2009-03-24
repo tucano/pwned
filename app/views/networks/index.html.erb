@@ -31,7 +31,7 @@
 		<% end %>
 		<% for network in @pages %>
 		<h2><%= network.name %></h2>
-		<h6><%= truncate(network.description, :length => 100, :omission => ' ... ') %></h6>
+		<h6><%= auto_link(truncate(network.description, :length => 100, :omission => ' ... ')) %></h6>
 		<p><b>tags:</b> <%= network.tag_list %><p/>
 		<p class="details">
 			<%= link_to_remote 'Show', 

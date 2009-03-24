@@ -4,55 +4,31 @@ module NetworksHelper
   def get_file_path_for_applet(file)
     '../../' + file
   end
-  
-  def page_title(sep=(': '))
-    @page_title ||= [
-      controller.controller_name.humanize,
-      controller.action_name.humanize
-    ] * sep
-  end
-  
-  def content_type(type="text/html;charset=utf-8")
-    tag 'meta', :'http-equiv' => 'Content-Type', :content => type
-  end
-
-  def info
-    info = [
-    (tag 'meta', :name => 'copyright', :content => COPYRIGHT),
-    (tag 'meta', :name => 'author', :content => AUTHOR),
-    (tag 'meta', :name => 'description', :content => DESC)]
-  end
-  
-  def icon
-    tag 'link', :rel => "icon", :type => "image/x-icon" ,:href => ICON
-  end
-  
+    
   def form_title
     @form_title ||= set_form_title
   end
   
-  def hidden_div_if(condition, attributes = {})
-    if condition then
-      attributes["style"] = "display: none"
+  def general_error_msgs(*params)
+    objects = params.collect {|object_name| instance_variable_get("@#{object_name}") }.compact
+    count  = objects.inject(0) {|sum, object| sum + object.errors.count }
+    errors = String.new
+    errors << "<h2>Network can't be saved for #{count} errors</h2>"
+    errors << '<p>There were problems with the following objects</p>'
+    errors << '<ul>'
+    objects.each do |obj|
+      unless obj.errors.empty?
+        errors << '<li>' << obj.class.name
+        errors << '<ul>'
+        obj.errors.full_messages.each do |msg|
+          errors << '<li class="child">' << msg << '</li>'
+        end
+        errors << '</li>'
+        errors << '</ul>'
+      end
     end
-    attrs = tag_options(attributes.stringify_keys)
-    "<div #{attrs}>"
-  end
-  
-  def hidden_div_close
-    "</div>"
-  end
-  
-  def rss_button
-    @rss_button ||= set_rss_button 
-  end
-  
-  private
-  
-  def set_rss_button
-    rss = url_for(formatted_networks_url(:rss))
-    image = image_tag("icon_rss.gif")
-    "<a href=#{rss} title=#{rss}>#{image}</a>"
+    errors << '</ul>'
+    errors
   end
   
   def set_form_title
@@ -65,11 +41,7 @@ module NetworksHelper
     end
   end
 
-  def general_error_msgs(*params)
-    objects = params.collect {|object_name| instance_variable_get("@#{object_name}") }.compact
-    count  = objects.inject(0) {|sum, object| sum + object.errors.count }
-    "can't be saved for #{count} errors"
-  end
+ 
   
   def config_form_builder(xml)
     form = String.new

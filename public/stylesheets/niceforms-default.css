@@ -107,13 +107,6 @@
 .niceform .NFButtonRight { float: none; }
 
 /* FORMS ERRORS */
-.fieldWithErrors
-{
-	padding: 1px;
-	background-color: red;
-	display: table;
-}
-
 #errorExplanation
 {
 	width: 400px;
@@ -139,14 +132,28 @@
 {
 	color: #333;
 	margin-bottom: 0;
-	padding: 5px;
+	padding: 15px;
 }
 
 #errorExplanation ul li
 {
 	font-size: 12px;
 	list-style: square;
+	margin-left: 20px;
+	font-weight: bold;
+	line-height: 2em;
 }
+
+#errorExplanation li.child
+{
+	font-size: 10px;
+	list-style: square;
+	margin-left: 20px;
+	font-weight: normal;
+	font-style: italic;
+	line-height: 1.5em;
+}
+
 
 /*Safari*/
 select, input, textarea, button

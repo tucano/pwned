@@ -1,6 +1,4 @@
 class CommentsController < ApplicationController
-
-  layout 'networks'
   
   before_filter :load_network
 

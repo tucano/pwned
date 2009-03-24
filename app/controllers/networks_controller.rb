@@ -1,7 +1,8 @@
 class NetworksController < ApplicationController
   
   auto_complete_for :network, :name
-  layout "networks", :except => [:get_network]
+  
+  layout 'application', :except => [:get_network]
   
   # GET /networks
   # GET /networks.xml

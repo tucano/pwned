@@ -2,16 +2,17 @@
   <%= stylesheet_link_tag 'niceforms-default' %>
 <% end %>
 
-<%= hidden_div_if(@network.errors.empty?, :id => 'errors') %>
-  <h6><%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %></h6>
-<%= hidden_div_close %>
-
-<div>
-  <% form_for(@network, :html => { :multipart => true , :class => 'niceform'  }) do |f| %>
+<div class="corner-content-1col-top"></div>
+<div class="content-1col-nobox">
   
+  <%= hidden_div_if(@network.errors.empty?, :id => 'errorExplanation') %>
+    <%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %>
+  <%= hidden_div_close %>
+
+  <div>
+  <% form_for(@network, :html => { :multipart => true , :class => 'niceform'  }) do |f| %>
     <fieldset>
       <legend>Network</legend>
-  	  <%= error_messages_for :network %>
 	    <dl>
 	      <dt><%= f.label :name, 'Network Name' %></dt>
 	      <dd><%= f.text_field :name %></dd>
@@ -24,11 +25,9 @@
           <dt><%= f.label :tag_list, 'Tags' %></dt>
           <dd><%= f.text_field :tag_list, :size => "60" %></dd>
         </dl>
-
     </fieldset>
     
     <fieldset><legend>Edges</legend>
-	    <%= error_messages_for :edgefile %>
       <% fields_for :edgefile do |edgefile| %>
       <dl>
         <dt><%= edgefile.label :uploaded_data , 'Edgefile'%></dt>
@@ -42,7 +41,6 @@
     </fieldset>
     
     <fieldset><legend>Config</legend>
-	    <%= error_messages_for :configfile %>
       <% fields_for :configfile do |configfile| %>
       <dl>
         <dt><%= configfile.label :uploaded_data , 'Configfile'%></dt>
@@ -63,7 +61,6 @@
     </fieldset>
     
     <fieldset><legend>annotation</legend>
-  		<%= error_messages_for :annotationfile %>
       <% fields_for :annotationfile do |annotationfile| %>
       <dl>
         <dt><%= annotationfile.label :uploaded_data , 'Annotationfile'%></dt>
@@ -81,3 +78,5 @@
     </fieldset>
   <% end %>
   </div>
+</div>
+<div class="corner-content-1col-bottom"></div>

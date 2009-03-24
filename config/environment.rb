@@ -75,7 +75,7 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
 
-# HACK FIXME remove filedWithErrors proc
+#TODO remove fieldWithErrors proc
 ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   "#{html_tag}"
 end

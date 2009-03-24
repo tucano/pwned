@@ -1,9 +1,12 @@
-- Config and edges/nodes editor
-- Users
-- In parallel with applet developing more modes to animate a network nodes and labels
-- Formats (pajek, dots, etc..)
-
-
 * New TODO
 
-- 
+- Admin layer
+- Better error messages
+- Better errors handling (AJAX update?)
+- Better config and edges/nodes editor
+- Users
+- In parallel with displayer developing more modes to animate a network nodes and labels
+- Formats (pajek, dots, etc..)
+
+* FIXME
+- Hack in config enviroment (fieldWithErrors proc)

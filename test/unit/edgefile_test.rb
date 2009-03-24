@@ -36,4 +36,24 @@ class EdgefileTest < ActiveSupport::TestCase
     assert !edgefile.valid?
     assert_equal "error on size #{edgefile.size}", edgefile.errors.on(:size)
   end
+  
+  test "save valid file" do
+    file = File.read('test/storage/edgefiles/barabasi.txt')
+    edgefile = Edgefile.new()
+    edgefile.filename = 'pippo.txt'
+    edgefile.content_type = 'text/plain'
+    edgefile.set_temp_data(file)
+    assert edgefile.valid?, edgefile.errors.full_messages
+    assert edgefile.save, edgefile.errors.full_messages
+  end
+
+  test "error on empty file" do
+    edgefile = Edgefile.new()
+    edgefile.filename = 'pippo.txt'
+    edgefile.content_type = 'text/plain'
+    assert !edgefile.valid?
+    assert !edgefile.save
+    assert_equal "error on size #{edgefile.size}", edgefile.errors.on(:size)
+  end
+  
 end

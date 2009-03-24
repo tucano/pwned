@@ -14,7 +14,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post :create, :comment => { }, :network_id => networks(:barabasi).id 
+      post :create, :comment => { :body => 'A comment here' }, :network_id => networks(:barabasi).id 
     end
 
     assert_redirected_to network_path(assigns(:network))

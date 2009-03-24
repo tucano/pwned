@@ -34,6 +34,7 @@ class Configfile < ActiveRecord::Base
     end
     
     # check if is a pwned config and try load it
+    # TODO error messages
     configservice = Configservice.new(xml)
     unless configservice.valid? then
       errors.add(:xmldata, "is not a valid config file")

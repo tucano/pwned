@@ -5,7 +5,6 @@ ActionController::Routing::Routes.draw do |map|
     :collection => { :auto_complete_for_network_name => :get, :tag => :get },
     :has_many => :comments
 
-
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

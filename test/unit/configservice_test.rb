@@ -23,10 +23,12 @@ class ConfigserviceTest < Test::Unit::TestCase
     assert !config.valid?
   end
   
-  def test_not_valid_object
-    bad = 'string'
-    config = Configservice.new(bad)
-    assert !config.valid?
+  def test_not_valid_objects
+    bads = ['string', nil, 1, Configfile.new]
+    bads.each do |bad|
+      config = Configservice.new(bad)
+      assert !config.valid?
+    end
   end
   
 end

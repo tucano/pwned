@@ -46,8 +46,17 @@ class ConfigfileTest < ActiveSupport::TestCase
     configfile.content_type = 'text/xml'
     configfile.set_temp_data(data)
     
-    assert configfile.valid?
-    assert configfile.save
+    assert configfile.valid?, configfile.errors.full_messages
+    assert configfile.save, configfile.errors.full_messages
+  end
+  
+  test "error on empty file" do
+    configfile = Configfile.new()
+    configfile.filename = 'pippo.xml'
+    configfile.content_type = 'text/xml'
+    assert !configfile.valid?
+    assert !configfile.save
+    assert_equal "error on size #{configfile.size}", configfile.errors.on(:size)
   end
 
 end

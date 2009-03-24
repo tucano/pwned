@@ -24,6 +24,7 @@ class Edgefile < ActiveRecord::Base
   end
 
   def edgefile_valid?
+    # TODO error messages
     edgeservice = Edgeservice.new(self.temp_data)
     unless edgeservice.valid? then
       errors.add(:edgedata, "is not a valid edges file")

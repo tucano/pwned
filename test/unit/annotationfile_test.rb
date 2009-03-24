@@ -38,4 +38,25 @@ class AnnotationfileTest < ActiveSupport::TestCase
     assert_equal "error on size #{annotationfile.size}", annotationfile.errors.on(:size)
 
   end
+  
+  test "valid entry" do
+    data = File.read('test/storage/annotationfiles/tucanonodes.txt')
+    annotationfile = Annotationfile.new()
+    annotationfile.filename = 'pippo.txt'
+    annotationfile.content_type = 'text/plain'
+    annotationfile.set_temp_data(data)
+    
+    assert annotationfile.valid?, annotationfile.errors.full_messages
+    assert annotationfile.save, annotationfile.errors.full_messages
+  end
+  
+  test "error on empty file" do
+    annotationfile = Annotationfile.new()
+    annotationfile.filename = 'pippo.txt'
+    annotationfile.content_type = 'text/plain'
+    assert !annotationfile.valid?
+    assert !annotationfile.save
+    assert_equal "error on size #{annotationfile.size}", annotationfile.errors.on(:size)
+  end
+  
 end

@@ -93,6 +93,7 @@ class NetworksControllerTest < ActionController::TestCase
     assert_equal("text/xml", newbie.configfile.content_type)
     assert_equal("pastie.txt", newbie.annotationfile.filename)
     assert_equal("text/plain", newbie.annotationfile.content_type)
+    assert_redirected_to network_path(assigns(:network))
   end
 
   test "should show network" do

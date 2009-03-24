@@ -5,8 +5,8 @@ namespace :test do
   namespace :coverage do
     desc "Delete aggregate coverage data."
     task(:clean) do
-      rm_rf "data/coverage"
-      rm_f "data/coverage.data"
+      rm_rf "test/coverage"
+      rm_f "test/coverage.data"
     end
   end
   
@@ -23,9 +23,9 @@ namespace :test do
         t.libs << "test"
         t.test_files = FileList["test/#{target}/**/*_test.rb"]
         t.verbose = true
-        t.rcov_opts << '--rails --aggregate data/coverage.data --exclude /Library/,/System/'
+        t.rcov_opts << '--rails --aggregate test/coverage.data --exclude /Library/,/System/'
         if target == tests_to_run[-1]
-          t.output_dir = "data/coverage"
+          t.output_dir = "test/coverage"
         else
           t.rcov_opts << '--no-html'
         end

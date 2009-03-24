@@ -8,5 +8,5 @@ db/*.sqlite3
 doc/api
 doc/app
 doc/plugins
-data/coverage
-data/coverage.data
+test/coverage
+test/coverage.data

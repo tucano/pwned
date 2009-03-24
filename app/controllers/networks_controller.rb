@@ -40,6 +40,15 @@ class NetworksController < ApplicationController
     end
   end
   
+  # AJAX function to get a record (actually not used)
+  # Example:
+  # <div id="<%= network.name + 'box' %>" ></div>
+  # <%= link_to_remote 'Show inline', 
+  #     :url => { :action => 'get_network' , :id => network.id  }, 
+  #     :update => { :success => "#{network.name}box", :failure => "notice" },
+  #     :before => "Element.hide(\'#{network.name}box\')",
+  #     :complete => "Element.show(\'#{network.name}box\')"
+  #   %>
   def get_network
     begin
       @network = Network.find(params[:id])

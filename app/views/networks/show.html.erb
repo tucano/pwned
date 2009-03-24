@@ -7,6 +7,7 @@
 
 <% content_for(:toolbox) do %>
   <li><%= link_to 'Edit', edit_network_path(@network) %></li>
+  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
 	<li><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></li>
 <% end %>
 
@@ -15,10 +16,6 @@
   <%= render :partial => 'menu_toolbox' %>
   <%= render :partial => 'menu_networks' %>
   <%= render :partial => 'menu_help' %>
-<% end %>
-
-<% content_for(:applet) do %>
-	<%= render :partial => 'applet' %>
 <% end %>
 
 <!-- PAGE TITLE -->

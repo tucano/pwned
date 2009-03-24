@@ -13,7 +13,7 @@
 	</blockquote>
 	</div>
 	
-	<%= yield :applet %>
+	<%= render :partial => 'applet' %>
 	
 	<div class="content-2col-nobox-leftcolumn">
 		<h2>Network icon</h2>
@@ -38,12 +38,30 @@
 		</ol>
 	</div>
 
+  <div class="content-1col-nobox">
 	<h2>Posted by</h2>
 	<h3><a href="#"><img src="/images/image.jpg" alt="Image description" title="Image title" /></a>Heading 3</h3>
 	<h6>Heading h6</h6>
 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 		 euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
 	<p class="details">Posted by DummyUser <%= network.created_at.to_date -%> </p> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
+  </div>
+  
+  <div class="content-1col-nobox"> 
+	<h2>Comments</h2>
+  <% unless network.comments.empty? %>
+  	<% network.comments.each do |comment| %>
+    <blockquote>
+    <h5>Posted by DummyUser <%= comment.created_at %></h5>
+    <p><%=h comment.body %></p>
+  	</blockquote>
+  	<% end %>
 
+	<% end %>
+	
+	<h2>New Comment</h2>
+	<%= render :partial => @comment = Comment.new, :locals => { :button_name => 'Create'}%>
+	
+  </div>
 </div>
 <div class="corner-content-1col-bottom"></div>

@@ -6,6 +6,8 @@ class Network < ActiveRecord::Base
   has_one :annotationfile, :dependent => :destroy
   has_one :configfile, :dependent => :destroy
 
+  has_many :comments
+
   validates_presence_of :name, :description
 
   validates_format_of :name,

@@ -24,39 +24,20 @@
 	<!-- NETWORKS LIST CELL -->
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
+		
 		<% if @pages.total_pages <= 1 then %>
 			<h1>Networks</h1>
 		<% else %>
 			<h1><%= will_paginate @pages %></h1>
 		<% end %>
+		
 		<% for network in @pages %>
-		<h2><%= network.name %></h2>
-		<h6><%= auto_link(truncate(network.description, :length => 100, :omission => ' ... ')) %></h6>
-		<p><b>tags:</b> <%= network.tag_list %><p/>
-		<p class="details">
-			<%= link_to_remote 'Show', 
-				:url => { :action => 'get_network' , :id => network.id 	}, 
-				:update => { :success => "networkbox", :failure => "notice" },
-				:before => "Element.hide('networkbox')",
-				:complete => visual_effect(:appear, "networkbox", :duration => 1.0)
-			%> | 
-			<%= link_to 'Go', network %> | 
-			<%= link_to 'Edit', edit_network_path(network) %> |
-			<%= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete %>
-		</p>
+		  <%= render :partial => 'inline_network', :locals => { :network => network } %>
 		<% end %>
+		
 	</div>
 	<div class="corner-content-1col-bottom"></div>
-	
-	<div>
-	
-	</div>
-	
-	<div id="networkbox">
-	 <% if @networks.size == 1 %>
-	  <%= render :partial => @networks[0] %>
-	 <% end %>
-	</div>
+		
 </div>
 
 <!-- C.2 SUBCONTENT -->

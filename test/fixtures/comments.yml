@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  network: barabasi
+  body: cool network
+
+two:
+  network: disney
+  body: This is a stupid idea
+  
+three:
+  network: tucano
+  body: actually your homepage is down
+  
+four:
+  network: facebook
+  body: Who is A. barbato?

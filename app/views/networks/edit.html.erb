@@ -7,6 +7,7 @@
 
 <% content_for(:toolbox) do %>
   <li><%= link_to 'Show', @network %></li>
+  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
 	<li><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></li>
 <% end %>
 
@@ -26,5 +27,5 @@
 
 <!-- C.1 CONTENT no sidebar -->
 <div class="niceform">
-  	<%= render :partial => "form" %>
+  	<%= render :partial => "form" , :locals => { :button_name => "Update" }%>
 </div>

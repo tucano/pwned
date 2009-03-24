@@ -1,0 +1,22 @@
+<h1>Listing comments</h1>
+
+<table>
+  <tr>
+    <th>Network</th>
+    <th>Body</th>
+  </tr>
+
+<% for comment in @comments %>
+  <tr>
+    <td><%=h comment.network_id %></td>
+    <td><%=h comment.body %></td>
+    <td><%= link_to 'Show', [@network, comment] %></td>
+    <td><%= link_to 'Edit', [:edit, @network, comment] %></td>
+    <td><%= link_to 'Destroy', [@network, comment], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New comment', new_network_comment_path(@network) %>

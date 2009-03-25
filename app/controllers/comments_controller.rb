@@ -10,7 +10,8 @@ class CommentsController < ApplicationController
   def index
     
     @comments = @network.comments.find(:all)
-     
+    @comment_pages = @comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 5
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @comments }
@@ -31,6 +32,7 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    @network = @comment.network
   end
 
   # POST /comments

@@ -7,7 +7,7 @@
 		
 	<div id="description">
 	  <blockquote>
-  	  <p><%= simple_format auto_link(h network.description) %></p>
+  	  <p><%= simple_format(auto_link(h(network.description))) %></p>
 	  </blockquote>
 	</div>
 	
@@ -30,14 +30,16 @@
 	 
 	<div id="details" style="display:none;">
   	<div class="content-2col-nobox-leftcolumn">
-  		<h2>TODO Network statistic</h2>
+  		<h2>Statistics</h2>
   		<table>
-  			<tr><th class="top" scope="col">Heading 1</th><th class="top" scope="col">Heading 2</th></tr>
-  			<tr><th scope="row">Category 1</th><td>Data</td></tr>
-  			<tr><th scope="row">Category 2</th><td>Data</td></tr>
-  			<tr><th scope="row">Category 3</th><td><a href="#">Link</a></td></tr>              
+  			<tr><th class="top" scope="col">Params</th><th class="top" scope="col">Value</th></tr>
+  			<tr><th scope="row">Edgefile size</th><td><%= number_to_human_size(network.edgefile.size) %></td></tr>
+  			<tr><th scope="row">Configfile size</th><td><%= number_to_human_size(network.configfile.size) %></td></tr>
+  			<% if network.annotationfile %>
+  			<tr><th scope="row">Annotationfile size</th><td><%= number_to_human_size(network.annotationfile.size) %></td></tr>
+  			<% end %>
       </table>
-  		<p class="caption"><b>Table x.x.</b> Caption</p>
+  		<p class="caption"><b>Network statistics</b> Caption</p>
   	</div>
 
   	<div class="content-2col-nobox-rightcolumn"> 

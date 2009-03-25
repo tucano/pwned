@@ -14,5 +14,5 @@
 </p>
 
 <div id="<%= network.name + 'box' %>" style="display:none;">
-  <p><%= simple_format auto_link(h network.description) %></p>
+  <p><%= simple_format(auto_link(h(network.description))) %></p>
 </div>

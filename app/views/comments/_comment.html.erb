@@ -1,6 +1,6 @@
 <blockquote>
     <p><%= simple_format auto_link(h(comment.body)) %></p>
-    <p><%= link_to 'Edit', [:edit, comment] %> | 
-        <%= link_to 'Destroy', [comment], :confirm => 'Are you sure?', :method => :delete %>
+    <p><%= link_to 'Edit', [:edit, @network, comment] %> | 
+        <%= link_to 'Destroy', [@network, comment], :confirm => 'Are you sure?', :method => :delete %>
     </p>
 </blockquote>

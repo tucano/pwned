@@ -18,9 +18,9 @@
 		<div class="navglobal">
 		 	<ul id="nav">
 		     <li><%= link_to("Home", root_url, { :class => 'home'}) %></li>
-		     <li><a href="/404.html" class="news"><strong>News</strong></a></li>
-		     <li><a href="/404.html" class="services"><strong>Services</strong></a></li>
-		     <li><a href="/404.html" class="contact"><strong>Contact</strong></a></li>
+		     <li><%= link_to("News","http://github.com/tucano/pwned/commits/master") %></li>
+		     <li><%= link_to("Contact","http://tucano.recipient.cc") %></li>
+ 		     <li><a href="/404.html">Sitemap</a></li>
 		</ul>
 	 </div>
 	</div>
@@ -28,13 +28,8 @@
 	<!-- A.4 BREADCRUMB and SEARCHFORM -->
 	<div class="header-bottom">
 		<!-- Breadcrumb -->
-		<ul>
-			<li class="nobullet">You are here:&nbsp;</li>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Page</a></li>
-			<li><a href="#">Sub-Page</a></li>
-			<li><a href="#">Sub-Sub-Page</a></li>          
-		</ul>
+		<%= simple_breadcrumb %>
+		
 		<!-- Search form -->                  
 		<%= render :partial => 'shared/searchform'%>
 	</div>

@@ -48,4 +48,22 @@ module ApplicationHelper
     "<a href=#{rss} title=#{rss}>#{image}</a>"
   end
   
+  def simple_breadcrumb
+    bc = String.new
+    url = request.path.split('?') #remove extra query string parameters
+    levels = url[0].split('/') #break up url into different levels
+    bc << "<ul>"
+    bc << '<li class="nobullet">You are here:&nbsp;</li>'
+    bc << '<li>' << link_to("Home", root_url) << '</li> '
+    mylink = "/"
+    levels.each_with_index do |level, index|
+      unless level.blank? then
+        mylink << level << '/'
+        bc << "<li>" << link_to(level, mylink) << "</li> "
+      end
+    end
+    bc << "</ul>"
+    bc
+  end
+  
 end

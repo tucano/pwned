@@ -32,21 +32,7 @@
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
     <h1>Editing comment</h1>
-    <div class="niceform">  
-    <% form_for(@comment, :html => { :class => 'niceform' }) do |f| %>
-      <%= f.error_messages %>
-      <fieldset>
-          <legend>Comment</legend>
-          <dl>
-            <dt><%= f.label :body %></dt>
-            <dd><%= f.text_area :body %></dd>
-          </dl>
-      </fieldset>
-      <fieldset class="action">
-        <%= f.submit 'Update' %> |  <%= link_to 'Back', network_comments_path(@network) %>
-      </fieldset>
-    <% end %>
-    </div>
+    <%= render :partial => 'form', :locals => { :button_name => 'Update' }%>
    
   </div>
   <div class="corner-content-1col-bottom"></div>

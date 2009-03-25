@@ -17,17 +17,18 @@ class CommentsControllerTest < ActionController::TestCase
     assert_difference('Comment.count') do
       post :create, :comment => { :body => 'A comment here' }, :network_id => networks(:barabasi).id 
     end
-    assert_redirected_to network_comments_path(assigns(:network))
+    assert_redirected_to network_comments_path
   end
 
   test "should get edit" do
-    get :edit, :id => comments(:one).id
+    get :edit, :id => comments(:one).id, :network_id => networks(:barabasi).id
     assert_response :success
+    assert_template "edit"
   end
 
   test "should update comment" do
-    put :update, :id => comments(:one).id, :comment => { :body => "new comment" }
-    assert_redirected_to network_comments_path(comments(:one).network)
+    put :update, :id => comments(:one).id, :comment => { :body => "new comment" }, :network_id => networks(:barabasi).id
+    assert_redirected_to network_comments_path
   end
   
   test "should render new on errors" do
@@ -37,16 +38,16 @@ class CommentsControllerTest < ActionController::TestCase
   end
   
   test "should render edit on errors" do
-    put :update, :id => comments(:one).id, :comment => { :body => "" }
+    put :update, :id => comments(:one).id, :comment => { :body => "" }, :network_id => networks(:barabasi).id
     assert_response :success
     assert_template "edit"
   end
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, :id => comments(:one)
+      delete :destroy, :id => comments(:one), :network_id => networks(:barabasi).id
     end
 
-    assert_redirected_to network_comments_path(comments(:one).network)
+    assert_redirected_to network_comments_path
   end
 end

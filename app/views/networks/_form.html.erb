@@ -9,7 +9,7 @@
     <%= general_error_msgs(:network, :edgefile, :configfile, :annotationfile) %>
   <%= hidden_div_close %>
 
-  <div>
+  <div class="niceform">
   <% form_for(@network, :html => { :multipart => true , :class => 'niceform'  }) do |f| %>
     <fieldset>
       <legend>Network</legend>

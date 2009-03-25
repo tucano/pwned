@@ -2,52 +2,68 @@
 <div class="content-1col-nobox">
 
 	<div class="networktitle" id="name">		
-		<h1 class="network"><%= link_to network.name, network %></h1>
+		<h1 class="network"><%= network.name %></h1>
 	</div>
-  <h5>Tags</h5>
-	<p><%= network.tag_list %></p>
+		
 	<div id="description">
-	<blockquote>
-		<h5>Description size: <%= network.description.size %></h5>
-  	<p><%= auto_link(network.description, :urls) %></p>
-	</blockquote>
+	  <blockquote>
+  	  <p><%= simple_format auto_link(h network.description) %></p>
+	  </blockquote>
 	</div>
 	
+	<div id="tags">
+	  <blockquote>
+	  <p>
+	    <%=  link_to_function "Details", "Effect.toggle('details', 'blind',{ duration: 0.5 })" %> | 
+	    <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %> | 
+	    <b>Tags: </b>
+	    <% tag_cloud network.tag_counts, %w{tag1 tag2 tag3 tag4} do |tag, css_class| %> 
+	    <%= link_to tag.name, { :controller => :networks, :action => :tag, :name => tag.name }, :class => css_class %>
+	    <% end %>
+    </p>
+    </blockquote>
+	</div>
+  
+  <div id="comments">
+  </div>
+	
+	 
+	<div id="details" style="display:none;">
+  	<div class="content-2col-nobox-leftcolumn">
+  		<h2>TODO Network statistic</h2>
+  		<table>
+  			<tr><th class="top" scope="col">Heading 1</th><th class="top" scope="col">Heading 2</th></tr>
+  			<tr><th scope="row">Category 1</th><td>Data</td></tr>
+  			<tr><th scope="row">Category 2</th><td>Data</td></tr>
+  			<tr><th scope="row">Category 3</th><td><a href="#">Link</a></td></tr>              
+      </table>
+  		<p class="caption"><b>Table x.x.</b> Caption</p>
+  	</div>
+
+  	<div class="content-2col-nobox-rightcolumn"> 
+  		<h2>TODO Files icon</h2>
+  		<h5>File links</h5>
+  		<ol>
+  			<li>Edges: <%= link_to network.edgefile.filename, network.edgefile.public_filename %></li>
+  			<li>Config: <%= link_to network.configfile.filename, network.configfile.public_filename %></li>
+  			<% if network.annotationfile %>
+  			<li>Nodes: <%= link_to network.annotationfile.filename, network.annotationfile.public_filename %></li>
+  			<% end %>
+  			<li>TODO package.zip with applet</li>
+  		</ol>
+  	</div>
+
+    <div class="content-1col-nobox">
+    	<h2>TODO Posted by</h2>
+    	<h3><a href="#"><img src="/images/image.jpg" alt="Image description" title="Image title" /></a>Heading 3</h3>
+    	<h6>Heading h6</h6>
+    	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
+    		 euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+    	<p class="details">Posted by DummyUser <%= network.created_at.to_date -%> </p>
+    </div>
+	</div>
+
 	<%= render :partial => 'applet' %>
-	
-	<div class="content-2col-nobox-leftcolumn">
-		<h2>Network icon</h2>
-		<table>
-			<tr><th class="top" scope="col">Heading 1</th><th class="top" scope="col">Heading 2</th></tr>
-			<tr><th scope="row">Category 1</th><td>Data</td></tr>
-			<tr><th scope="row">Category 2</th><td>Data</td></tr>
-			<tr><th scope="row">Category 3</th><td><a href="#">Link</a></td></tr>              
-    </table>
-		<p class="caption"><b>Table x.x.</b> Caption</p>
-	</div>
 
-	<div class="content-2col-nobox-rightcolumn"> 
-		<h2>Files icon</h2>
-		<h5>File links</h5>
-		<ol>
-			<li>Edges: <%= link_to network.edgefile.filename, network.edgefile.public_filename %></li>
-			<li>Config: <%= link_to network.configfile.filename, network.configfile.public_filename %></li>
-			<% if network.annotationfile %>
-			<li>Nodes: <%= link_to network.annotationfile.filename, network.annotationfile.public_filename %></li>
-			<% end %>
-			<li>TODO package.zip with applet</li>
-		</ol>
-	</div>
-
-  <div class="content-1col-nobox">
-	<h2>Posted by</h2>
-	<h3><a href="#"><img src="/images/image.jpg" alt="Image description" title="Image title" /></a>Heading 3</h3>
-	<h6>Heading h6</h6>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
-		 euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-	<p class="details">Posted by DummyUser <%= network.created_at.to_date -%> </p> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
-  </div>
-	
-  </div>
 </div>
 <div class="corner-content-1col-bottom"></div>

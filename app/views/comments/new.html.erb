@@ -3,6 +3,7 @@
 	<%= stylesheet_link_tag 'mf54_grid' %>
   <%= stylesheet_link_tag 'mf54_content' %>
 	<%= stylesheet_link_tag 'pwned' %>
+	<%= stylesheet_link_tag 'niceforms-default' %>
 <% end %>
 
 <% content_for(:toolbox) do %>
@@ -32,11 +33,25 @@
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
     <h1>New comment</h1>
-    <%= render :partial => "form", :locals => { :button_name => "Create" } %>
-    <p><%= link_to 'Back', network_comments_path(@network) %></p>
+    <div class="niceform">  
+      <% form_for([@network, @comment], :html => { :class => 'niceform' }) do |f| %>
+        <%= f.error_messages %>
+        <fieldset>
+            <legend>Comment</legend>
+            <dl>
+              <dt><%= f.label :body %></dt>
+              <dd><%= f.text_area :body %></dd>
+            </dl>
+        </fieldset>
+        <fieldset class="action">
+          <%= f.submit 'Update' %> | <%= link_to 'Back', network_comments_path(@network) %>
+        </fieldset>
+      <% end %>
+    </div>
   </div>
   <div class="corner-content-1col-bottom"></div>
 </div>
+
 <!-- C.2 SUBCONTENT -->
 <div class="subcontent">
 	<%= render(:partial => 'shared/login') %>

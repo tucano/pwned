@@ -37,4 +37,28 @@ eight:
   tag: web
   taggable: facebook
   taggable_type: Network
-  
+
+nine:
+  tag: science
+  taggable: tp53
+  taggable_type: Network
+
+ten:
+  tag: science
+  taggable: hprd
+  taggable_type: Network
+
+eleven:
+  tag: biology
+  taggable: tp53
+  taggable_type: Network
+
+twelve:
+  tag: biology
+  taggable: hprd
+  taggable_type: Network
+
+testone:
+  tag: test
+  taggable: three
+  taggable_type: Network

@@ -6,3 +6,6 @@ web:
   
 test:
   name: test
+  
+biology:
+  name: biology

@@ -56,10 +56,17 @@ module ApplicationHelper
     bc << '<li class="nobullet">You are here:&nbsp;</li>'
     bc << '<li>' << link_to("Home", root_url) << '</li> '
     mylink = "/"
+    network_id = false
     levels.each_with_index do |level, index|
       unless level.blank? then
+        # FIXME hack for network :id
         mylink << level << '/'
+        if network_id then
+          level = @network.name if @network
+          network_id = false
+        end
         bc << "<li>" << link_to(level, mylink) << "</li> "
+        network_id = true if level == 'networks'
       end
     end
     bc << "</ul>"

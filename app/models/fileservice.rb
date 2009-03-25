@@ -86,7 +86,7 @@ class Fileservice
     elsif params['annotations'] and !params['annotations'].blank? then
       set_annotationfile(params[:annotations])
     else
-      # TODO
+      # TODO annotation is an optional field
     end
   end
   
@@ -96,6 +96,7 @@ class Fileservice
     elsif params['edges'] && !params['edges'].blank? then
       e = set_edgefile(params['edges'])
     else
+      # TODO errors
       e = Edgefile.new()
     end
     return e
@@ -103,13 +104,17 @@ class Fileservice
   
   def create_config(params)
     if params['configfile'] && !params['configfile']['uploaded_data'].blank? then
-      Configfile.new(params['configfile'])
+      c = Configfile.new(params['configfile'])
     elsif params['config'] && !params['config']['template'].blank? then
-      set_template_config(params['config']['template'])
-    else
+      c = set_template_config(params['config']['template'])
+    elsif params['params'] && params['colors'] && params['flags']
       # Use form fields... TODO error messages on empty, etc...
-      set_params_config(params['params'], params['colors'], params['flags'])
+      c = set_params_config(params['params'], params['colors'], params['flags'])
+    else
+      # TODO errors
+      c = Configfile.new()
     end
+    return c
   end
   
   def set_edgefile(edges)

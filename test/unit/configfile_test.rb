@@ -59,4 +59,28 @@ class ConfigfileTest < ActiveSupport::TestCase
     assert_equal "error on size #{configfile.size}", configfile.errors.on(:size)
   end
 
+  test "error on bad xml file" do
+    configfile = Configfile.new()
+    configfile.filename = 'pippo.xml'
+    configfile.content_type = 'text/xml'
+    configfile.set_temp_data('<config><xml><pippo><i></xml></config>')
+    assert !configfile.valid?
+    assert !configfile.save
+    # FIXME this test
+    #assert_equal "is not a valid config file", configfile.errors.on(:xmldata)
+  end
+  
+  test "error on invalid config" do
+    bad = REXML::Document.new(File.read('test/storage/configfiles/barabasi.xml'))
+    configfile = Configfile.new()
+    configfile.filename = 'pippo.xml'
+    configfile.content_type = 'text/xml'
+    bad.root.elements[1].remove
+    configfile.set_temp_data(bad.to_s)
+    assert !configfile.valid?
+    assert !configfile.save
+    # FIXME this test
+    #assert_equal "is not a valid config file", configfile.errors.on(:xmldata)
+  end
+
 end

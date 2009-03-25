@@ -164,4 +164,25 @@ class NetworksControllerTest < ActionController::TestCase
     get :tag, :name => 'web'
     assert_response :success
   end
+  
+  test "should render new on network errors" do
+    post :create
+    assert_response :success
+    assert_template "new"
+  end
+
+  test "should render edit on network errors" do
+    network_id = networks(:disney).id
+    old = Network.find(network_id) 
+    network_hash = { 
+      :name => 'pippo',
+      :description => ''
+    }
+    put :update, :id => network_id, :network => network_hash, :config => { :template => 'classic'}
+    updated = Network.find(network_id) 
+    assert_equal old, updated
+    assert_response :success
+    assert_template "edit"
+  end
+
 end

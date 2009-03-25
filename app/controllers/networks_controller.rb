@@ -139,11 +139,4 @@ class NetworksController < ApplicationController
     end
   end
 
-  private
-  
-  def redirect_to_index(msg = nil)
-    flash[:notice] = msg if msg
-    redirect_to :action => :index
-  end
-
 end

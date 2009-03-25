@@ -13,6 +13,13 @@ class CommentsControllerTest < ActionController::TestCase
     assert_template "new"
   end
 
+  test "should get show" do
+    get :show, :network_id => networks(:barabasi).id , :id => comments(:one).id
+    assert_response :success
+    assert_not_nil assigns(:comment)
+    assert_template "show"
+  end
+
   test "should create comment" do
     assert_difference('Comment.count') do
       post :create, :comment => { :body => 'A comment here' }, :network_id => networks(:barabasi).id 

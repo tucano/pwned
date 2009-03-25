@@ -7,6 +7,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "networks"
 
+  map.sitemap 'sitemap.xml', :controller => 'sitemap', :action => 'sitemap'
+  
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

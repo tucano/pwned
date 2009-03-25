@@ -19,10 +19,10 @@
 		 	<ul id="nav">
 		     <li><%= link_to("Home", root_url, { :class => 'home'}) %></li>
 		     <li><%= link_to("News","http://github.com/tucano/pwned/commits/master") %></li>
-		     <li><%= link_to("Contact","http://tucano.recipient.cc") %></li>
- 		     <li><a href="/404.html">Sitemap</a></li>
-		</ul>
-	 </div>
+		     <li><%= link_to("Contact","http://github.com/tucano") %></li>
+ 		     <li><%= link_to("Sitemap", :controller => :sitemap, :action => :sitemap ) %></li>
+		   </ul>
+	  </div>
 	</div>
 	
 	<!-- A.4 BREADCRUMB and SEARCHFORM -->

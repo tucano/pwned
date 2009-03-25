@@ -1,10 +1,6 @@
-<% form_for([@network, @comment]) do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit button_name %>
-  </p>
-<% end %>
+<blockquote>
+    <p><%= simple_format auto_link(h(comment.body)) %></p>
+    <p><%= link_to 'Edit', [:edit, comment] %> | 
+        <%= link_to 'Destroy', [comment], :confirm => 'Are you sure?', :method => :delete %>
+    </p>
+</blockquote>

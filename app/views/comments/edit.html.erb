@@ -25,11 +25,8 @@
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
     <h1>Editing comment</h1>
-    <%= render :partial => @comment, :locals => { :button_name => "Update" } %>
-    <p>
-    <%= link_to 'Show', [@network, @comment] %> |
-    <%= link_to 'Back', network_comments_path(@network) %>
-    </p>
+    <%= render :partial => "form", :locals => { :button_name => "Update" } %>
+    <%= link_to 'Back', network_comments_path(@comment.network.id) %>
   </div>
   <div class="corner-content-1col-bottom"></div>
 </div>

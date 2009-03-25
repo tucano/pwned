@@ -12,7 +12,7 @@
 <% end %>
 
 <!-- PAGE TITLE -->
-<h1 class="pagetitle">Comments for <%= @network.name %></h1>
+<h1 class="pagetitle"><%= comments_title %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
@@ -23,28 +23,17 @@
   <!-- LIST CELL -->
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
-    <h1>Listing comments for <%= @network.name %></h1>
-
-    <table>
-      <tr>
-        <th>Network</th>
-        <th>Body</th>
-      </tr>
+    <h1 class="blog">Listing comments</h1>
 
     <% for comment in @comments %>
-      <tr>
-        <td><%=h comment.network.name %></td>
-        <td><%=h comment.body %></td>
-        <td><%= link_to 'Show', [@network, comment] %></td>
-        <td><%= link_to 'Edit', [:edit, @network, comment] %></td>
-        <td><%= link_to 'Destroy', [@network, comment], :confirm => 'Are you sure?', :method => :delete %></td>
-      </tr>
+        <%= render :partial => comment %>
     <% end %>
-    </table>
 
-    <br />
+    <p>
+    <%= link_to 'New comment', new_network_comment_path(@network) %>
+    <%= link_to 'Back to Network', network_path(@network) %>
+    </p>
 
-    <p><%= link_to 'New comment', new_network_comment_path(@network) %></p>
   </div>
   <div class="corner-content-1col-bottom"></div>
 </div>

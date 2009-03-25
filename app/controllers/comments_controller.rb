@@ -1,26 +1,19 @@
 class CommentsController < ApplicationController
-  
-  before_filter :load_network
+
+  # TODO FIXME this controller and redirections (is a partial), then no more redirections to @comments
+  before_filter :load_network, :only => [:index, :new, :create]
 
   # GET /comments
   # GET /comments.xml
+  # GET /network/:id/comments
+  # GET /network/:id/comments.xml
   def index
+    
     @comments = @network.comments.find(:all)
-
+     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @comments }
-    end
-  end
-
-  # GET /comments/1
-  # GET /comments/1.xml
-  def show
-    @comment = @network.comments.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @comment }
     end
   end
 
@@ -37,7 +30,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    @comment = @network.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   # POST /comments
@@ -48,7 +41,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to([@network]) }
+        format.html { redirect_to([@comment.network, :comments]) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         format.html { render :action => "new" }
@@ -60,12 +53,12 @@ class CommentsController < ApplicationController
   # PUT /comments/1
   # PUT /comments/1.xml
   def update
-    @comment = @network.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         flash[:notice] = 'Comment was successfully updated.'
-        format.html { redirect_to([@network]) }
+        format.html { redirect_to([@comment.network, :comments]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -77,11 +70,11 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.xml
   def destroy
-    @comment = @network.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(network_comments_url(@network)) }
+      format.html { redirect_to([@comment.network, :comments]) }
       format.xml  { head :ok }
     end
   end

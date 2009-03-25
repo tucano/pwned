@@ -159,4 +159,9 @@ class NetworksControllerTest < ActionController::TestCase
     
     assert_redirected_to networks_path
   end
+
+  test "should get tags" do
+    get :tag, :name => 'web'
+    assert_response :success
+  end
 end

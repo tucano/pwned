@@ -13,7 +13,7 @@
 
 
 <!-- PAGE TITLE -->
-<h1 class="pagetitle">New comment for <%= @comment.network.name %></h1>
+<h1 class="pagetitle">New comment for <%= @network.name %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
@@ -25,7 +25,7 @@
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
     <h1>New comment</h1>
-    <%= render :partial => @comment, :locals => { :button_name => "Create" } %>
+    <%= render :partial => "form", :locals => { :button_name => "Create" } %>
     <p><%= link_to 'Back', network_comments_path(@network) %></p>
   </div>
   <div class="corner-content-1col-bottom"></div>

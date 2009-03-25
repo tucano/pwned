@@ -1,14 +1,15 @@
+
 <h2><%= link_to network.name, network %></h2>
 <p class="details">
-  Posted by DummyUser <%= network.created_at.to_date -%> |
-  <%=  link_to_function "Details", 
-    "Effect.toggle('#{network.name}box', 'blind',{ duration: 0.5 })" %> | 
-	<%= link_to 'Show', network %> | 
+  Posted by DummyUser <%= network.created_at.to_date -%> | 
+  <%= link_to 'Show', network %> | 
+  <%=  link_to_function "Description", "Effect.toggle('#{network.name}box', 'blind',{ duration: 0.5 })" %> | 
 	<%= link_to 'Comments', network_comments_path(network) %> | 
 	<%= link_to 'Edit', edit_network_path(network) %> | 
 	<%= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete %> | 
 	<b>tags:</b> <%= network.tag_list %> | <b>comments:</b> <%= network.comments.size %>
 </p>
+
 <div id="<%= network.name + 'box' %>" style="display:none;">
   <p><%= auto_link(network.description, :length => 300, :omission => ' ... ') %></p>
 </div>

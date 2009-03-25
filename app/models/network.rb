@@ -19,19 +19,29 @@ class Network < ActiveRecord::Base
   validates_uniqueness_of :name
   
   # OPTIMIZE this search
-  def self.search(search = nil)
-    if search then
-      if search.has_key? 'name' then
-        find(:all, :conditions => ['name LIKE ?', "%#{search['name']}%"])
-      end
-    else
-      find(:all)
+  def self.search(query = nil, options={})
+    with_scope( :find => { :conditions => self.search_conditions(query) }) do
+      find :all, options
     end
   end
   
   # Sitemap finder
   def self.find_for_sitemap
     find(:all, :select => "id, updated_at", :order => "updated_at DESC", :limit => 50000)
+  end
+  
+  private
+  
+  def self.search_conditions(query)
+    return nil if query.nil?
+    like_frags = Array.new
+    value_frags = Array.new
+    query.map { |k,v|
+      like_frags.push("#{k} LIKE ?")
+      value_frags.push("%#{v}%")
+    }
+    like_string = like_frags.join(" AND ")
+    [like_string, *value_frags]
   end
   
 end

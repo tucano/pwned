@@ -17,6 +17,13 @@ class NetworksController < ApplicationController
       format.xml  { render :xml => @networks }
     end
   end
+  
+  # GET /networks/search
+  def search
+    respond_to do |format|
+      format.html # search.html.erb
+    end
+  end
 
   # GET /networks/tag/name
   # GET /networks/tag/name.xml

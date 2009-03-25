@@ -1,0 +1,53 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid' %>
+  <%= stylesheet_link_tag 'mf54_content' %>
+	<%= stylesheet_link_tag 'pwned' %>
+	<%= stylesheet_link_tag 'niceforms-default' %>
+<% end %>
+
+<% content_for(:navbar) do %>
+  <%= render :partial => 'shared/menu_user' %>
+  <%= render :partial => 'shared/menu_networks' %>
+  <%= render :partial => 'shared/menu_help' %> 
+<% end %>
+
+<!-- PAGE TITLE -->
+<h1 class="pagetitle"><%= page_title %></h1>
+
+<div id="notice">
+	<p style="color: green"><%= flash[:notice] %></p>
+</div>
+
+<!-- C.1 CONTENT -->
+<div class="content">
+	<!-- NETWORKS SEARCH CELL -->
+	<div class="corner-content-1col-top"></div>
+	<div class="content-1col-nobox">
+	  
+  <div class="niceform">
+  	  <% form_tag networks_path, :method => :get do %>
+  	    <fieldset><legend>Network</legend>
+  	      <dl>
+  	        <dt><%= label(:network, :name, 'By Name')%></dt>
+  	        <dd><%= text_field_with_auto_complete :network, :name , { :autocomplete => "off"}, { :method => :get} %></dd>
+  	      </dl>
+			    <dl>
+			      <dt><%= label(:network, :description, 'By Description')%></dt>
+			      <dd><%= text_field(:network, :description)%></dd>
+			    </dl>
+	  	    <%= submit_tag "GO!", :class => "button", :name => nil %>
+		    </fieldset>	
+  		<% end %>
+  </div>
+
+  </div>
+  <div class="corner-content-1col-bottom"></div>
+</div>
+
+<!-- C.2 SUBCONTENT -->
+<div class="subcontent">
+	<%= render(:partial => 'shared/login') %>
+	<%= render(:partial => 'shared/search') %>	
+	<%= render(:partial => 'shared/news') %>	
+</div>

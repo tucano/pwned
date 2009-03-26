@@ -106,30 +106,52 @@ public void addEdge(int n) {
   makeEdgeBetween( p, q );
   p.moveTo( q.position().x() + random( -1, 1 ), q.position().y() + random( -1, 1 ), 0 );
 }
+/* 
+/ Annotatio format: KEY LABEL LINK
+*/
 class AnnotationReader
 {
   
   String[] lines;
-  int index;
+  HashMap lines_hash;
   
   AnnotationReader(String filename)
   {
     lines = loadStrings(filename);
-    index = 0; 
+    generate_map(lines);
   }
   
-  public String[] get_annotation(int ix)
+  private void generate_map(String[] lines)
   {
-    String[] pieces = get_line(ix);
-    String[] annotation = new String[2];
+    lines_hash = new HashMap();
+    for (int i =0; i < lines.length; i++) {
+      String[] note = get_line(i);
+      if (note != null) {
+        lines_hash.put(note[0], i);
+      }
+    }
+  }
+  
+  public String[] get_annotation(String mykey)
+  {
+    Object hash_val = lines_hash.get(mykey);
+    String i = hash_val.toString();
+    int line_index = PApplet.parseInt(i);
+    String[] pieces = get_line(line_index);
+    String[] annotation = new String[3];
     switch(pieces.length) {
+      case 3:
+        annotation[0] = pieces[0];
+        annotation[1] = pieces[1];
+        annotation[2] = pieces[2];
+        break;
       case 2:
         annotation[0] = pieces[0];
         annotation[1] = pieces[1];
+        annotation[2] = "";
         break;
       case 1:
-        annotation[0] = pieces[0];
-        annotation[1] = "";
+        annotation = null;
         break;
     }
     return annotation;
@@ -138,6 +160,7 @@ class AnnotationReader
   private String[] get_line(int ix)
   {
     if (ix > lines.length-1) return null; 
+    if (lines[ix].equals("")) return null;
     return split(lines[ix], ' ');
   }
 }
@@ -227,7 +250,7 @@ class Config
 class Network
 { 
   
-  Map nodes;
+  HashMap nodes;
   java.util.List edges;  // a growable list 
   int nodeid;
   
@@ -283,15 +306,15 @@ class Network
     }     
   }
   
-  private void add_node(String name)
+  private void add_node(String mykey)
   {
-    if (! nodes.containsKey(name))
+    if (! nodes.containsKey(mykey))
     {
       if (annotation != null) {
-        String[] notes = annotation.get_annotation(nodeid);
-        nodes.put(name, new Node(nodeid,notes[0],notes[1]));
+        String[] notes = annotation.get_annotation(mykey);
+        nodes.put(mykey, new Node(nodeid,notes[1],notes[2]));
       } else {
-        nodes.put(name, new Node(nodeid,name,""));
+        nodes.put(mykey, new Node(nodeid,mykey,""));
       }
       nodeid++;
     }
@@ -487,7 +510,7 @@ public void mouseClicked()
 // call always before if (mouseButton == left)
 public boolean rightClick()
 {
-  if ((mouseButton == LEFT) && (keyPressed) && (key == CODED) && (keyCode == ALT) ) {
+  if ((mouseButton == LEFT) && (keyPressed) && (key == CODED) && (keyCode == CONTROL) ) {
     return true;
   } else if (mouseButton == RIGHT) {
     return true;
@@ -500,46 +523,6 @@ public boolean rightClick()
 
 public void keyPressed()
 {
-  if ( key == '1' )
-  {
-    c = web;
-    reader = new NetworkReader("siteedges.txt");
-    annotation = new AnnotationReader("sitenodes.txt");
-    initialize();
-  }
-  
-  if ( key == '2' )
-  {
-    c = mrblue;
-    reader = new NetworkReader("testedges.txt");
-    annotation = null;
-    initialize();
-  }
-  
-  if ( key == '3' )
-  {
-    c = classic;
-    reader = new NetworkReader("barabasiedges.txt");
-    annotation = null;
-    initialize();
-  }
-  
-  if ( key == '4' )
-  {
-    c = classic;
-    reader = new NetworkReader("bigbarabasiedges.txt");
-    annotation = null;
-    initialize();
-  }
- 
-  if ( key == '5' )
-  {
-    c = directed;
-    reader = new NetworkReader("directed.txt");
-    annotation = null;
-    initialize();
-  }
- 
   if ( key == 'c' )
   {
     initialize();
@@ -550,12 +533,7 @@ public void keyPressed()
     addEdge(objcounter);
     objcounter += 1;  
   }
-  
-  if ( key == 'i' ) 
-  {
-    network.debug();
-  }
-    
+     
   if ( key == 's' )
   {
     toggle_centroid = !toggle_centroid;
@@ -815,125 +793,36 @@ public void turn_on_springs(Particle p)
 }
 public void config()
 {
-  Config t;
+  XMLElement xml;
+  xml = new XMLElement(this, param("config"));
+  //xml = new XMLElement(this, "classic.xml");
+  parse_xml(xml);
   
-  // *********** Classic ****************
-  t = new Config();
-  t.NODE_SIZE = 10;
-  t.SPACER_STRENGTH = 1000;
-  t.SPACER_MAX = 20.0f;
-  t.EDGE_LENGTH = 20;
-  t.EDGE_STRENGTH = 0.2f;
-  t.EDGE_DAMPING = 0.2f;
-  t.STROKE_WEIGHT = 2;
-  t.FONTSIZE = 5;
-  t.set_background(233,233,233);
-  t.set_e_rgb(100,100,100);
-  t.set_n_rgb(150,150,150);
-  t.set_nh_rgb(205,205,205);
-  t.set_n2_rgb(150,0,0);
-  t.set_n2h_rgb(255,0,0);
-  t.set_l_rgb(0,0,0);
-  t.draw_edges  = true;
-  t.draw_nodes  = true;
-  t.draw_labels = true;
-  t.with_links  = false;
-  t.directed  = false;
-  classic = t;
-  // ************************************
-  
-  // *********** Directed ****************
-  t = new Config();
-  t.NODE_SIZE = 10;
-  t.SPACER_STRENGTH = 1000;
-  t.SPACER_MAX = 20.0f;
-  t.EDGE_LENGTH = 20;
-  t.EDGE_STRENGTH = 0.2f;
-  t.EDGE_DAMPING = 0.2f;
-  t.STROKE_WEIGHT = 2;
-  t.FONTSIZE = 5;
-  t.set_background(233,233,233);
-  t.set_e_rgb(100,100,100);
-  t.set_n_rgb(150,150,150);
-  t.set_nh_rgb(205,205,205);
-  t.set_n2_rgb(150,0,0);
-  t.set_n2h_rgb(255,0,0);
-  t.set_l_rgb(0,0,0);
-  t.draw_edges  = true;
-  t.draw_nodes  = true;
-  t.draw_labels = true;
-  t.with_links  = false;
-  t.directed  = true;  
-  directed = t;
-  // ************************************
-  
-  // *********** MrBlue ****************
-  t = new Config();
-  t.NODE_SIZE = 20;
-  t.SPACER_STRENGTH = 1000;
-  t.SPACER_MAX = 20.0f;
-  t.EDGE_LENGTH = 30;
-  t.EDGE_STRENGTH = 0.2f;
-  t.EDGE_DAMPING = 0.2f;
-  t.STROKE_WEIGHT = 2;
-  t.FONTSIZE = 5;
-  t.set_background(190,225,252);
-  t.set_e_rgb(232,232,101);
-  t.set_n_rgb(22,111,184);
-  t.set_nh_rgb(205,205,205);
-  t.set_n2_rgb(22,111,184);
-  t.set_n2h_rgb(205,205,205);
-  t.set_l_rgb(0,0,0);
-  t.draw_edges  = true;
-  t.draw_nodes  = true;
-  t.draw_labels = true;
-  t.directed  = false;
-  t.with_links  = false;  
-  mrblue = t;
-  // ************************************
-   
-  // *********** Web ****************
-  t = new Config();
-  t.NODE_SIZE = 10;
-  t.SPACER_STRENGTH = 1000;
-  t.SPACER_MAX = 20.0f;
-  t.EDGE_LENGTH = 20;
-  t.EDGE_STRENGTH = 0.2f;
-  t.EDGE_DAMPING = 0.2f;
-  t.STROKE_WEIGHT = 2;
-  t.FONTSIZE = 5;
-  t.set_background(223,223,233);
-  t.set_e_rgb(100,100,110);
-  t.set_n_rgb(150,150,150);
-  t.set_nh_rgb(205,205,205);
-  t.set_n2_rgb(150,20,20);
-  t.set_n2h_rgb(255,0,0);
-  t.set_l_rgb(0,0,0);
-  t.draw_edges  = true;
-  t.draw_nodes  = true;
-  t.draw_labels = true;
-  t.directed  = false;
-  t.with_links  = true;  
-  web = t;
-  // ************************************
-  
+
   // PROCESSING CONFIG
   ellipseMode( CENTER );
   rectMode ( CORNER );
   smooth();
   font = createFont("Verdana",10);
-  speed = FRAMERATE;
-  
+  speed = FRAMERATE / 2;
+
   // PYSHICS CONFIG
   // 2D particle system new ParticleSystem( float gravityY, float drag )
   // new Smoother3D( float smoothness )
   physics = new ParticleSystem( 0, 0.25f );
   centroid = new Smoother3D( 0.8f );
-  
-  // Load defaut network and config [must change into application with single network/config]
-  c = web;
-  reader = new NetworkReader("siteedges.txt");
-  annotation = new AnnotationReader("sitenodes.txt");
+
+  // FIXME
+  //reader = new NetworkReader("directed.txt");
+  reader = new NetworkReader(param("edges"));
+  String notefile = param("nodes");
+  //String notefile = "sitenodes.txt";
+  //String notefile = "directednote.txt";
+  if (notefile == null) {
+    annotation = null;
+  } else {
+    annotation = new AnnotationReader(notefile);
+  }
 }
 
 public void initialize()
@@ -950,6 +839,149 @@ public void initialize()
   toggle_zoombox = false;
 }
 
+public void parse_xml(XMLElement xml)
+{
+// SLURP XML CONFIG
+  
+  c = new Config();
+
+  // params
+  XMLElement params = xml.getChild("params");
+
+  XMLElement obj = params.getChild("node");
+  XMLElement kid = obj.getChild("size");
+  String content = kid.getContent().toString();
+  c.NODE_SIZE = PApplet.parseFloat(content);
+
+  obj = params.getChild("spacer");
+  kid = obj.getChild("strength");
+  content = kid.getContent().toString();
+  c.SPACER_STRENGTH = PApplet.parseFloat(content);
+  kid = obj.getChild("max");
+  content = kid.getContent().toString();
+  c.SPACER_MAX = PApplet.parseFloat(content);
+  
+  obj = params.getChild("edge");
+  kid = obj.getChild("length");
+  content = kid.getContent().toString();
+  c.EDGE_LENGTH = PApplet.parseFloat(content);
+  kid = obj.getChild("strength");
+  content = kid.getContent().toString();
+  c.EDGE_STRENGTH = PApplet.parseFloat(content);
+  kid = obj.getChild("damping");
+  content = kid.getContent().toString();
+  c.EDGE_DAMPING = PApplet.parseFloat(content);
+
+  obj = params.getChild("stroke");
+  kid = obj.getChild("weight");
+  content = kid.getContent().toString();
+  c.STROKE_WEIGHT = PApplet.parseInt(content);
+  obj = params.getChild("font");
+  kid = obj.getChild("size");
+  content = kid.getContent().toString();
+  c.FONTSIZE = PApplet.parseInt(content);
+  
+  // COLORS
+  XMLElement colors = xml.getChild("colors");
+
+  obj = colors.getChild("background");
+  kid = obj.getChild("r");
+  content = kid.getContent().toString();
+  int r = PApplet.parseInt (content);
+  kid = obj.getChild("g");
+  content = kid.getContent().toString();
+  int g = PApplet.parseInt (content);
+  kid = obj.getChild("b");
+  content = kid.getContent().toString();
+  int b = PApplet.parseInt (content);
+  c.set_background(r,g,b);
+
+  obj = colors.getChild("edge");
+  kid = obj.getChild("r");
+  content = kid.getContent().toString();
+  r = PApplet.parseInt (content);
+  kid = obj.getChild("g");
+  content = kid.getContent().toString();
+  g = PApplet.parseInt (content);
+  kid = obj.getChild("b");
+  content = kid.getContent().toString();
+  b = PApplet.parseInt (content);  
+  c.set_e_rgb(r,g,b);
+
+  obj = colors.getChild("node1");
+  kid = obj.getChild("r");
+  content = kid.getContent().toString();
+  r = PApplet.parseInt (content);
+  kid = obj.getChild("g");
+  content = kid.getContent().toString();
+  g = PApplet.parseInt (content);
+  kid = obj.getChild("b");
+  content = kid.getContent().toString();
+  b = PApplet.parseInt (content);    
+  c.set_n_rgb(r,g,b);
+  kid = obj.getChild("rh");
+  content = kid.getContent().toString();
+  r = PApplet.parseInt (content);
+  kid = obj.getChild("gh");
+  content = kid.getContent().toString();
+  g = PApplet.parseInt (content);
+  kid = obj.getChild("bh");
+  content = kid.getContent().toString();
+  b = PApplet.parseInt (content);      
+  c.set_nh_rgb(r,g,b);
+  
+  obj = colors.getChild("node2");
+  kid = obj.getChild("r");
+  content = kid.getContent().toString();
+  r = PApplet.parseInt (content);
+  kid = obj.getChild("g");
+  content = kid.getContent().toString();
+  g = PApplet.parseInt (content);
+  kid = obj.getChild("b");
+  content = kid.getContent().toString();
+  b = PApplet.parseInt (content);    
+  c.set_n2_rgb(r,g,b);
+  kid = obj.getChild("rh");
+  content = kid.getContent().toString();
+  r = PApplet.parseInt (content);
+  kid = obj.getChild("gh");
+  content = kid.getContent().toString();
+  g = PApplet.parseInt (content);
+  kid = obj.getChild("bh");
+  content = kid.getContent().toString();
+  b = PApplet.parseInt (content);      
+  c.set_n2h_rgb(r,g,b);
+
+  obj = colors.getChild("label");
+  kid = obj.getChild("r");
+  content = kid.getContent().toString();
+  r = PApplet.parseInt (content);
+  kid = obj.getChild("g");
+  content = kid.getContent().toString();
+  g = PApplet.parseInt (content);
+  kid = obj.getChild("b");
+  content = kid.getContent().toString();
+  b = PApplet.parseInt (content); 
+  c.set_l_rgb(r,g,b);
+ 
+  // COLORS
+  XMLElement flags = xml.getChild("flags"); 
+  obj = flags.getChild("drawedges");
+  content = obj.getContent().toString();
+  c.draw_edges  = PApplet.parseBoolean(PApplet.parseInt(content));
+  obj = flags.getChild("drawnodes");
+  content = obj.getContent().toString();
+  c.draw_nodes  = PApplet.parseBoolean(PApplet.parseInt(content));
+  obj = flags.getChild("drawlabels");
+  content = obj.getContent().toString();
+  c.draw_labels = PApplet.parseBoolean(PApplet.parseInt(content));
+  obj = flags.getChild("withlinks");
+  content = obj.getContent().toString();
+  c.with_links  = PApplet.parseBoolean(PApplet.parseInt(content));
+  obj = flags.getChild("directed");
+  content = obj.getContent().toString();
+  c.directed  = PApplet.parseBoolean(PApplet.parseInt(content));  
+}
 
   static public void main(String args[]) {
     PApplet.main(new String[] { "--bgcolor=#ffffff", "SimpleNetworkVisualizer" });

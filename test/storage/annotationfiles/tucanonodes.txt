@@ -1,26 +1,26 @@
-index http://tucano.recipient.cc/index.html
-home http://tucano.recipient.cc/home.html
-links http://tucano.recipient.cc/links.html
-contacts http://tucano.recipient.cc/contacts.html
-projects http://tucano.recipient.cc/projects.html
-art http://tucano.recipient.cc/art.html
-science http://tucano.recipient.cc/science.html
-other http://tucano.recipient.cc/other.html
-asciiart
-flashart
-robotics
-playgene
-bioinformatics
-university
-master
-PhD
-unix
-Veterinary
-MolecularEvolution
-Lab http://ciccarelli.group.ifom-ieo-campus.it/fcwiki/DavideRambaldi
-recipient.cc http://recipient.cc
-delicious
-email
-YOUAREHERE
-WWW.*.*
-PublicProfiles
+0 index http://tucano.recipient.cc/index.html
+1 home http://tucano.recipient.cc/home.html
+2 links http://tucano.recipient.cc/links.html
+3 contacts http://tucano.recipient.cc/contacts.html
+4 projects http://tucano.recipient.cc/projects.html
+5 art http://tucano.recipient.cc/art.html
+6 science http://tucano.recipient.cc/science.html
+7 other http://tucano.recipient.cc/other.html
+8 asciiart
+9 flashart
+10 robotics
+11 playgene
+12 bioinformatics
+13 university
+14 master
+15 PhD
+16 unix
+17 Veterinary
+18 MolecularEvolution
+19 Lab http://ciccarelli.group.ifom-ieo-campus.it/fcwiki/DavideRambaldi
+20 recipient.cc http://recipient.cc
+21 delicious
+22 email
+23 YOUAREHERE
+24 WWW.*.*
+25 PublicProfiles

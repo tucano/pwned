@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
-  # TODO FIXME this controller and redirections (is a partial), then no more redirections to @comments
   before_filter :load_network
 
   # GET /comments

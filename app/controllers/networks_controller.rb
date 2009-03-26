@@ -48,7 +48,7 @@ class NetworksController < ApplicationController
     end
   end
   
-  # AJAX function to get a record (actually not used)
+  # TODO AJAX function to get a record (actually not used)
   # Example:
   # <div id="<%= network.name + 'box' %>" ></div>
   # <%= link_to_remote 'Show inline', 
@@ -113,7 +113,6 @@ class NetworksController < ApplicationController
 
   # PUT /networks/1
   # PUT /networks/1.xml
-  # TODO FIXME according to changes in create
   def update
     @network = Network.find(params[:id])
     @edgefile = @network.edgefile
@@ -135,7 +134,6 @@ class NetworksController < ApplicationController
 
   # DELETE /networks/1
   # DELETE /networks/1.xml
-  # TODO what we do with this Destroy method? AdminAccess
   def destroy
     @network = Network.find(params[:id])
     @network.destroy

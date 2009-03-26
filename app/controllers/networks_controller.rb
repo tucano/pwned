@@ -64,7 +64,7 @@ class NetworksController < ApplicationController
       logger.error("Attempt to access invalid network #{params[:id]}")
       render :text => "Invalid Network"
     else
-      render :partial => @network
+      render :partial => 'applet_small'
     end
   end
 

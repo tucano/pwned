@@ -12,6 +12,8 @@
 
 .content .networktitle { border: 0px #000 solid; }
 
+.appletsmall { margin: 20px; }
+
 /* TAG cloud */
 .tag1 { font-size: 1.0em; }
 .tag2 { font-size: 1.2em; }

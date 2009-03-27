@@ -6,11 +6,13 @@
     :id => "#{network.name}toggle_inline", :style => "display:none;"
   %>
   <%= link_to_remote 'Show inline',
-    :html => {:id  => 'show_inline'},
+    :html => {:id  => "#{network.name}show_inline" },
     :url => { :action => 'get_network' , :id => network.id  },
     :update => { :success => "#{network.name}show", :failure => "notice" },
     :before => "Element.hide(\'#{network.name}show\')",
-    :complete => "Element.show(\'#{network.name}show\');Element.hide('show_inline');Element.show(\'#{network.name}toggle_inline\')"
+    :complete => "Element.show(\'#{network.name}show\');
+                  Element.hide(\'#{network.name}show_inline\');
+                  Element.show(\'#{network.name}toggle_inline\')"
   %> | 
   <%=  link_to_function "Description", "Effect.toggle('#{network.name}desc', 'appear',{ duration: 0.5 })" %> | 
 	<%= link_to 'Comments', network_comments_path(network) %> | 

@@ -72,6 +72,27 @@ class NetworkTest < ActiveSupport::TestCase
     end
   end
   
-  # TODO act_as_taggable testing? (don't have model)
+  test "create with tags" do
+    network = Network.new(
+      :name => 'tag',
+      :description => 'tagtagtag',
+      :tag_list => "A,B,C,D,E"
+    )
+    assert network.valid?, network.errors.full_messages
+    assert network.save
+    assert_equal ["A","B","C","D","E"], network.tag_list
+  end
+  
+  test "should get errors on bad tags" do
+    badtag = "A" * 100
+    network = Network.new(
+      :name => 'tag',
+      :description => 'tagtagtag',
+      :tag_list => badtag
+    )
+    assert !network.valid?
+    assert !network.save
+    assert_equal "#{badtag} is too big (size: #{badtag.size}), maximum size is: 50", network.errors.on(:tag)
+  end
   
 end

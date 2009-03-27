@@ -3,9 +3,14 @@ ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
   map.resources :networks, 
     :collection => { :auto_complete_for_network_name => :get, 
-                     :tag => :get, :search => :get },
-    :member => { :view => :get },
-    :has_many => :comments
+                     :tag => :get, 
+                     :search => :get,
+                     :get_network => :get },
+    :member => { :view => :get }
+    
+  map.resources :networks do |network|
+    network.resources :comments, :collection => { :get_comments => :get }
+  end
 
   map.root :controller => "networks"
 

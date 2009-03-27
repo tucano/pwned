@@ -11,8 +11,14 @@ class AnnotationserviceTest < Test::Unit::TestCase
     assert @service.valid?
   end
   
-  def test_invalid
+  def test_invalid_with_no_data
     data = nil
+    @service = Annotationservice.new(data)
+    assert !@service.valid?
+  end
+  
+  def test_invalid_url
+    data = "A pippo http:/\:,,,,::::ldsdsa%%$"
     @service = Annotationservice.new(data)
     assert !@service.valid?
   end

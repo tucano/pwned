@@ -1,6 +1,6 @@
 class AddCacheToNetwork < ActiveRecord::Migration
   def self.up
-    add_column :networks, :cached_tag_list, :string
+    add_column :networks, :cached_tag_list, :text
   end
 
   def self.down

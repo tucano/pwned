@@ -59,4 +59,15 @@ class AnnotationfileTest < ActiveSupport::TestCase
     assert_equal "error on size #{annotationfile.size}", annotationfile.errors.on(:size)
   end
   
+  test "error on invalid format" do
+    annotationfile = Annotationfile.new()
+    annotationfile.filename = 'pippo.txt'
+    annotationfile.content_type = 'text/plain'
+    annotationfile.set_temp_data("A\nB\nC D\n")
+    assert !annotationfile.valid?
+    assert !annotationfile.save
+    # FIXME this test
+    #assert_equal "is not a valid annotation file", annotationfile.errors.on(:xmldata)
+  end
+  
 end

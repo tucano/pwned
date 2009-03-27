@@ -1,9 +1,8 @@
 * New TODO
 
-- Update AnnotationFIle after applet update
+* Update AnnotationFIle after applet update
 * Show applet inline in index 
-- Comments AJAX updater from networks index
-- Annotationfile ALL
+* Comments AJAX updater from networks index
 - Admin layer
 - Better error messages
 - Better errors handling (AJAX update?)

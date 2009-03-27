@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
 
   before_filter :load_network
 
+  layout 'application', :except => [:get_comments]
+
   # GET /comments
   # GET /comments.xml
   # GET /network/:id/comments
@@ -87,9 +89,42 @@ class CommentsController < ApplicationController
     end
   end
   
+  # AJAX action to get comments
+  def get_comments
+    @comments = @network.comments.find(:all, :order => 'created_at DESC', :limit => 5)
+    @comment = Comment.new()
+    render :partial => 'inline_comments'
+  end
+  
+  # AJAX action to create comment
+  # FIXME please
+  def add_comment 
+    @comment = @network.comments.build(params[:comment])
+    if @comment.save then
+      @comments = @network.comments.find(:all, :order => 'created_at DESC', :limit => 5)
+      logger.info("Created valid comment for network #{params[:network_id]}")
+    else
+      @comments = @network.comments.find(:all, :order => 'created_at DESC', :limit => 5)
+      logger.error("Attempt to create invalid comment for network #{params[:network_id]}")
+    end
+  end
+  
   private
+  
   def load_network
-    @network = Network.find(params[:network_id])
+    begin
+      @network = Network.find(params[:network_id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error("Attempt to access invalid comments for network #{params[:network_id]}")
+      redirect_to_networks("Invalid Network")
+    else
+      return @network
+    end
+  end
+  
+  def redirect_to_networks(msg = nil)
+    flash[:notice] = msg if msg
+    redirect_to :action => :index, :controller => :networks
   end
   
 end

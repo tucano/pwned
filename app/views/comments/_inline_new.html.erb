@@ -1,0 +1,7 @@
+<p> 
+  <% form_remote_tag :url => { :action => :add_comment, :network_id => @network.id } do %>
+    <%= error_messages_for :comment %>
+    <%= text_area :comment,  :body, :size => "50x10" %><br/>
+    <%= submit_tag 'New Comment', :class => "button", :name => nil %>
+  <% end %>
+</p>

@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20090324080920) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cached_tag_list"
+    t.text     "cached_tag_list"
   end
 
   create_table "sessions", :force => true do |t|

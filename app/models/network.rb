@@ -18,6 +18,8 @@ class Network < ActiveRecord::Base
 
   validates_uniqueness_of :name
   
+  validate :tag_list_valid?, :if => Proc.new{ |n| !n.tag_list.blank? }
+  
   # OPTIMIZE this search
   def self.search(query = nil, options={})
     with_scope( :find => { :conditions => self.search_conditions(query) }) do
@@ -28,6 +30,16 @@ class Network < ActiveRecord::Base
   # Sitemap finder
   def self.find_for_sitemap
     find(:all, :select => "id, updated_at", :order => "updated_at DESC", :limit => 50000)
+  end
+
+  # FIXME tag validation for now just on size less than 100 chars
+  def tag_list_valid?
+    maxsize = 50
+    self.tag_list.each do |tag|
+      unless tag.size <= maxsize
+        errors.add(:tag, "#{tag} is too big (size: #{tag.size}), maximum size is: #{maxsize}")
+      end
+    end
   end
   
   private

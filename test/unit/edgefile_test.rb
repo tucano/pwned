@@ -56,4 +56,15 @@ class EdgefileTest < ActiveSupport::TestCase
     assert_equal "error on size #{edgefile.size}", edgefile.errors.on(:size)
   end
   
+  test "error on invalid edge file" do
+    edgefile = Edgefile.new()
+    edgefile.filename = 'pippo.txt'
+    edgefile.content_type = 'text/plain'
+    edgefile.set_temp_data("A B C\nF G H\n")
+    assert !edgefile.valid?
+    assert !edgefile.save
+    # FIXME this test
+    #assert_equal "is not a valid annotation file", annotationfile.errors.on(:xmldata)
+  end
+  
 end

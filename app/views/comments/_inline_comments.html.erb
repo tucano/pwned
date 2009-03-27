@@ -1,0 +1,12 @@
+<% if @comments.empty? %>
+  <h4>No comments</h4>
+<% else %>
+  <h4>Last <%= @comments.size %> comments</h4>
+<% end %>
+<% for comment in @comments %>
+  <%= render :partial => comment %>
+<% end %>
+
+<blockquote>
+  <%= render :partial => 'inline_new' %>
+</blockquote>

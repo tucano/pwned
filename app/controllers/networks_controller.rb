@@ -9,7 +9,7 @@ class NetworksController < ApplicationController
   def index
     
     @networks = Network.search(params[:network])
-    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 10
+    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
     
     respond_to do |format|
       format.html # index.html.erb
@@ -56,21 +56,13 @@ class NetworksController < ApplicationController
     end
   end
   
-  # TODO AJAX function to get a record (actually not used)
-  # Example:
-  # <div id="<%= network.name + 'box' %>" ></div>
-  # <%= link_to_remote 'Show inline', 
-  #     :url => { :action => 'get_network' , :id => network.id  }, 
-  #     :update => { :success => "#{network.name}box", :failure => "notice" },
-  #     :before => "Element.hide(\'#{network.name}box\')",
-  #     :complete => "Element.show(\'#{network.name}box\')"
-  #   %>
+  # AJAX action to get a record
   def get_network
     begin
       @network = Network.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       logger.error("Attempt to access invalid network #{params[:id]}")
-      render :text => "Invalid Network"
+      redirect_to_index("Invalid Network ID")
     else
       render :partial => 'applet_small'
     end
@@ -152,4 +144,9 @@ class NetworksController < ApplicationController
     end
   end
 
+  private
+  def redirect_to_index(msg = nil)
+    flash[:notice] = msg if msg
+    redirect_to :action => :index
+  end
 end

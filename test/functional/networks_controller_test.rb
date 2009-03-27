@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class NetworksControllerTest < ActionController::TestCase
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -10,6 +11,32 @@ class NetworksControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+  end
+
+  test "should get search page" do
+    get :search, :network => { :name => 'Barabsi'}
+    assert_response :success
+    assert_template "search"
+  end
+  
+  test "should get view page" do
+    get :view, :id => networks(:barabasi).id
+    assert_response :success
+    assert_template "view"
+  end
+  
+  test "should get network" do
+    get :get_network, :id => networks(:barabasi).id
+    assert_response :success
+    assert_template "applet_small"
+    assert_not_nil assigns(:network)
+  end
+  
+  test "should raise error on get network with invalid id" do
+    get :get_network, :id => 0
+    assert_response :success
+    assert_template ""
+    # TODO test error (before define an error template)
   end
 
   test "should create network" do
@@ -72,7 +99,7 @@ class NetworksControllerTest < ActionController::TestCase
     }
 
     edges = "A B\nA C\n"
-    annotations = "uno\ndue\ntre\n"
+    annotations = "A uno\nB due\nC tre\n"
 
     assert_difference('Network.count') do
       post :create, :network => network_hash,

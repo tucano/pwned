@@ -2,7 +2,7 @@ class NetworksController < ApplicationController
   
   auto_complete_for :network, :name
   
-  layout 'application', :except => [:get_network]
+  layout 'application', :except => [:get_network, :view]
   
   # GET /networks
   # GET /networks.xml
@@ -44,7 +44,15 @@ class NetworksController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.rss { render :layout => false }
-      format.xml  { render :xml => @network }
+      format.xml  { render :xml => @network }      
+    end
+  end
+  
+   # GET /networks/1/view
+  def view
+    @network = Network.find(params[:id])
+    respond_to do |format|
+      format.html { render :action => :view, :layout => 'fullscreen' }
     end
   end
   

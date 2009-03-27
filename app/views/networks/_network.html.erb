@@ -14,6 +14,7 @@
 	<div id="tags">
 	  <blockquote>
 	  <p>
+	    <%= link_to 'Fullscreen', :action => 'view' %> | 
 	    <%=  link_to_function "Details", "Effect.toggle('details', 'blind',{ duration: 0.5 })" %> | 
 	    <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %> | 
 	    <b>Tags: </b>

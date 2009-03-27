@@ -32,6 +32,14 @@
 	border: solid 5px rgb(175,175,175);
 }
 
+.appletbig
+{
+	width: 1024px;
+	height: 768px;
+	margin: 10px auto 10px auto;
+	border: solid 5px rgb(175,175,175);
+}
+
 /* TAG cloud */
 .tag1 { font-size: 1.0em; }
 .tag2 { font-size: 1.2em; }

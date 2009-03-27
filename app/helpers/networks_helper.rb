@@ -40,8 +40,6 @@ module NetworksHelper
       "New Form"
     end
   end
-
- 
   
   def config_form_builder(xml)
     form = String.new

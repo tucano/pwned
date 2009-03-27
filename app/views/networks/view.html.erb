@@ -1,0 +1,10 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
+  <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
+	<%= stylesheet_link_tag 'pwned_nosidebar' %>
+<% end %>
+
+
+<%= render :partial => 'applet_big' %>
+<p align="center"><big><%= link_to 'Back', :action => :show %></big></p>

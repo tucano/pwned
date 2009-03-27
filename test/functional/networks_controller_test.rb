@@ -34,9 +34,7 @@ class NetworksControllerTest < ActionController::TestCase
   
   test "should raise error on get network with invalid id" do
     get :get_network, :id => 0
-    assert_response :success
-    assert_template ""
-    # TODO test error (before define an error template)
+    assert_redirected_to networks_path
   end
 
   test "should create network" do

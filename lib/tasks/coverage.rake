@@ -38,7 +38,7 @@ begin
   
   end
   
-rescue Object
+rescue Exception
   
 end
 

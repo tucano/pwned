@@ -25,7 +25,7 @@ begin
           t.libs << "test"
           t.test_files = FileList["test/#{target}/**/*_test.rb"]
           t.verbose = true
-          t.rcov_opts << '--rails --aggregate test/coverage.data --exclude /Library/,/System/'
+          t.rcov_opts << '--rails --aggregate test/coverage.data --exclude /Library/,/System/,/Users/'
           if target == tests_to_run[-1]
             t.output_dir = "test/coverage"
           else
@@ -41,3 +41,4 @@ begin
 rescue Object
   
 end
+

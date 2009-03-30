@@ -1,8 +1,10 @@
 .DS_Store
+Capfile
 log/*.log
 tmp/**/*
 config/database.yml
 config/amazon_s3.yml
+config/deploy.rb
 public/storage
 db/*.sqlite3
 doc/api
@@ -10,3 +12,4 @@ doc/app
 doc/plugins
 test/coverage
 test/coverage.data
+

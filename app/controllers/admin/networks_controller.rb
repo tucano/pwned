@@ -1,6 +1,4 @@
 class Admin::NetworksController < ApplicationController
-
-  auto_complete_for :network, :name
   
   layout 'application', :except => [:get_network, :view]
   

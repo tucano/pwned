@@ -1,0 +1,26 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid' %>
+  <%= stylesheet_link_tag 'mf54_content' %>
+	<%= stylesheet_link_tag 'pwned' %>
+<% end %>
+
+<!-- PAGE TITLE -->
+<h1 class="pagetitle"><%= page_title %></h1>
+
+<div id="notice">
+	<p style="color: green"><%= flash[:notice] %></p>
+</div>
+
+<!-- C.1 CONTENT -->
+<div class="content">
+  <!-- CELL -->
+	<div class="corner-content-1col-top"></div>
+	<div class="content-1col-nobox">
+	  <h2>Controllers</h2>
+	  <ul>
+	    <li><%= link_to "Networks" ,admin_networks_path %></li>
+	  </ul>  
+  </div>
+	<div class="corner-content-1col-bottom"></div>
+</div>

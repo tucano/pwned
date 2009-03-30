@@ -20,6 +20,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :networks
   end
   
+  map.admin 'admin', :controller => 'admin'
+  
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

@@ -16,6 +16,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.sitemap 'sitemap.xml', :controller => 'sitemap', :action => 'sitemap'
   
+  map.namespace :admin do |admin|
+    admin.resources :networks
+  end
+  
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

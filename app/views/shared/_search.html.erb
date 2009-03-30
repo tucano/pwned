@@ -4,7 +4,11 @@
   <div class="searchform">
     <% form_tag networks_path, :method => :get do %>
   		<fieldset>
-  			<%= text_field_with_auto_complete :network, :name , { :autocomplete => "off"}, { :method => :get} %>
+  			<%= text_field_with_auto_complete :network, :name , 
+  			    { :autocomplete => "off"}, 
+  			    { :method => :get, :url => { 
+  			        :controller => "/networks", 
+  			        :action => :auto_complete_for_network_name} } %>
   			<br/>
   	  	<%= submit_tag "GO!", :class => "button", :name => nil %>
   		</fieldset>	

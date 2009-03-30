@@ -1,0 +1,49 @@
+
+<h2><%= link_to network.name, network %></h2>
+<p>Posted by DummyUser <%= network.created_at.to_date -%></p>
+<p class="details">
+  <%= link_to_function "Toggle Inline", "Effect.toggle('#{network.name}show', 'appear',{ duration: 0.1 })",
+    :id => "#{network.name}toggle_inline", :style => "display:none;"
+  %>
+  <%= link_to_remote 'Show inline',
+    :html => {:id  => "#{network.name}show_inline" },
+    :url => { :action => 'get_network' , :id => network.id  },
+    :method => :get,
+    :update => { :success => "#{network.name}show", :failure => "notice" },
+    :before => "Element.hide(\'#{network.name}show\')",
+    :complete => "Element.show(\'#{network.name}show\');
+                  Element.hide(\'#{network.name}show_inline\');
+                  Element.show(\'#{network.name}toggle_inline\')"
+  %> | 
+  <%=  link_to_function "Description", "Effect.toggle('#{network.name}desc', 'appear',{ duration: 0.5 })" %> | 
+	<%= link_to_function "Toggle Comments", "Effect.toggle('#{network.name}comments', 'appear',{ duration: 0.1 })",
+    :id => "#{network.name}toggle_comments", :style => "display:none;"
+  %>
+	<%= link_to_remote 'Comments',
+	  :html => {:id  => "#{network.name}show_comments",   :method => :get },
+	  :url => get_comments_network_comments_path(network),
+	  :method => :get,
+	  :update => { :success => "#{network.name}comments", :failure => "notice" },
+    :before => "Element.hide(\'#{network.name}comments\')",
+    :complete => "Element.show(\'#{network.name}comments\');
+                  Element.hide(\'#{network.name}show_comments\');
+                  Element.show(\'#{network.name}toggle_comments\')"
+	%> | 
+	<%= link_to 'Edit', edit_network_path(network) %> | 
+	<%= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete %>
+<p>
+<p class="details">
+	<b>tags:</b> 
+	<% network.tag_list.each do |tag| %>
+	  <%= link_to tag, { :controller => :networks, :action => :tag, :name => tag }%>
+	<% end %>
+	 | <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %>
+</p>
+
+<div id="<%= network.name + 'desc' %>" style="display:none;">
+  <p><%= simple_format(auto_link(h(network.description))) %></p>
+</div>
+
+<div id="<%= network.name + 'show' %>" style="display:none;"></div>
+
+<div id="<%= network.name + 'comments' %>" style="display:none;"></div>

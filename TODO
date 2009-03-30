@@ -1,6 +1,6 @@
 * New TODO
 
-* Update AnnotationFIle after applet update
+* Update AnnotationFile after applet update
 * Show applet inline in index 
 * Comments AJAX updater from networks index
 - Admin layer
@@ -12,4 +12,4 @@
 - Formats (pajek, dots, etc..)
 
 * FIXME
-- Hack in config enviroment (fieldWithErrors proc)
+- Hack in config environment (fieldWithErrors proc)

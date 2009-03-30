@@ -1,6 +1,6 @@
 class Admin::NetworksController < ApplicationController
   
-  layout 'application', :except => [:get_network, :view]
+  layout 'application', :except => [:view]
   
   # GET /networks
   # GET /networks.xml
@@ -51,18 +51,6 @@ class Admin::NetworksController < ApplicationController
     @network = Network.find(params[:id])
     respond_to do |format|
       format.html { render :action => :view, :layout => 'fullscreen' }
-    end
-  end
-  
-  # AJAX action to get a record
-  def get_network
-    begin
-      @network = Network.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error("Attempt to access invalid network #{params[:id]}")
-      redirect_to_index("Invalid Network ID")
-    else
-      render :partial => 'networks/applet_small'
     end
   end
 
@@ -140,12 +128,6 @@ class Admin::NetworksController < ApplicationController
       format.html { redirect_to(admin_networks_url) }
       format.xml  { head :ok }
     end
-  end
-
-  private
-  def redirect_to_index(msg = nil)
-    flash[:notice] = msg if msg
-    redirect_to :action => :index
   end
 
 end

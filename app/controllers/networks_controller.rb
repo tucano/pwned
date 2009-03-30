@@ -132,17 +132,6 @@ class NetworksController < ApplicationController
     end
   end
 
-  # DELETE /networks/1
-  # DELETE /networks/1.xml
-  def destroy
-    @network = Network.find(params[:id])
-    @network.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(networks_url) }
-      format.xml  { head :ok }
-    end
-  end
 
   private
   def redirect_to_index(msg = nil)

@@ -7,7 +7,7 @@
   %>
   <%= link_to_remote 'Show inline',
     :html => {:id  => "#{network.name}show_inline" },
-    :url => { :action => 'get_network' , :id => network.id  },
+    :url => { :controller => "/networks", :action => 'get_network' , :id => network.id  },
     :method => :get,
     :update => { :success => "#{network.name}show", :failure => "notice" },
     :before => "Element.hide(\'#{network.name}show\')",
@@ -30,7 +30,7 @@
                   Element.show(\'#{network.name}toggle_comments\')"
 	%> | 
 	<%= link_to 'Edit', edit_network_path(network) %> | 
-	<%= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete %>
+	<%= link_to 'Destroy', admin_network_path(:id => network.id), :confirm => 'Are you sure?', :method => :delete %>
 <p>
 <p class="details">
 	<b>tags:</b> 

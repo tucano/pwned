@@ -22,4 +22,4 @@ rake utils:storage:init              # Create a storage
 
 == News
 
-Added new template, search box, attacments.
+Added new template, search box, attachments.

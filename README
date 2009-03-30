@@ -8,9 +8,11 @@ This software was presented as a prototype at dorkbot Milano (26/02/2009).
 
 == Getting Started
 
-1. Load fixtures: rake db:fixtures:load
-2. launch server (./script/server)
-3. Ready to go!
+1. cp db/example_database.yml config/database.yml
+2. rake db:migrate
+3. Load fixtures: rake db:fixtures:load
+4. launch server (./script/server)
+5. Ready to go!
 
 
 == Rake custom Tasks

@@ -29,7 +29,7 @@
                   Element.hide(\'#{network.name}show_comments\');
                   Element.show(\'#{network.name}toggle_comments\')"
 	%> | 
-	<%= link_to 'Edit', edit_network_path(network) %> | 
+	<%= link_to 'Edit', edit_admin_network_path(network) %> | 
 	<%= link_to 'Destroy', admin_network_path(:id => network.id), :confirm => 'Are you sure?', :method => :delete %>
 <p>
 <p class="details">

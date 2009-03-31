@@ -23,18 +23,16 @@
 	
 	<!-- NETWORKS LIST CELL -->
 	<div class="corner-content-1col-top"></div>
-	<div class="content-1col-nobox">
-		
-		<% if @pages.total_pages <= 1 then %>
-			<h1>Networks</h1>
-		<% else %>
-			<h1><%= will_paginate @pages %></h1>
-		<% end %>
+	<div class="content-1col-nobox">		
+	  <h1>Networks</h1>
+
+
 		
 		<% for network in @pages %>
 		  <%= render :partial => 'inline_network', :locals => { :network => network } %>
 		<% end %>
-		
+
+		<h6><%= will_paginate @pages %></h6>
 		<h6><%= page_entries_info @pages %></h6>
 	</div>
 	<div class="corner-content-1col-bottom"></div>

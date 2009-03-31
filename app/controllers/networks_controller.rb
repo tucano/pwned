@@ -9,7 +9,7 @@ class NetworksController < ApplicationController
   def index
     
     @networks = Network.search(params[:network])
-    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
+    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 50
     
     respond_to do |format|
       format.html # index.html.erb

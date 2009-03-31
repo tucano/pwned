@@ -19,7 +19,7 @@
 	    </dl>
 	    <dl>
         <dt><%= f.label :description, 'Description' %></dt>
-        <dd><%= f.text_area :description, :size => "60x10" %></dd>
+        <dd><%= f.text_area :description, :size => "60x10", :value => 'A description ...', :onfocus => "this.select()" %></dd>
       </dl>
         <dl>
           <dt><%= f.label :tag_list, 'Tags' %></dt>
@@ -27,7 +27,7 @@
         </dl>
         <dl>
         <dt><%= label_tag 'edges', 'Edges' %></dt>
-        <dd><%= text_area_tag 'edges' , nil, :size => "50x10" %></dd>
+        <dd><%= text_area_tag 'edges' , "NodeA NodeB\nNodeA NodeC\nNodeB NodeC\n", :size => "50x10" %></dd>
       </dl>
       <% fields_for :config do |config| %>
       <dl>

@@ -1,0 +1,34 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'mf54_reset' %>
+	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
+  <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
+	<%= stylesheet_link_tag 'pwned_nosidebar' %>
+<% end %>
+
+<% content_for(:toolbox) do %>
+  <li><%= link_to 'Edit', edit_network_path(@network) %></li>
+  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
+	<li><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></li>
+<% end %>
+
+<% content_for(:navbar) do %>
+  <%= render :partial => 'shared/menu_user' %>
+  <%= render :partial => 'shared/menu_toolbox' %>
+  <%= render :partial => 'shared/menu_networks' %>
+  <%= render :partial => 'shared/menu_help' %>
+<% end %>
+
+<!-- PAGE TITLE -->
+<h1 class="pagetitle"><%= page_title %></h1>
+
+<div id="notice">
+	<p style="color: green"><%= flash[:notice] %></p>
+</div>
+
+<!-- C.1 CONTENT no sidebar -->
+<div class="content">
+
+	<!-- NETWORK CONTENT CELL -->
+  <%= render :partial => @network %>
+	
+</div>

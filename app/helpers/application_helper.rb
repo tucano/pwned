@@ -40,8 +40,6 @@ module ApplicationHelper
     @rss_button ||= set_rss_button 
   end
   
-  private
-  
   def set_rss_button
     rss = url_for(formatted_networks_url(:rss))
     image = image_tag("icon_rss.gif")

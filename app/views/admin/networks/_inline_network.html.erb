@@ -1,5 +1,5 @@
 
-<h2><%= link_to network.name, network %></h2>
+<h2><%= link_to network.name, admin_network_path(network.id) %></h2>
 <p>Posted by DummyUser <%= network.created_at.to_date -%></p>
 <p class="details">
   <%= link_to_function "Toggle Inline", "Effect.toggle('#{network.name}show', 'appear',{ duration: 0.1 })",

@@ -2,11 +2,11 @@
 <div class="corner-subcontent-top"></div>                        
 <div class="subcontent-box">
   <h1 class="webtemplate">News</h1>                  
-  <h2><%= link_to "Last 5 added", networks_url %></h2> 
+  <h2><%= link_to "Last 5 added", :controller => :networks, :action => :index %></h2> 
   <ul>
   <!-- TODO, cache, move to controller, do something -->
   <% Network.find(:all).last(5).each do |n| %>
-    <li><%= link_to n.name, n %></li>
+    <li><%= link_to n.name, :controller => :networks, :action => :show, :id => n.id %></li>
   <% end %>
   </ul>
   <h2>Tag cloud</h2>

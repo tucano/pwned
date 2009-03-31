@@ -46,14 +46,6 @@ class Admin::NetworksController < ApplicationController
     end
   end
   
-   # GET /networks/1/view
-  def view
-    @network = Network.find(params[:id])
-    respond_to do |format|
-      format.html { render :action => :view, :layout => 'fullscreen' }
-    end
-  end
-
   # GET /networks/new
   # GET /networks/new.xml
   def new

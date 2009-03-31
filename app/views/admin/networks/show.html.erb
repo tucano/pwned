@@ -3,12 +3,19 @@
 	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
   <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
 	<%= stylesheet_link_tag 'pwned_nosidebar' %>
+	<%= stylesheet_link_tag 'admin' %>
+<% end %>
+
+<% content_for(:menu_networks) do %>
+  <li><%= link_to 'all', admin_networks_path %></li>
+	<li><%= link_to 'new', new_admin_network_path %></li>
+	<li><%= link_to 'search', search_admin_networks_path %></a></li>
 <% end %>
 
 <% content_for(:toolbox) do %>
-  <li><%= link_to 'Edit', edit_network_path(@network) %></li>
+  <li><%= link_to 'Edit', edit_admin_network_path(:id => @network.id) %></li>
   <li><%= link_to 'Comments', network_comments_path(@network) %></li>
-	<li><%= link_to 'Destroy', @network, :confirm => 'Are you sure?', :method => :delete %></li>
+	<li><%= link_to 'Destroy', admin_network_path(:id => @network.id), :confirm => 'Are you sure?', :method => :delete %></li>
 <% end %>
 
 <% content_for(:navbar) do %>

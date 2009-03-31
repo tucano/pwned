@@ -3,9 +3,7 @@
 <li><a href="#">Networks<!--[if IE 7]><!--></a><!--<![endif]-->
 	<!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul>
-		  <li><%= link_to 'all', networks_path %>
-			<li><%= link_to 'new', new_network_path %></li>
-			<li><%= link_to 'search', search_networks_path %></a></li>
+      <%= yield :menu_networks %>
 		</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
 </li>

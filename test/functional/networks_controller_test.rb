@@ -13,12 +13,6 @@ class NetworksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get search page" do
-    get :search, :network => { :name => 'Barabsi'}
-    assert_response :success
-    assert_template "search"
-  end
-  
   test "should get view page" do
     get :view, :id => networks(:barabasi).id
     assert_response :success
@@ -128,63 +122,6 @@ class NetworksControllerTest < ActionController::TestCase
     assert_not_nil assigns(:network)
   end
 
-  test "should get edit" do
-    network_id = networks(:barabasi).id
-    get :edit, :id => network_id
-    assert_response :success
-  end
-
-  test "should update network attributes" do
-    network_id = networks(:disney).id
-    old = Network.find(network_id) 
-    network_hash = { 
-      :name => 'pippo',
-      :description => 'blablabla'
-    }
-    put :update, :id => network_id, :network => network_hash, :config => { :template => 'classic'}
-    
-    updated = Network.find(network_id) 
-    assert_equal 'pippo', updated.name
-    assert_equal 'blablabla', updated.description
-    assert_not_nil updated.edgefile
-    assert_not_nil updated.configfile
-    assert_equal old.edgefile, updated.edgefile
-    assert_equal old.configfile, updated.configfile
-    assert_redirected_to network_path(assigns(:network))
-  end
-
-  test "should update network files" do
-    network_id = networks(:disney).id
-    old = Network.find(network_id) 
-    put :update, :id => network_id, 
-      :edgefile => { :uploaded_data => fixture_file_upload("../storage/edgefiles/barabasi.txt", "text/plain") }, 
-      :configfile => { :uploaded_data => fixture_file_upload("../storage/configfiles/barabasi.xml", "text/xml") },
-      :annotationfile => { :uploaded_data => fixture_file_upload("../storage/annotationfiles/hprdmap.txt", "text/plain") }
-
-    updated = Network.find(network_id) 
-    assert_equal old.name, updated.name
-    assert_equal old.description, updated.description
-    assert_not_nil updated.edgefile
-    assert_not_nil updated.configfile
-    assert_not_nil updated.annotationfile
-    assert_equal("barabasi.txt", updated.edgefile.filename)
-    assert_equal("text/plain", updated.edgefile.content_type)
-    assert_equal("barabasi.xml", updated.configfile.filename)
-    assert_equal("text/xml", updated.configfile.content_type)
-    assert_equal("hprdmap.txt", updated.annotationfile.filename)
-    assert_equal("text/plain", updated.annotationfile.content_type)
-
-    assert_redirected_to network_path(assigns(:network))
-  end
-
-  test "should destroy network" do
-    assert_difference('Network.count', -1) do
-      delete :destroy, :id => networks(:disney).id
-    end
-    
-    assert_redirected_to networks_path
-  end
-
   test "should get tags" do
     get :tag, :name => 'web'
     assert_response :success
@@ -194,20 +131,6 @@ class NetworksControllerTest < ActionController::TestCase
     post :create
     assert_response :success
     assert_template "new"
-  end
-
-  test "should render edit on network errors" do
-    network_id = networks(:disney).id
-    old = Network.find(network_id) 
-    network_hash = { 
-      :name => 'pippo',
-      :description => ''
-    }
-    put :update, :id => network_id, :network => network_hash, :config => { :template => 'classic'}
-    updated = Network.find(network_id) 
-    assert_equal old, updated
-    assert_response :success
-    assert_template "edit"
   end
 
 end

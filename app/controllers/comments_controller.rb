@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
   def index
     
     @comments = @network.comments.find(:all)
-    @comment_pages = @comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 5
+    @comment_pages = @comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 15
     
     respond_to do |format|
       format.html # index.html.erb

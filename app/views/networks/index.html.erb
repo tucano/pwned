@@ -9,7 +9,6 @@
   <%= render :partial => 'shared/search_header', :locals => { :search_path => networks_path } %>
 <% end %>
 
-
 <% content_for(:navbar) do %>
   <%= render :partial => 'shared/menu_networks' %>
 <% end %>
@@ -46,6 +45,6 @@
 
 <!-- C.2 SUBCONTENT -->
 <div class="subcontent">
-	<%= render(:partial => 'shared/search') %>	
+	<%= render(:partial => 'shared/search', :locals => { :search_path => networks_path }) %>	
 	<%= render(:partial => 'shared/news') %>	
 </div>

@@ -13,7 +13,7 @@ class Network < ActiveRecord::Base
   validates_presence_of :name, :description
 
   validates_format_of :name,
-                      :with => /^[A-Za-z]+\w+$/,
+                      :with => /^[A-Za-z]+\w*$/,
                       :if => Proc.new { |n| !n.name.blank? }
 
   validates_uniqueness_of :name

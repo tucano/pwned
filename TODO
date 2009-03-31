@@ -4,6 +4,8 @@
 * Show applet inline in index 
 * Comments AJAX updater from networks index
 - Admin layer
+- Comments
+- Clean layouts
 - Better error messages
 - Better errors handling (AJAX update?)
 - Better config and edges/nodes editor

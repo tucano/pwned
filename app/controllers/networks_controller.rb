@@ -80,16 +80,6 @@ class NetworksController < ApplicationController
     end
   end
 
-  # GET /networks/1/edit
-  def edit
-    @network = Network.find(params[:id])
-    @edgefile = @network.edgefile
-    @configfile = @network.configfile
-    @annotationfile = @network.annotationfile
-    @service = Fileservice.new(@network, @edgefile, @configfile, @annotationfile)   
-    @thisconfig = REXML::Document.new(File.read(@configfile.full_filename))
-  end
-
   # POST /networks
   # POST /networks.xml
   def create
@@ -110,28 +100,6 @@ class NetworksController < ApplicationController
       end
     end
   end
-
-  # PUT /networks/1
-  # PUT /networks/1.xml
-  def update
-    @network = Network.find(params[:id])
-    @edgefile = @network.edgefile
-    @configfile = @network.configfile
-    @annotationfile = @network.annotationfile
-    @service = Fileservice.new(@network, @edgefile, @configfile, @annotationfile)
-    
-    respond_to do |format|
-      if @service.update_attributes(params)
-        flash[:notice] = 'Network was successfully updated.'
-        format.html { redirect_to(@network) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @network.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
 
   private
   def redirect_to_index(msg = nil)

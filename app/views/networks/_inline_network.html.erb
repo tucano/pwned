@@ -28,9 +28,8 @@
     :complete => "Element.show(\'#{network.name}comments\');
                   Element.hide(\'#{network.name}show_comments\');
                   Element.show(\'#{network.name}toggle_comments\')"
-	%> | 
-	<%= link_to 'Edit', edit_network_path(network) %>
-<p>
+	%>
+</p>
 <p class="details">
 	<b>tags:</b> 
 	<% network.tag_list.each do |tag| %>

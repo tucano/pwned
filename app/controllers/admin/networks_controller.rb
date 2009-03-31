@@ -11,7 +11,6 @@ class Admin::NetworksController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.rss { render :layout => false, :collection => @networks }
       format.xml  { render :xml => @networks }
     end
   end
@@ -30,7 +29,6 @@ class Admin::NetworksController < ApplicationController
     @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
     respond_to do |format|
       format.html { render :action => :index , :collection => @pages }
-      format.rss { render :action => :index, :layout => false, :collection => @networks }
       format.xml  { render :xml => @networks }
     end
   end
@@ -41,7 +39,6 @@ class Admin::NetworksController < ApplicationController
     @network = Network.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
-      format.rss { render :layout => false }
       format.xml  { render :xml => @network }      
     end
   end
@@ -80,7 +77,7 @@ class Admin::NetworksController < ApplicationController
     respond_to do |format|
       if @service.save
         flash[:notice] = 'Network was successfully created.'
-        format.html { redirect_to(:admin, @network) }
+        format.html { redirect_to([:admin, @network]) }
         format.xml  { render :xml => @network, :status => :created, :location => @network }
       else       
         format.html { render :action => :new }
@@ -101,7 +98,7 @@ class Admin::NetworksController < ApplicationController
     respond_to do |format|
       if @service.update_attributes(params)
         flash[:notice] = 'Network was successfully updated.'
-        format.html { redirect_to(:admin, @network) }
+        format.html { redirect_to([:admin, @network]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

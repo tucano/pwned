@@ -5,6 +5,11 @@
 	<%= stylesheet_link_tag 'pwned' %>
 <% end %>
 
+<% content_for(:search_header) do %>
+  <%= render :partial => 'shared/search_header', :locals => { :search_path => networks_path } %>
+<% end %>
+
+
 <% content_for(:navbar) do %>
   <%= render :partial => 'shared/menu_networks' %>
 <% end %>

@@ -12,6 +12,10 @@
   <%= render :partial => 'shared/menu_help' %> 
 <% end %>
 
+<% content_for(:search_header) do %>
+  <%= render :partial => 'shared/search_header', :locals => { :search_path => admin_networks_path } %>
+<% end %>
+
 <!-- PAGE TITLE -->
 <h1 class="pagetitle"><%= page_title %></h1>
 

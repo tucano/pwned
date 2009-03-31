@@ -4,7 +4,7 @@
 	  <!-- A.1 SITENAME -->
 	  <%= link_to("", root_url, {:title => 'Home', :class => 'sitelogo'}) %>
 	  <div class="sitename">
-	    <h1><%= link_to("PWNED&bull;1.0", root_url, { :title => 'Home'}) %></h1> 
+	    <h1><%= link_to("PWNED&bull;alpha", root_url, { :title => 'Home'}) %></h1> 
 			<h2>Processing.org Wise Node and Edges Drawer</h2>
    	</div>
 		<!-- A.2 BUTTON NAVIGATION -->
@@ -31,7 +31,7 @@
 		<%= simple_breadcrumb %>
 		
 		<!-- Search form -->                  
-		<%= render :partial => 'shared/searchform'%>
+		<%= yield :search_header %>
 	</div>
 </div>		
 <div class="corner-page-bottom"></div>

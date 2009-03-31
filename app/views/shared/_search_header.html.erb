@@ -1,5 +1,5 @@
 <div class="searchform">
-  <% form_tag networks_path, :method => :get do %>
+  <% form_tag search_path, :method => :get do %>
 		<fieldset>
 			<%= text_field :network, :name, :id => 'search_head', :value => " Search ..." , :onfocus => "this.select()" %>
 	  	<%= submit_tag "GO!", :class => "button", :name => nil %>

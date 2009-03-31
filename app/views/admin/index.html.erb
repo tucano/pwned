@@ -6,6 +6,16 @@
 	<%= stylesheet_link_tag 'admin' %>
 <% end %>
 
+<% content_for(:navbar) do %>
+  <%= render :partial => 'shared/menu_user' %>
+  <%= render :partial => 'shared/menu_networks' %>
+  <%= render :partial => 'shared/menu_help' %> 
+<% end %>
+
+<% content_for(:search_header) do %>
+  <%= render :partial => 'shared/search_header', :locals => { :search_path => admin_networks_path } %>
+<% end %>
+
 <!-- PAGE TITLE -->
 <h1 class="pagetitle"><%= page_title %></h1>
 
@@ -24,4 +34,11 @@
 	  </ul>  
   </div>
 	<div class="corner-content-1col-bottom"></div>
+</div>
+
+<!-- C.2 SUBCONTENT -->
+<div class="subcontent">
+	<%= render(:partial => 'shared/login') %>
+	<%= render(:partial => 'shared/search') %>	
+	<%= render(:partial => 'shared/news') %>	
 </div>

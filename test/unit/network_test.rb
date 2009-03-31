@@ -22,8 +22,8 @@ class NetworkTest < ActiveSupport::TestCase
   end
 
   test "name format" do
-    bad = ["jhy hynjr", "\\inkjf1?!", "?", "!?", ";", "'", "1test", "12345678test", "-test", "test-1"]
-    good = ["test", "test4", "lupo67", "Precipitando", "Ah_beh_ci_siamo", "test12345678", "test_1"]
+    bad = ["1", "jhy hynjr", "\\inkjf1?!", "?", "!?", ";", "'", "1test", "12345678test", "-test", "test-1"]
+    good = ["a", "test", "test4", "lupo67", "Precipitando", "Ah_beh_ci_siamo", "test12345678", "test_1"]
     
     bad.each do |name|
       network = Network.new(

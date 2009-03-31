@@ -6,9 +6,7 @@
 <% end %>
 
 <% content_for(:navbar) do %>
-  <%= render :partial => 'shared/menu_user' %>
-  <%= render :partial => 'shared/menu_networks' %>
-  <%= render :partial => 'shared/menu_help' %> 
+  <ul><li><%= link_to 'Networks', networks_path %></li></ul>
 <% end %>
 
 <!-- PAGE TITLE -->

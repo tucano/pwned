@@ -25,52 +25,16 @@
           <dt><%= f.label :tag_list, 'Tags' %></dt>
           <dd><%= f.text_field :tag_list, :size => "60" %></dd>
         </dl>
-    </fieldset>
-    
-    <fieldset><legend>Edges</legend>
-      <% fields_for :edgefile do |edgefile| %>
-      <dl>
-        <dt><%= edgefile.label :uploaded_data , 'Edgefile'%></dt>
-        <dd><%= edgefile.file_field :uploaded_data %></dd>
-      </dl>
-      <% end %>
-      <dl>
+        <dl>
         <dt><%= label_tag 'edges', 'Edges' %></dt>
         <dd><%= text_area_tag 'edges' , nil, :size => "50x10" %></dd>
       </dl>
-    </fieldset>
-    
-    <fieldset><legend>Config</legend>
-      <% fields_for :configfile do |configfile| %>
-      <dl>
-        <dt><%= configfile.label :uploaded_data , 'Configfile'%></dt>
-        <dd><%= configfile.file_field :uploaded_data %></dd>
-      </dl>
-      <% end %>
       <% fields_for :config do |config| %>
       <dl>
         <dt><%= config.label :template, 'Template' -%></dt>
-        <dd><%= config.select :template, @service.template_keys, {:include_blank => true }%></dd>
+        <dd><%= config.select :template, @service.template_keys, {:include_blank => false }%></dd>
       </dl>
       <% end %>
-      <% if @thisconfig %>
-        <%= config_form_builder(@thisconfig) %>
-      <% else %>
-        <%= config_form_builder(@service.config_templates[@service.template_keys[0]]) %>
-      <% end %>
-    </fieldset>
-    
-    <fieldset><legend>annotation</legend>
-      <% fields_for :annotationfile do |annotationfile| %>
-      <dl>
-        <dt><%= annotationfile.label :uploaded_data , 'Annotationfile'%></dt>
-        <dd><%= annotationfile.file_field :uploaded_data %></dd>
-      </dl>
-      <% end %>
-      <dl>
-        <dt><%= label_tag 'annotations', 'Annotation' %></dt>
-        <dd><%= text_area_tag 'annotations' , nil, :size => "50x10"  %></dd>
-      </dl>
     </fieldset>
     
     <fieldset class="action">

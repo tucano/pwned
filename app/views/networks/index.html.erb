@@ -9,14 +9,8 @@
   <%= render :partial => 'shared/search_header', :locals => { :search_path => networks_path } %>
 <% end %>
 
-<% content_for(:menu_networks) do %>
-  <li><%= link_to 'all', networks_path %></li>
-	<li><%= link_to 'new', new_network_path %></li>
-	<li><%= link_to 'search', search_networks_path %></a></li>
-<% end %>
-
 <% content_for(:navbar) do %>
-  <%= render :partial => 'shared/menu_networks' %>
+  <ul><li><%= link_to 'New Network', new_network_path %></li></ul>
 <% end %>
 
 

@@ -3,34 +3,29 @@
 	<%= stylesheet_link_tag 'mf54_grid_nosidebar' %>
   <%= stylesheet_link_tag 'mf54_content_nosidebar' %>
 	<%= stylesheet_link_tag 'pwned_nosidebar' %>
-<% end %>
-
-<% content_for(:toolbox) do %>
-  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
+	<%= stylesheet_link_tag 'admin' %>
 <% end %>
 
 <% content_for(:menu_networks) do %>
-  <li><%= link_to 'all', networks_path %></li>
-	<li><%= link_to 'new', new_network_path %></li>
-	<li><%= link_to 'search', search_networks_path %></a></li>
+  <li><%= link_to 'all', admin_networks_path %></li>
+	<li><%= link_to 'new', new_admin_network_path %></li>
+	<li><%= link_to 'search', search_admin_networks_path %></a></li>
 <% end %>
 
 <% content_for(:navbar) do %>
-  <%= render :partial => 'shared/menu_toolbox' %>
+  <%= render :partial => 'shared/menu_user' %>
   <%= render :partial => 'shared/menu_networks' %>
+  <%= render :partial => 'shared/menu_help' %> 
 <% end %>
 
 <!-- PAGE TITLE -->
-<h1 class="pagetitle"><%= page_title %></h1>
+<h1 class="pagetitle"><%= form_title %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
 </div>
 
 <!-- C.1 CONTENT no sidebar -->
-<div class="content">
-
-	<!-- NETWORK CONTENT CELL -->
-  <%= render :partial => @network %>
-	
+<div class="niceform">
+		<%= render :partial => "form" , :locals => { :button_name => "Create" } %>
 </div>

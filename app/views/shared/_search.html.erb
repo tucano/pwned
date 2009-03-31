@@ -5,7 +5,7 @@
     <% form_tag search_path, :method => :get do %>
   		<fieldset>
   			<%= text_field_with_auto_complete :network, :name , 
-  			    { :autocomplete => "off"}, 
+  			    { :autocomplete => "off" }, 
   			    { :method => :get, :url => { 
   			        :controller => "/networks", 
   			        :action => :auto_complete_for_network_name} } %>

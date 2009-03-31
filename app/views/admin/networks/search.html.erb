@@ -3,13 +3,24 @@
 	<%= stylesheet_link_tag 'mf54_grid' %>
   <%= stylesheet_link_tag 'mf54_content' %>
 	<%= stylesheet_link_tag 'pwned' %>
+	<%= stylesheet_link_tag 'admin' %>
 	<%= stylesheet_link_tag 'niceforms-default' %>
+<% end %>
+
+<% content_for(:menu_networks) do %>
+  <li><%= link_to 'all', admin_networks_path %></li>
+	<li><%= link_to 'new', new_admin_network_path %></li>
+	<li><%= link_to 'search', search_admin_networks_path %></a></li>
 <% end %>
 
 <% content_for(:navbar) do %>
   <%= render :partial => 'shared/menu_user' %>
   <%= render :partial => 'shared/menu_networks' %>
   <%= render :partial => 'shared/menu_help' %> 
+<% end %>
+
+<% content_for(:search_header) do %>
+  <%= render :partial => 'shared/search_header', :locals => { :search_path => admin_networks_path } %>
 <% end %>
 
 <!-- PAGE TITLE -->
@@ -26,11 +37,11 @@
 	<div class="content-1col-nobox">
 	  
   <div class="niceform">
-  	  <% form_tag networks_path, :method => :get do %>
+  	  <% form_tag admin_networks_path, :method => :get do %>
   	    <fieldset><legend>Network</legend>
   	      <dl>
   	        <dt><%= label(:network, :name, 'By Name')%></dt>
-  	        <dd><%= text_field_with_auto_complete :network, :name , { :autocomplete => "off"}, { :method => :get} %></dd>
+  	        <dd>Fix this: same ID of autocomplete subcontent<br/><%= text_field :network, :name ,{ :method => :get} %></dd>
   	      </dl>
 			    <dl>
 			      <dt><%= label(:network, :description, 'By Description')%></dt>
@@ -48,6 +59,6 @@
 <!-- C.2 SUBCONTENT -->
 <div class="subcontent">
 	<%= render(:partial => 'shared/login') %>
-	<%= render(:partial => 'shared/search') %>	
+	<%= render(:partial => 'shared/search', :locals => { :search_path => networks_path }) %>	
 	<%= render(:partial => 'shared/news') %>	
 </div>

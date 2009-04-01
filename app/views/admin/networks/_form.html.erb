@@ -36,7 +36,7 @@
       <% end %>
       <dl>
         <dt><%= label_tag 'edges', 'Edges' %></dt>
-        <dd><%= text_area_tag 'edges' , nil, :size => "50x10" %></dd>
+        <dd><%= text_area_tag 'edges' , @network.edgefile.temp_data, :size => "50x10" %></dd>
       </dl>
     </fieldset>
     

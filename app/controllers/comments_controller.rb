@@ -4,14 +4,12 @@ class CommentsController < ApplicationController
 
   layout 'application', :except => [:get_comments]
 
-  # GET /comments
-  # GET /comments.xml
   # GET /network/:id/comments
   # GET /network/:id/comments.xml
   def index
     
-    @comments = @network.comments.find(:all)
-    @comment_pages = @comments.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 15
+    @comments = @network.comments.find(:all, :order => 'created_at DESC')
+    @comment_pages = @comments.paginate :page => params[:page], :per_page => 15
     
     respond_to do |format|
       format.html # index.html.erb
@@ -19,15 +17,6 @@ class CommentsController < ApplicationController
     end
   end
   
-  def show
-    @comment = @network.comments.find(params[:id])
-     
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @comment }
-    end 
-  end
-
   # GET /comments/new
   # GET /comments/new.xml
   def new
@@ -37,11 +26,6 @@ class CommentsController < ApplicationController
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
     end
-  end
-
-  # GET /comments/1/edit
-  def edit
-    @comment = @network.comments.find(params[:id])
   end
 
   # POST /comments
@@ -58,34 +42,6 @@ class CommentsController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
-    end
-  end
-
-  # PUT /comments/1
-  # PUT /comments/1.xml
-  def update
-    @comment = @network.comments.find(params[:id])
-    respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        flash[:notice] = 'Comment was successfully updated.'
-        format.html { redirect_to([@network, :comments]) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.xml
-  def destroy
-    @comment = @network.comments.find(params[:id])
-    @comment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to([@network,:comments]) }
-      format.xml  { head :ok }
     end
   end
   

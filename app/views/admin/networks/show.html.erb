@@ -14,7 +14,7 @@
 
 <% content_for(:toolbox) do %>
   <li><%= link_to 'Edit', edit_admin_network_path(:id => @network.id) %></li>
-  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
+  <li><%= link_to 'Comments', admin_network_comments_path(@network) %></li>
 	<li><%= link_to 'Destroy', admin_network_path(:id => @network.id), :confirm => 'Are you sure?', :method => :delete %></li>
 <% end %>
 

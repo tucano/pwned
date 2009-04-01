@@ -6,10 +6,7 @@
   <% end %>
 </h4>
 <% for comment in @comments %>
-  <blockquote class="comment">
-    <p><%= simple_format auto_link(h(comment.body)) %></p>
-    <h5>Posted by DummyUser <%= comment.created_at.to_date %></h5>
-  </blockquote>
+  <%= render :partial => 'comment' %>
 <% end %>
 
 <blockquote>

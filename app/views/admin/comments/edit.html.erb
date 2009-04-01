@@ -3,16 +3,18 @@
 	<%= stylesheet_link_tag 'mf54_grid' %>
   <%= stylesheet_link_tag 'mf54_content' %>
 	<%= stylesheet_link_tag 'pwned' %>
+	<%= stylesheet_link_tag 'admin' %>
+	<%= stylesheet_link_tag 'niceforms-default' %>	
 <% end %>
 
 <% content_for(:toolbox) do %>
-  <li><%= link_to 'Show', @network %></li>
-  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
+  <li><%= link_to 'Show', [:admin, @network] %></li>
+  <li><%= link_to 'Comments', admin_network_comments_path(@network) %></li>
 <% end %>
 
 <% content_for(:menu_networks) do %>
-  <li><%= link_to 'all', networks_path %></li>
-	<li><%= link_to 'new', new_network_path %></li>
+  <li><%= link_to 'all', admin_networks_path %></li>
+	<li><%= link_to 'new', new_admin_network_path %></li>
 <% end %>
 
 <% content_for(:navbar) do %>
@@ -22,7 +24,7 @@
 
 
 <!-- PAGE TITLE -->
-<h1 class="pagetitle">Comment for <%= @network.name %></h1>
+<h1 class="pagetitle">Editing comment for <%= @comment.network.name %></h1>
 
 <div id="notice">
 	<p style="color: green"><%= flash[:notice] %></p>
@@ -33,15 +35,15 @@
   <!-- LIST CELL -->
 	<div class="corner-content-1col-top"></div>
 	<div class="content-1col-nobox">
-    <h1 class="blog">Comment</h1>
-    <%= render :partial => @comment %>
-
+    <h1>Editing comment</h1>
+    <%= render :partial => 'form', :locals => { :button_name => 'Update' }%>
+   
   </div>
   <div class="corner-content-1col-bottom"></div>
 </div>
 
 <!-- C.2 SUBCONTENT -->
 <div class="subcontent">
-	<%= render(:partial => 'shared/search', :locals => { :search_path => networks_path }) %>	
+	<%= render(:partial => 'shared/search', :locals => { :search_path => admin_networks_path }) %>	
 	<%= render(:partial => 'shared/news') %>	
 </div>

@@ -16,7 +16,9 @@ ActionController::Routing::Routes.draw do |map|
   map.sitemap 'sitemap.xml', :controller => 'sitemap', :action => 'sitemap'
   
   map.namespace :admin do |admin|
-    admin.resources :networks, :collection => { :tag => :get, :search => :get }
+    admin.resources :networks, :collection => { :tag => :get, :search => :get } do |network|
+      network.resources :comments
+    end
   end
   
   map.admin 'admin', :controller => 'admin'

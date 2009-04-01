@@ -16,7 +16,7 @@
 	  <p>
 	    <%= link_to 'Fullscreen', :controller => "/networks" , :action => 'view' %> | 
 	    <%=  link_to_function "Details", "Effect.toggle('details', 'blind',{ duration: 0.5 })" %> | 
-	    <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %> | 
+	    <b>comments:</b> <%= link_to(network.comments.size, admin_network_comments_path(network)) %> | 
 	    <b>Tags: </b>
 	    <% tag_cloud network.tag_counts, %w{tag1 tag2 tag3 tag4} do |tag, css_class| %> 
 	    <%= link_to tag.name, { :controller => :networks, :action => :tag, :name => tag.name }, :class => css_class %>

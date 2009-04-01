@@ -3,16 +3,17 @@
 	<%= stylesheet_link_tag 'mf54_grid' %>
   <%= stylesheet_link_tag 'mf54_content' %>
 	<%= stylesheet_link_tag 'pwned' %>
+	<%= stylesheet_link_tag 'admin' %>
 <% end %>
 
 <% content_for(:toolbox) do %>
-  <li><%= link_to 'Show', @network %></li>
-  <li><%= link_to 'Comments', network_comments_path(@network) %></li>
+  <li><%= link_to 'Show', [:admin, @network] %></li>
+  <li><%= link_to 'Comments', admin_network_comments_path(@network) %></li>
 <% end %>
 
 <% content_for(:menu_networks) do %>
-  <li><%= link_to 'all', networks_path %></li>
-	<li><%= link_to 'new', new_network_path %></li>
+  <li><%= link_to 'all', admin_networks_path %></li>
+	<li><%= link_to 'new', new_admin_network_path %></li>
 <% end %>
 
 <% content_for(:navbar) do %>
@@ -40,8 +41,8 @@
     <% end %>
 
     <p>
-    <%= link_to 'New comment', new_network_comment_path(@network) %> | 
-    <%= link_to 'Back to Network', network_path(@network) %> | 
+    <%= link_to 'New comment', new_admin_network_comment_path(@network) %> | 
+    <%= link_to 'Back to Network', admin_network_path(@network) %> | 
     <%= page_entries_info @comment_pages %>
     </p>
 
@@ -51,6 +52,6 @@
 
 <!-- C.2 SUBCONTENT -->
 <div class="subcontent">
-	<%= render(:partial => 'shared/search', :locals => { :search_path => networks_path }) %>	
+	<%= render(:partial => 'shared/search', :locals => { :search_path => admin_networks_path }) %>	
 	<%= render(:partial => 'shared/news') %>	
 </div>

@@ -2,8 +2,8 @@ class Admin::NetworksController < ApplicationController
   
   layout 'application', :except => [:view]
   
-  # GET /networks
-  # GET /networks.xml
+  # GET /admin/networks
+  # GET /admin/networks.xml
   def index
 
     @networks = Network.search(params[:network], { :order => "created_at DESC"})
@@ -15,15 +15,15 @@ class Admin::NetworksController < ApplicationController
     end
   end
   
-  # GET /networks/search
+  # GET /admin/networks/search
   def search
     respond_to do |format|
       format.html # search.html.erb
     end
   end
 
-  # GET /networks/tag/name
-  # GET /networks/tag/name.xml
+  # GET /admin/networks/tag/name
+  # GET /admin/networks/tag/name.xml
   def tag
     @networks = Network.find_tagged_with(params[:name])
     @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
@@ -33,8 +33,8 @@ class Admin::NetworksController < ApplicationController
     end
   end
 
-  # GET /networks/1
-  # GET /networks/1.xml
+  # GET /admin/networks/1
+  # GET /admin/networks/1.xml
   def show
     @network = Network.find(params[:id])
     respond_to do |format|
@@ -43,8 +43,8 @@ class Admin::NetworksController < ApplicationController
     end
   end
   
-  # GET /networks/new
-  # GET /networks/new.xml
+  # GET /admin/networks/new
+  # GET /admin/networks/new.xml
   def new
     @network = Network.new
     @service = Fileservice.new(@network)
@@ -55,7 +55,7 @@ class Admin::NetworksController < ApplicationController
     end
   end
 
-  # GET /networks/1/edit
+  # GET /admin/networks/1/edit
   def edit
     @network = Network.find(params[:id])
     @edgefile = @network.edgefile
@@ -65,8 +65,8 @@ class Admin::NetworksController < ApplicationController
     @thisconfig = REXML::Document.new(File.read(@configfile.full_filename))
   end
 
-  # POST /networks
-  # POST /networks.xml
+  # POST /admin/networks
+  # POST /admin/networks.xml
   def create
     @network = Network.new(params[:network])
     @service = Fileservice.new(@network)
@@ -86,8 +86,8 @@ class Admin::NetworksController < ApplicationController
     end
   end
 
-  # PUT /networks/1
-  # PUT /networks/1.xml
+  # PUT /admin/networks/1
+  # PUT /admin/networks/1.xml
   def update
     @network = Network.find(params[:id])
     @edgefile = @network.edgefile
@@ -107,8 +107,8 @@ class Admin::NetworksController < ApplicationController
     end
   end
 
-  # DELETE /networks/1
-  # DELETE /networks/1.xml
+  # DELETE /admin/networks/1
+  # DELETE /admin/networks/1.xml
   def destroy
     @network = Network.find(params[:id])
     @network.destroy

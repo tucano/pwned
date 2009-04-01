@@ -1,0 +1,15 @@
+<div class="niceform">  
+  <% form_for([:admin, @network, @comment], :html => { :class => 'niceform' }) do |f| %>
+  <%= f.error_messages %>
+  <fieldset>
+      <legend>Comment</legend>
+      <dl>
+        <dt><%= f.label :body %></dt>
+        <dd><%= f.text_area :body %></dd>
+      </dl>
+  </fieldset>
+  <fieldset class="action">
+    <%= f.submit button_name %> |  <%= link_to 'Back', admin_network_comments_path(@network) %>
+  </fieldset>
+<% end %>
+</div>

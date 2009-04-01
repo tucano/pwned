@@ -2,31 +2,7 @@ class CommentsController < ApplicationController
 
   before_filter :load_network
 
-  layout 'application', :except => [:get_comments]
-
-  # GET /network/:id/comments
-  # GET /network/:id/comments.xml
-  def index
-    
-    @comments = @network.comments.find(:all, :order => 'created_at DESC')
-    @comment_pages = @comments.paginate :page => params[:page], :per_page => 15
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @comments }
-    end
-  end
-  
-  # GET /comments/new
-  # GET /comments/new.xml
-  def new
-    @comment = @network.comments.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @comment }
-    end
-  end
+  layout false
 
   # POST /comments
   # POST /comments.xml
@@ -36,10 +12,12 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to([@network, :comments]) }
+        format.html { redirect_to(:back) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
-        format.html { render :action => "new" }
+        flash[:notice] = 'Comment was not created.'
+        # TODO errors to form and AJAX update if comments div
+        format.html { redirect_to(:back) }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end

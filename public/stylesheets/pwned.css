@@ -6,8 +6,13 @@
 
 .content h1.network
 {
-	background: url(../images/icon_celltitle_level1.gif) no-repeat;
+	background: url(../images/icon_network.png) no-repeat;
 	background-position: 632px 5px;
+}
+
+.content h2.network
+{
+	background: none;
 }
 
 .content .networktitle { border: 0px #000 solid; }

@@ -6,13 +6,7 @@
 
 .content h1.network
 {
-	background: url(../images/icon_celltitle_level1.gif) no-repeat;
-	background-position: 914px 5px;
-}
-
-.content h1.network
-{
-	background: url(../images/icon_celltitle_level1.gif) no-repeat;
+	background: url(../images/icon_network.png) no-repeat;
 	background-position: 914px 5px;
 }
 
@@ -20,8 +14,7 @@
 
 .content h1.apptitle
 {
-	background: url(../images/icon_celltitle_level1.gif) no-repeat;
-	background-position: 914px 5px;
+	background: none;
 }
 
 .content .applet

@@ -1,5 +1,5 @@
 
-<h2><%= link_to network.name, network %></h2>
+<h2 class="network"><%= link_to network.name, network %></h2>
 
 <div id="<%= network.name + 'desc' %>" style="display:none;">
   <p><%= simple_format(auto_link(h(network.description))) %></p>
@@ -13,7 +13,7 @@
   <%= link_to_function "Toggle Inline", "Effect.toggle('#{network.name}show', 'appear',{ duration: 0.1 })",
     :id => "#{network.name}toggle_inline", :style => "display:none;"
   %>
-  <%= link_to_remote 'Show inline',
+  <%= link_to_remote 'Show',
     :html => {:id  => "#{network.name}show_inline" },
     :url => { :action => 'get_network' , :id => network.id  },
     :method => :get,
@@ -43,7 +43,7 @@
 	<% network.tag_list.each do |tag| %>
 	  <%= link_to tag, { :controller => :networks, :action => :tag, :name => tag }%>
 	<% end %>
-	 | <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %>
+	 | <b>comments:</b> <%= network.comments.size %>
 </p>
 
 

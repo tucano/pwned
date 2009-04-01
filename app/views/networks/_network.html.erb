@@ -2,30 +2,54 @@
 <div class="content-1col-nobox">
 
 	<div class="networktitle" id="name">		
-		<h1 class="network"><%= network.name %></h1>
+		<h1 class="network"><%= @network.name %></h1>
 	</div>
 		
 	<div id="description">
 	  <blockquote>
-  	  <p><%= simple_format(auto_link(h(network.description))) %></p>
+  	  <p><%= simple_format(auto_link(h(@network.description))) %></p>
 	  </blockquote>
 	</div>
 	
 	<div id="tags">
 	  <blockquote>
 	  <p>
-	    <%= link_to 'Fullscreen', :action => 'view' %> |
-	    <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %> | 
+	    <%= link_to 'View Fullscreen', :action => 'view' %>
+    </p>
+    <p class="details">
 	    <b>Tags: </b>
-	    <% tag_cloud network.tag_counts, %w{tag1 tag2 tag3 tag4} do |tag, css_class| %> 
+	    <% tag_cloud @network.tag_counts, %w{tag1 tag2 tag3 tag4} do |tag, css_class| %> 
 	    <%= link_to tag.name, { :controller => :networks, :action => :tag, :name => tag.name }, :class => css_class %>
 	    <% end %>
     </p>
     </blockquote>
 	</div>
+	
   <div class="content-1col-nobox">
-	<h1 class="apptitle">Display</h1>
-	<%= render :partial => 'applet', :locals => { :height => 600, :width => 800, :codebase => '/applet/800x600', :applet_class => "applet" } %>
+	  <h1 class="apptitle"></h1>
+	  <%= render :partial => 'applet', :locals => { 
+	    :height => 600, 
+	    :width => 800, 
+	    :codebase => '/applet/800x600', 
+	    :applet_class => "applet" } %>
   </div>
+  
+</div>
+<div class="corner-content-1col-bottom"></div>
+
+<div class="corner-content-1col-top"></div>
+<div class="content-1col-nobox">
+  <h1>Comments</h1>
+  <h4><%= will_paginate @comment_pages %></h4>
+  <div id="<%= @network.name + 'comments' %>">
+  <%= render :partial => "comments/comment", :collection => @comment_pages %>
+  </div>
+</div>
+<div class="corner-content-1col-bottom"></div>
+
+<div class="corner-content-1col-top"></div>
+<div class="content-1col-nobox">
+  <h1>New Comment</h1>
+  <%= render :partial => "comments/form", :locals => { :button_name => "New Comment"} %>
 </div>
 <div class="corner-content-1col-bottom"></div>

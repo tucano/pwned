@@ -8,7 +8,7 @@
 - Clean layouts
 - News subcontent cell
 - Improve Sitempa
-- Better error messages
+- Better error messages and Notice flash messages
 - Better errors handling (AJAX update?)
 - Better config and edges/nodes editor
 - Users

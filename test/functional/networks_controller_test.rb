@@ -22,7 +22,7 @@ class NetworksControllerTest < ActionController::TestCase
   test "should get network" do
     get :get_network, :id => networks(:barabasi).id
     assert_response :success
-    assert_template "applet_small"
+    assert_template "applet"
     assert_not_nil assigns(:network)
   end
   

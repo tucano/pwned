@@ -1,3 +1,7 @@
+<% content_for(:style) do %>
+  <%= stylesheet_link_tag 'niceforms-default' %>
+<% end %>
+
 <div class="niceform">  
   <% form_for([@network, @comment], :html => { :class => 'niceform' }) do |f| %>
   <%= f.error_messages %>

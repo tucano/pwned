@@ -100,5 +100,14 @@ module NetworksHelper
     form << '</fieldset>'
     return form
   end  
-  
+
+  def get_edge_data(network)
+    data = String.new
+    if @network.edgefile
+      data = @network.edgefile.temp_data
+    else
+      data = "NodeA NodeB\nNodeB NodeC\nNodeC NodeA\n"
+    end
+    return data
+  end
 end

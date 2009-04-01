@@ -34,6 +34,10 @@ class NetworksController < ApplicationController
   # GET /networks/1.xml
   def show
     @network = Network.find(params[:id])
+    # TODO Ajax pagination
+    @comments = @network.comments.find(:all, :order => 'created_at DESC')
+    @comment_pages = @comments.paginate :page => params[:page], :per_page => 5
+    @comment = @network.comments.build
     respond_to do |format|
       format.html # show.html.erb
       format.rss { render :layout => false }

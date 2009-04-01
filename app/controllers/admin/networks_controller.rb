@@ -6,8 +6,8 @@ class Admin::NetworksController < ApplicationController
   # GET /networks.xml
   def index
 
-    @networks = Network.search(params[:network])
-    @pages = @networks.paginate :page => params[:page], :order => 'name', :per_page => 5
+    @networks = Network.search(params[:network], { :order => "created_at DESC"})
+    @pages = @networks.paginate :page => params[:page], :per_page => 5
     
     respond_to do |format|
       format.html # index.html.erb

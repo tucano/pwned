@@ -1,10 +1,15 @@
-<% if @comments.empty? %>
-  <h4>No comments</h4>
-<% else %>
-  <h4>Last <%= @comments.size %> comments</h4>
-<% end %>
+<h4 class="comment">
+  <% if @comments.empty? %>
+  New comment
+  <% else %>
+  Comments (last five)
+  <% end %>
+</h4>
 <% for comment in @comments %>
-  <%= render :partial => comment %>
+  <blockquote class="comment">
+    <p><%= simple_format auto_link(h(comment.body)) %></p>
+    <h5>Posted by DummyUser <%= comment.created_at.to_date %></h5>
+  </blockquote>
 <% end %>
 
 <blockquote>

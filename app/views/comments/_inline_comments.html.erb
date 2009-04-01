@@ -2,12 +2,12 @@
   <% if @comments.empty? %>
   New comment
   <% else %>
-  Comments (last five)
+  Comments (last <%= @comments.size %>)
   <% end %>
 </h4>
-<% for comment in @comments %>
-  <%= render :partial => 'comment' %>
-<% end %>
+
+<%= render :partial => 'comment', :collection => @comments %>
+
 
 <blockquote>
   <%= render :partial => 'inline_new' %>

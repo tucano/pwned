@@ -6,5 +6,5 @@
 <% end %>
 
 
-<%= render :partial => 'applet_big' %>
+<%= render :partial => 'applet' , :locals => { :height => 768, :width => 1024, :codebase => '/applet/1024x768', :applet_class => "appletbig" }%>
 <p align="center"><big><%= link_to 'Back', :back %></big></p>

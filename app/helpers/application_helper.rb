@@ -2,6 +2,11 @@
 module ApplicationHelper
   include TagsHelper
   
+  def time_ago(time)
+    mtime = String.new
+    mtime << time_ago_in_words(Time.now - (Time.now.to_i - time.to_i).seconds) << " ago"
+  end
+  
   def page_title(sep=(': '))
     @page_title ||= [
       controller.controller_name.humanize,

@@ -1,6 +1,14 @@
 
 <h2><%= link_to network.name, network %></h2>
-<p>Posted by DummyUser <%= network.created_at.to_date -%></p>
+
+<div id="<%= network.name + 'desc' %>" style="display:none;">
+  <p><%= simple_format(auto_link(h(network.description))) %></p>
+</div>
+
+<div id="<%= network.name + 'show' %>" style="display:none;"></div>
+
+<p>Posted <%= time_ago(network.created_at) -%></p>
+
 <p class="details">
   <%= link_to_function "Toggle Inline", "Effect.toggle('#{network.name}show', 'appear',{ duration: 0.1 })",
     :id => "#{network.name}toggle_inline", :style => "display:none;"
@@ -38,10 +46,6 @@
 	 | <b>comments:</b> <%= link_to(network.comments.size, network_comments_path(network)) %>
 </p>
 
-<div id="<%= network.name + 'desc' %>" style="display:none;">
-  <p><%= simple_format(auto_link(h(network.description))) %></p>
-</div>
 
-<div id="<%= network.name + 'show' %>" style="display:none;"></div>
 
 <div id="<%= network.name + 'comments' %>" style="display:none;"></div>

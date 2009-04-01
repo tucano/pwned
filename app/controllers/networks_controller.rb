@@ -57,7 +57,11 @@ class NetworksController < ApplicationController
       logger.error("Attempt to access invalid network #{params[:id]}")
       redirect_to_index("Invalid Network ID")
     else
-      render :partial => 'applet_small'
+      render :partial => 'applet', :locals => { 
+        :height => 300, 
+        :width => 400, 
+        :codebase => '/applet/400x300', 
+        :applet_class => "appletsmall" }
     end
   end
 

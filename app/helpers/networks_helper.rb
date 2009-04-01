@@ -100,4 +100,5 @@ module NetworksHelper
     form << '</fieldset>'
     return form
   end  
+  
 end

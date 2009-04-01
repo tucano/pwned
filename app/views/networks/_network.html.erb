@@ -23,8 +23,9 @@
     </p>
     </blockquote>
 	</div>
-
-	<%= render :partial => 'applet' %>
-
+  <div class="content-1col-nobox">
+	<h1 class="apptitle">Display</h1>
+	<%= render :partial => 'applet', :locals => { :height => 600, :width => 800, :codebase => '/applet/800x600', :applet_class => "applet" } %>
+  </div>
 </div>
 <div class="corner-content-1col-bottom"></div>

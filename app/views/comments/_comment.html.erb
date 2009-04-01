@@ -1,4 +1,4 @@
 <blockquote class="comment">
   <p><%= simple_format auto_link(h(comment.body)) %></p>
-  <h5>Posted by DummyUser <%= comment.created_at.to_date %></h5>
+  <h5>Posted <%= time_ago(comment.created_at) -%></h5>
 </blockquote>
